@@ -30,7 +30,16 @@ module Wrapper (
     input [15:0] SW,
     output reg [15:0] LED);
     wire clock, reset;
-    assign clock = clk_100mhz;
+    
+    wire clk33;
+    wire locked;
+    clk_wiz_5 pll(.clk_out1(clk33),
+    .reset(reset),
+    .locked(locked),
+    .clk_in1(clk_100mhz)
+    );
+    
+    assign clock = clk33;
     assign reset = BTNU; 
 	wire rwe, mwe;
 	wire[4:0] rd, rs1, rs2;
@@ -40,6 +49,8 @@ module Wrapper (
     reg [15:0] SW_Q, SW_M;  
     
     wire io_read, io_write;
+    
+    
     
     assign io_read = (memAddr == 32'd4096) ? 1'b1: 1'b0;
     assign io_write = (memAddr == 32'd4097) ? 1'b1: 1'b0;

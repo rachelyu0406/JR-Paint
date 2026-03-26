@@ -1,0 +1,122 @@
+Copyright 1986-2021 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2021.1 (win64) Build 3247384 Thu Jun 10 19:36:33 MDT 2021
+| Date         : Thu Mar 26 16:46:02 2026
+| Host         : P2-06 running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file Wrapper_control_sets_placed.rpt
+| Design       : Wrapper
+| Device       : xc7a100t
+------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    44 |
+|    Minimum number of control sets                        |    44 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |    28 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    44 |
+| >= 0 to < 4        |     2 |
+| >= 4 to < 6        |     0 |
+| >= 6 to < 8        |     1 |
+| >= 8 to < 10       |     0 |
+| >= 10 to < 12      |     0 |
+| >= 12 to < 14      |     0 |
+| >= 14 to < 16      |     0 |
+| >= 16              |    41 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              34 |           12 |
+| No           | No                    | Yes                    |             202 |           88 |
+| No           | Yes                   | No                     |               0 |            0 |
+| Yes          | No                    | No                     |              16 |            9 |
+| Yes          | No                    | Yes                    |            1528 |          690 |
+| Yes          | Yes                   | No                     |               0 |            0 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++--------------------+-----------------------------------------------------------+-------------------------------------+------------------+----------------+--------------+
+|    Clock Signal    |                       Enable Signal                       |           Set/Reset Signal          | Slice Load Count | Bel Load Count | Bels / Slice |
++--------------------+-----------------------------------------------------------+-------------------------------------+------------------+----------------+--------------+
+|  pll/inst/clk_out1 |                                                           | CPU/DX/insn/loop1[2].a_dff/startDiv |                1 |              1 |         1.00 |
+|  pll/inst/clk_out1 |                                                           |                                     |                2 |              2 |         1.00 |
+|  pll/inst/clk_out1 |                                                           | CPU/muldiv/divActiveReg/q_reg_1     |                2 |              6 |         3.00 |
+|  pll/inst/clk_out1 | CPU/XM/alu_o/loop1[0].a_dff/E[0]                          |                                     |                9 |             16 |         1.78 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_18                      | BTNU_IBUF                           |               20 |             32 |         1.60 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_29                      | BTNU_IBUF                           |               20 |             32 |         1.60 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_34                      | BTNU_IBUF                           |               18 |             32 |         1.78 |
+|  pll/inst/clk_out1 |                                                           | CPU/muldiv/multActiveReg/q_reg_1    |               12 |             32 |         2.67 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_13                      | BTNU_IBUF                           |               16 |             32 |         2.00 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_42                      | BTNU_IBUF                           |               10 |             32 |         3.20 |
+| ~pll/inst/clk_out1 |                                                           |                                     |               10 |             32 |         3.20 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_20                      | BTNU_IBUF                           |               11 |             32 |         2.91 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_28                      | BTNU_IBUF                           |                6 |             32 |         5.33 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_35                      | BTNU_IBUF                           |               10 |             32 |         3.20 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_33                      | BTNU_IBUF                           |               12 |             32 |         2.67 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_36                      | BTNU_IBUF                           |               13 |             32 |         2.46 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_17                      | BTNU_IBUF                           |               12 |             32 |         2.67 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_25                      | BTNU_IBUF                           |               19 |             32 |         1.68 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_30                      | BTNU_IBUF                           |               11 |             32 |         2.91 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_21                      | BTNU_IBUF                           |               15 |             32 |         2.13 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_32                      | BTNU_IBUF                           |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_37                      | BTNU_IBUF                           |               17 |             32 |         1.88 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_22                      | BTNU_IBUF                           |               21 |             32 |         1.52 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_38                      | BTNU_IBUF                           |               14 |             32 |         2.29 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_31                      | BTNU_IBUF                           |               11 |             32 |         2.91 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_40                      | BTNU_IBUF                           |               26 |             32 |         1.23 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_41                      | BTNU_IBUF                           |               11 |             32 |         2.91 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_12                      | BTNU_IBUF                           |               10 |             32 |         3.20 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_15                      | BTNU_IBUF                           |               25 |             32 |         1.28 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_19                      | BTNU_IBUF                           |               25 |             32 |         1.28 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_24                      | BTNU_IBUF                           |               12 |             32 |         2.67 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_23                      | BTNU_IBUF                           |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_27                      | BTNU_IBUF                           |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_16                      | BTNU_IBUF                           |               13 |             32 |         2.46 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_39                      | BTNU_IBUF                           |               11 |             32 |         2.91 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_26                      | BTNU_IBUF                           |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | CPU/MW/insn/loop1[28].a_dff/q_reg_14                      | BTNU_IBUF                           |               20 |             32 |         1.60 |
+|  pll/inst/clk_out1 |                                                           | BTNU_IBUF                           |               22 |             44 |         2.00 |
+|  pll/inst/clk_out1 | CPU/DX/insn/loop1[4].a_dff/q_reg_3                        | BTNU_IBUF                           |               26 |             64 |         2.46 |
+|  pll/inst/clk_out1 | CPU/muldiv/myMultiplier/countReg/loop1[0].a_dff/write_en0 | CPU/muldiv/multActiveReg/q_reg_1    |               29 |             64 |         2.21 |
+|  pll/inst/clk_out1 | CPU/muldiv/myDiv/t1/idk/write_en0                         | CPU/muldiv/divActiveReg/q_reg_1     |               31 |             64 |         2.06 |
+|  clk0              | CPU/mulDivBusy/loop1[0].a_dff/q_reg_inv_0                 | BTNU_IBUF                           |               37 |             81 |         2.19 |
+|  clk0              |                                                           | BTNU_IBUF                           |               51 |            119 |         2.33 |
+|  clk0              | CPU/mulDivBusy/loop1[0].a_dff/latchEnable                 | BTNU_IBUF                           |              122 |            263 |         2.16 |
++--------------------+-----------------------------------------------------------+-------------------------------------+------------------+----------------+--------------+
+
+
