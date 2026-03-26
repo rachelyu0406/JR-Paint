@@ -1,0 +1,3 @@
+[submodule "proccesor"]
+	path = proccesor
+	url = git@gitlab.oit.duke.edu:jaw185/proc-toolchain.git
