@@ -16,3 +16,4 @@ module ROM #(parameter DATA_WIDTH = 32, ADDRESS_WIDTH = 12, DEPTH = 4096, MEMFIL
         dataOut <= MemoryArray[addr];
     end
 endmodule
+//can u push
