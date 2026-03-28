@@ -1,4 +1,5 @@
 `timescale 1 ns / 100 ps
+
 module VGAController(
     input clk,          // 100 MHz System Clock
     input reset,        // Reset Signal
@@ -15,29 +16,18 @@ module VGAController(
     input BTND
 );
 
-    // Keep empty for project-relative .mem file paths.
-    localparam FILES_PATH = "";
+    localparam VIDEO_WIDTH   = 640;
+    localparam VIDEO_HEIGHT  = 480;
+    localparam PIXEL_COUNT   = VIDEO_WIDTH * VIDEO_HEIGHT;
+    localparam ADDR_WIDTH    = $clog2(PIXEL_COUNT);
 
-    localparam VIDEO_WIDTH = 640;
-    localparam VIDEO_HEIGHT = 480;
-    localparam PIXEL_COUNT = VIDEO_WIDTH * VIDEO_HEIGHT;
-    localparam PIXEL_ADDRESS_WIDTH = $clog2(PIXEL_COUNT) + 1;
-    localparam BITS_PER_COLOR = 12;
-    localparam PALETTE_COLOR_COUNT = 256;
-    localparam PALETTE_ADDRESS_WIDTH = $clog2(PALETTE_COLOR_COUNT) + 1;
+    localparam CURSOR_SIZE = 10;
+    localparam STEP        = 4;
 
-    localparam SPRITE_SIZE = 50;
-    localparam SPRITE_PIXELS = SPRITE_SIZE * SPRITE_SIZE; // 2500
-    localparam SPRITE_COUNT = 94; // Printable ASCII: 0x21..0x7E
-    localparam SPRITE_ROM_DEPTH = SPRITE_COUNT * SPRITE_PIXELS; // 235000
-    localparam SPRITE_ADDR_WIDTH = $clog2(SPRITE_ROM_DEPTH) + 1;
-    localparam SPRITE_PIXEL_ADDR_WIDTH = $clog2(SPRITE_PIXELS) + 1;
+    localparam [11:0] WHITE = 12'hFFF;
+    localparam [11:0] BLACK = 12'h000;
 
-    localparam STEP = 4;
-    localparam [11:0] SPRITE_COLOR = 12'hFFF;
-    localparam [7:0] DEFAULT_ASCII = 8'h41; // 'A'
-
-    // Clock divider 100 MHz -> 25 MHz
+    // 100 MHz -> 25 MHz pixel clock
     wire clk25;
     wire locked;
 
@@ -48,7 +38,7 @@ module VGAController(
         .clk_in1(clk)
     );
 
-    // VGA timing for 640x480
+    // VGA timing
     wire active, screenEnd;
     wire [9:0] x;
     wire [8:0] y;
@@ -67,119 +57,159 @@ module VGAController(
         .y(y)
     );
 
-    // Background image + palette
-    wire [PIXEL_ADDRESS_WIDTH-1:0] imgAddress;
-    wire [PALETTE_ADDRESS_WIDTH-1:0] colorAddr;
-    wire [BITS_PER_COLOR-1:0] colorData;
-    assign imgAddress = x + VIDEO_WIDTH * y;
-
-    RAM #(
-        .DEPTH(PIXEL_COUNT),
-        .DATA_WIDTH(PALETTE_ADDRESS_WIDTH),
-        .ADDRESS_WIDTH(PIXEL_ADDRESS_WIDTH),
-        .MEMFILE({FILES_PATH, "image.mem"})
-    ) ImageData (
-        .clk(clk25),
-        .wEn(1'b0),
-        .addr(imgAddress),
-        .dataIn({PALETTE_ADDRESS_WIDTH{1'b0}}),
-        .dataOut(colorAddr)
-    );
-
-    RAM #(
-        .DEPTH(PALETTE_COLOR_COUNT),
-        .DATA_WIDTH(BITS_PER_COLOR),
-        .ADDRESS_WIDTH(PALETTE_ADDRESS_WIDTH),
-        .MEMFILE({FILES_PATH, "colors.mem"})
-    ) ColorPalette (
-        .clk(clk25),
-        .wEn(1'b0),
-        .addr(colorAddr),
-        .dataIn({BITS_PER_COLOR{1'b0}}),
-        .dataOut(colorData)
-    );
-
-    // Sprite position
+    // =========================================================
+    // Cursor position
+    // =========================================================
     reg [9:0] x_pos;
     reg [8:0] y_pos;
 
-    always @(posedge clk25 or posedge reset) begin
-        if (reset) begin
-            x_pos <= 10'd100;
-            y_pos <= 9'd100;
-        end else if (screenEnd) begin
-            if (BTNU && (y_pos >= STEP))
-                y_pos <= y_pos - STEP;
-            else if (BTND && (y_pos + SPRITE_SIZE + STEP <= VIDEO_HEIGHT))
-                y_pos <= y_pos + STEP;
+    reg [9:0] next_x;
+    reg [8:0] next_y;
 
-            if (BTNL && (x_pos >= STEP))
-                x_pos <= x_pos - STEP;
-            else if (BTNR && (x_pos + SPRITE_SIZE + STEP <= VIDEO_WIDTH))
-                x_pos <= x_pos + STEP;
-        end
+    always @(*) begin
+        next_x = x_pos;
+        next_y = y_pos;
+
+        if (BTNU && (y_pos >= STEP))
+            next_y = y_pos - STEP;
+        else if (BTND && (y_pos + CURSOR_SIZE + STEP <= VIDEO_HEIGHT))
+            next_y = y_pos + STEP;
+
+        if (BTNL && (x_pos >= STEP))
+            next_x = x_pos - STEP;
+        else if (BTNR && (x_pos + CURSOR_SIZE + STEP <= VIDEO_WIDTH))
+            next_x = x_pos + STEP;
     end
 
-    // Fixed character selection
-    wire printable_char;
-    wire [6:0] sprite_index;
+    // =========================================================
+    // 1-bit framebuffer: 0 = white, 1 = black
+    // =========================================================
+    reg framebuf [0:PIXEL_COUNT-1];
+    reg fb_pixel;
 
-    assign printable_char = (DEFAULT_ASCII >= 8'h21) && (DEFAULT_ASCII <= 8'h7E);
-    assign sprite_index = DEFAULT_ASCII - 8'h21;
+    integer i;
+    initial begin
+        for (i = 0; i < PIXEL_COUNT; i = i + 1)
+            framebuf[i] = 1'b0;
+    end
 
-    // Check if current screen pixel is inside sprite box
-    wire inSprite;
-    assign inSprite =
-        (x >= x_pos) && (x < x_pos + SPRITE_SIZE) &&
-        (y >= y_pos) && (y < y_pos + SPRITE_SIZE);
+    wire [ADDR_WIDTH-1:0] read_addr;
+    assign read_addr = x + VIDEO_WIDTH * y;
 
-    wire [5:0] sprite_local_x;
-    wire [5:0] sprite_local_y;
-    assign sprite_local_x = x - x_pos;
-    assign sprite_local_y = y - y_pos;
+    // =========================================================
+    // Clear framebuffer on reset
+    // =========================================================
+    reg clearing;
+    reg [ADDR_WIDTH-1:0] clear_addr;
 
-    wire [SPRITE_PIXEL_ADDR_WIDTH-1:0] sprite_pixel_addr;
-    wire [SPRITE_ADDR_WIDTH-1:0] sprite_addr;
-    assign sprite_pixel_addr = sprite_local_y * SPRITE_SIZE + sprite_local_x;
-    assign sprite_addr = sprite_index * SPRITE_PIXELS + sprite_pixel_addr;
+    // =========================================================
+    // Paint cursor square into framebuffer so trail remains
+    // =========================================================
+    reg painting;
+    reg [9:0] paint_base_x;
+    reg [8:0] paint_base_y;
+    reg [5:0] paint_dx;
+    reg [5:0] paint_dy;
 
-    wire sprite_bit;
-    RAM #(
-        .DEPTH(SPRITE_ROM_DEPTH),
-        .DATA_WIDTH(1),
-        .ADDRESS_WIDTH(SPRITE_ADDR_WIDTH),
-        .MEMFILE({FILES_PATH, "sprites.mem"})
-    ) SpriteROM (
-        .clk(clk25),
-        .wEn(1'b0),
-        .addr(sprite_addr),
-        .dataIn(1'b0),
-        .dataOut(sprite_bit)
-    );
+    wire [ADDR_WIDTH-1:0] paint_addr;
+    assign paint_addr =
+        (paint_base_y + paint_dy) * VIDEO_WIDTH +
+        (paint_base_x + paint_dx);
 
-    // Delay background/control by 1 cycle to match synchronous sprite ROM
-    wire [BITS_PER_COLOR-1:0] bgColor;
-    wire [BITS_PER_COLOR-1:0] colorOut;
-    reg [BITS_PER_COLOR-1:0] bgColor_d;
-    reg inSprite_d;
-    reg printable_char_d;
+    // =========================================================
+    // Live cursor overlay
+    // =========================================================
+    wire inCursor;
+    assign inCursor =
+        (x >= x_pos) && (x < x_pos + CURSOR_SIZE) &&
+        (y >= y_pos) && (y < y_pos + CURSOR_SIZE);
 
-    assign bgColor = active ? colorData : 12'h000;
+    // =========================================================
+    // Framebuffer read/write
+    // =========================================================
+    always @(posedge clk25) begin
+        // synchronous read for display
+        fb_pixel <= framebuf[read_addr];
 
+        // write priority: clear first, then paint
+        if (clearing)
+            framebuf[clear_addr] <= 1'b0;
+        else if (painting)
+            framebuf[paint_addr] <= 1'b1;
+    end
+
+    // =========================================================
+    // Control state
+    // =========================================================
     always @(posedge clk25 or posedge reset) begin
         if (reset) begin
-            bgColor_d <= 12'h000;
-            inSprite_d <= 1'b0;
-            printable_char_d <= 1'b0;
+            x_pos      <= VIDEO_WIDTH  / 2;
+            y_pos      <= VIDEO_HEIGHT / 2;
+
+            clearing   <= 1'b1;
+            clear_addr <= {ADDR_WIDTH{1'b0}};
+
+            painting   <= 1'b0;
+            paint_base_x <= 10'd0;
+            paint_base_y <= 9'd0;
+            paint_dx   <= 6'd0;
+            paint_dy   <= 6'd0;
         end else begin
-            bgColor_d <= bgColor;
-            inSprite_d <= inSprite;
-            printable_char_d <= printable_char;
+            if (clearing) begin
+                if (clear_addr == PIXEL_COUNT - 1) begin
+                    clearing <= 1'b0;
+
+                    // paint initial cursor position after clear
+                    painting     <= 1'b1;
+                    paint_base_x <= x_pos;
+                    paint_base_y <= y_pos;
+                    paint_dx     <= 6'd0;
+                    paint_dy     <= 6'd0;
+                end else begin
+                    clear_addr <= clear_addr + 1'b1;
+                end
+            end else if (painting) begin
+                if (paint_dx == CURSOR_SIZE - 1) begin
+                    paint_dx <= 6'd0;
+                    if (paint_dy == CURSOR_SIZE - 1) begin
+                        paint_dy <= 6'd0;
+                        painting <= 1'b0;
+                    end else begin
+                        paint_dy <= paint_dy + 1'b1;
+                    end
+                end else begin
+                    paint_dx <= paint_dx + 1'b1;
+                end
+            end else if (screenEnd) begin
+                if ((next_x != x_pos) || (next_y != y_pos)) begin
+                    x_pos <= next_x;
+                    y_pos <= next_y;
+
+                    // paint the new cursor square into memory
+                    painting     <= 1'b1;
+                    paint_base_x <= next_x;
+                    paint_base_y <= next_y;
+                    paint_dx     <= 6'd0;
+                    paint_dy     <= 6'd0;
+                end
+            end
         end
     end
 
-    assign colorOut = (inSprite_d && printable_char_d && sprite_bit) ? SPRITE_COLOR : bgColor_d;
+    // =========================================================
+    // Final VGA color
+    // Show black if:
+    //   - pixel already stored in framebuffer, or
+    //   - pixel is inside current live cursor
+    // Otherwise white
+    // =========================================================
+    wire [11:0] colorOut;
+    assign colorOut = active ? ((fb_pixel || inCursor) ? BLACK : WHITE) : BLACK;
 
     assign {VGA_R, VGA_G, VGA_B} = colorOut;
+
+    // PS/2 unused
+    assign ps2_clk  = 1'bz;
+    assign ps2_data = 1'bz;
 
 endmodule
