@@ -1,0 +1,11 @@
+.\alu.v
+.\dffe_ref.v
+.\multdiv.v
+.\processor.v
+.\RAM.v
+.\regfile.v
+.\register.v
+.\ROM.v
+.\tFlipFlipAndMux.v
+.\Wrapper.v
+..\..\test_files\Wrapper_tb.v
