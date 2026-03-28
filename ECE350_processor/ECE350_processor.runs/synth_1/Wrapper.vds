@@ -1,15 +1,28 @@
 #-----------------------------------------------------------
-# Vivado v2021.1 (64-bit)
-# SW Build 3247384 on Thu Jun 10 19:36:33 MDT 2021
-# IP Build 3246043 on Fri Jun 11 00:30:35 MDT 2021
-# Start of session at: Thu Mar 26 16:42:53 2026
-# Process ID: 18072
-# Current directory: C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1
-# Command line: vivado.exe -log Wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Wrapper.tcl
-# Log file: C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1/Wrapper.vds
-# Journal file: C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1\vivado.jou
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Mar 28 00:06:36 2026
+# Process ID         : 29164
+# Current directory  : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1
+# Command line       : vivado.exe -log Wrapper.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Wrapper.tcl
+# Log file           : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1/Wrapper.vds
+# Journal file       : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1\vivado.jou
+# Running On         : rachelsLaptop
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : Intel(R) Core(TM) Ultra 7 165U
+# CPU Frequency      : 2688 MHz
+# CPU Physical cores : 12
+# CPU Logical cores  : 14
+# Host memory        : 33782 MB
+# Swap memory        : 8053 MB
+# Total Virtual      : 41835 MB
+# Available Virtual  : 5885 MB
 #-----------------------------------------------------------
 source Wrapper.tcl -notrace
+create_project: Time (s): cpu = 00:00:22 ; elapsed = 00:00:22 . Memory (MB): peak = 525.762 ; gain = 220.828
 Command: synth_design -top Wrapper -part xc7a100tcsg324-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
@@ -17,358 +30,361 @@ INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100
 INFO: [Device 21-403] Loading part xc7a100tcsg324-1
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 9064
-WARNING: [Synth 8-6901] identifier 'latchEnable' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:67]
-WARNING: [Synth 8-6901] identifier 'lw_hazard_d' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:67]
-WARNING: [Synth 8-6901] identifier 'bexTaken' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:91]
-WARNING: [Synth 8-6901] identifier 'fd_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:91]
-WARNING: [Synth 8-6901] identifier 'BNETaken' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:93]
-WARNING: [Synth 8-6901] identifier 'BNEResult' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:93]
-WARNING: [Synth 8-6901] identifier 'BLTTaken' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:95]
-WARNING: [Synth 8-6901] identifier 'BranchResult' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:95]
-WARNING: [Synth 8-6901] identifier 'isJal' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:97]
-WARNING: [Synth 8-6901] identifier 'dx_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:97]
-WARNING: [Synth 8-6901] identifier 'isJr' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:99]
-WARNING: [Synth 8-6901] identifier 'jr_reg_bypassed' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:99]
-WARNING: [Synth 8-6901] identifier 'BNETaken' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:103]
-WARNING: [Synth 8-6901] identifier 'BLTTaken' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:103]
-WARNING: [Synth 8-6901] identifier 'isJr' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:103]
-WARNING: [Synth 8-6901] identifier 'isJal' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:103]
-WARNING: [Synth 8-6901] identifier 'bexTaken' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:103]
-WARNING: [Synth 8-6901] identifier 'BLTTaken' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:104]
-WARNING: [Synth 8-6901] identifier 'isJr' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:104]
-WARNING: [Synth 8-6901] identifier 'isJal' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:104]
-WARNING: [Synth 8-6901] identifier 'isBNE' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:138]
-WARNING: [Synth 8-6901] identifier 'isBNE' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:140]
-WARNING: [Synth 8-6901] identifier 'RTypeX' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:160]
-WARNING: [Synth 8-6901] identifier 'opcodeX' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:160]
-WARNING: [Synth 8-6901] identifier 'opcodeX' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:160]
-WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:162]
-WARNING: [Synth 8-6901] identifier 'dx_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:162]
-WARNING: [Synth 8-6901] identifier 'alu_out_orMD' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:165]
-WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:168]
-WARNING: [Synth 8-6901] identifier 'dx_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:168]
-WARNING: [Synth 8-6901] identifier 'alu_out_orMD' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:171]
-WARNING: [Synth 8-6901] identifier 'x_isSetx' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:177]
-WARNING: [Synth 8-6901] identifier 'dx_target_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:177]
-WARNING: [Synth 8-6901] identifier 'm_isSetx' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:178]
-WARNING: [Synth 8-6901] identifier 'xm_target_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:178]
-WARNING: [Synth 8-6901] identifier 'w_isSetx' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:180]
-WARNING: [Synth 8-6901] identifier 'dx_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:192]
-WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:197]
-WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:202]
-WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:205]
-WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:205]
-WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:208]
-WARNING: [Synth 8-6901] identifier 'RTypeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:208]
-WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:208]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:208]
-WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:209]
-WARNING: [Synth 8-6901] identifier 'RTypeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:209]
-WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:209]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:209]
-WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:210]
-WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:210]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:210]
-WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:211]
-WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:211]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:211]
-WARNING: [Synth 8-6901] identifier 'RTypeW' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:213]
-WARNING: [Synth 8-6901] identifier 'mw_Opcode' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:213]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:213]
-WARNING: [Synth 8-6901] identifier 'RTypeW' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:214]
-WARNING: [Synth 8-6901] identifier 'mw_Opcode' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:214]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:214]
-WARNING: [Synth 8-6901] identifier 'xm_alu_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:217]
-WARNING: [Synth 8-6901] identifier 'xm_alu_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:221]
-WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:281]
-WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:281]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:281]
-WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:282]
-WARNING: [Synth 8-6901] identifier 'RTypeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:282]
-WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:282]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:282]
-WARNING: [Synth 8-6901] identifier 'bypassInsn_w_rt' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:283]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:283]
-WARNING: [Synth 8-6901] identifier 'xm_alu_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:286]
-WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:292]
-WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:292]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:292]
-WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:293]
-WARNING: [Synth 8-6901] identifier 'RTypeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:293]
-WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:293]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:293]
-WARNING: [Synth 8-6901] identifier 'bypassInsn_w_rs' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:294]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:294]
-WARNING: [Synth 8-6901] identifier 'xm_alu_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:297]
-WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:306]
-WARNING: [Synth 8-6901] identifier 'bypassInsn_m_rt' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:306]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:306]
-WARNING: [Synth 8-6901] identifier 'bypassInsn_w_rt' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:307]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:307]
-WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:309]
-WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:309]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:309]
-WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:310]
-WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:310]
-WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:310]
-WARNING: [Synth 8-6901] identifier 'xm_alu_out' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:314]
-WARNING: [Synth 8-6901] identifier 'RTypeW' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:320]
-WARNING: [Synth 8-6901] identifier 'mw_Opcode' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:320]
-WARNING: [Synth 8-6901] identifier 'mw_Opcode' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:320]
-WARNING: [Synth 8-6901] identifier 'RTypeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:322]
-WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:322]
+INFO: [Synth 8-7075] Helper process launched with PID 28408
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1288.211 ; gain = 543.043
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-6901] identifier 'latchEnable' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:67]
+WARNING: [Synth 8-6901] identifier 'lw_hazard_d' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:67]
+WARNING: [Synth 8-6901] identifier 'bexTaken' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:91]
+WARNING: [Synth 8-6901] identifier 'fd_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:91]
+WARNING: [Synth 8-6901] identifier 'BNETaken' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:93]
+WARNING: [Synth 8-6901] identifier 'BNEResult' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:93]
+WARNING: [Synth 8-6901] identifier 'BLTTaken' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:95]
+WARNING: [Synth 8-6901] identifier 'BranchResult' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:95]
+WARNING: [Synth 8-6901] identifier 'isJal' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:97]
+WARNING: [Synth 8-6901] identifier 'dx_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:97]
+WARNING: [Synth 8-6901] identifier 'isJr' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:99]
+WARNING: [Synth 8-6901] identifier 'jr_reg_bypassed' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:99]
+WARNING: [Synth 8-6901] identifier 'BNETaken' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:103]
+WARNING: [Synth 8-6901] identifier 'BLTTaken' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:103]
+WARNING: [Synth 8-6901] identifier 'isJr' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:103]
+WARNING: [Synth 8-6901] identifier 'isJal' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:103]
+WARNING: [Synth 8-6901] identifier 'bexTaken' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:103]
+WARNING: [Synth 8-6901] identifier 'BLTTaken' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:104]
+WARNING: [Synth 8-6901] identifier 'isJr' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:104]
+WARNING: [Synth 8-6901] identifier 'isJal' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:104]
+WARNING: [Synth 8-6901] identifier 'isBNE' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:138]
+WARNING: [Synth 8-6901] identifier 'isBNE' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:140]
+WARNING: [Synth 8-6901] identifier 'RTypeX' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:160]
+WARNING: [Synth 8-6901] identifier 'opcodeX' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:160]
+WARNING: [Synth 8-6901] identifier 'opcodeX' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:160]
+WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:162]
+WARNING: [Synth 8-6901] identifier 'dx_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:162]
+WARNING: [Synth 8-6901] identifier 'alu_out_orMD' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:165]
+WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:168]
+WARNING: [Synth 8-6901] identifier 'dx_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:168]
+WARNING: [Synth 8-6901] identifier 'alu_out_orMD' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:171]
+WARNING: [Synth 8-6901] identifier 'x_isSetx' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:177]
+WARNING: [Synth 8-6901] identifier 'dx_target_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:177]
+WARNING: [Synth 8-6901] identifier 'm_isSetx' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:178]
+WARNING: [Synth 8-6901] identifier 'xm_target_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:178]
+WARNING: [Synth 8-6901] identifier 'w_isSetx' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:180]
+WARNING: [Synth 8-6901] identifier 'dx_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:192]
+WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:197]
+WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:202]
+WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:205]
+WARNING: [Synth 8-6901] identifier 'dx_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:205]
+WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:208]
+WARNING: [Synth 8-6901] identifier 'RTypeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:208]
+WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:208]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:208]
+WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:209]
+WARNING: [Synth 8-6901] identifier 'RTypeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:209]
+WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:209]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:209]
+WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:210]
+WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:210]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:210]
+WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:211]
+WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:211]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:211]
+WARNING: [Synth 8-6901] identifier 'RTypeW' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:213]
+WARNING: [Synth 8-6901] identifier 'mw_Opcode' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:213]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:213]
+WARNING: [Synth 8-6901] identifier 'RTypeW' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:214]
+WARNING: [Synth 8-6901] identifier 'mw_Opcode' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:214]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:214]
+WARNING: [Synth 8-6901] identifier 'xm_alu_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:217]
+WARNING: [Synth 8-6901] identifier 'xm_alu_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:221]
+WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:281]
+WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:281]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:281]
+WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:282]
+WARNING: [Synth 8-6901] identifier 'RTypeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:282]
+WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:282]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:282]
+WARNING: [Synth 8-6901] identifier 'bypassInsn_w_rt' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:283]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:283]
+WARNING: [Synth 8-6901] identifier 'xm_alu_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:286]
+WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:292]
+WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:292]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:292]
+WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:293]
+WARNING: [Synth 8-6901] identifier 'RTypeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:293]
+WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:293]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:293]
+WARNING: [Synth 8-6901] identifier 'bypassInsn_w_rs' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:294]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:294]
+WARNING: [Synth 8-6901] identifier 'xm_alu_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:297]
+WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:306]
+WARNING: [Synth 8-6901] identifier 'bypassInsn_m_rt' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:306]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:306]
+WARNING: [Synth 8-6901] identifier 'bypassInsn_w_rt' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:307]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:307]
+WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:309]
+WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:309]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:309]
+WARNING: [Synth 8-6901] identifier 'xm_rd_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:310]
+WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:310]
+WARNING: [Synth 8-6901] identifier 'xm_insn_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:310]
+WARNING: [Synth 8-6901] identifier 'xm_alu_out' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:314]
+WARNING: [Synth 8-6901] identifier 'RTypeW' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:320]
+WARNING: [Synth 8-6901] identifier 'mw_Opcode' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:320]
+WARNING: [Synth 8-6901] identifier 'mw_Opcode' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:320]
+WARNING: [Synth 8-6901] identifier 'RTypeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:322]
+WARNING: [Synth 8-6901] identifier 'OpcodeM' is used before its declaration [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:322]
 INFO: [Common 17-14] Message 'Synth 8-6901' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
----------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:02 ; elapsed = 00:00:03 . Memory (MB): peak = 1329.160 ; gain = 0.000
----------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'Wrapper' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/Vivado Timing files/Wrapper_timing.v:27]
-INFO: [Synth 8-6157] synthesizing module 'clk_wiz_5' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1/.Xil/Vivado-18072-P2-06/realtime/clk_wiz_5_stub.v:5]
-INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_5' (1#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1/.Xil/Vivado-18072-P2-06/realtime/clk_wiz_5_stub.v:5]
-INFO: [Synth 8-6157] synthesizing module 'processor' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:20]
-INFO: [Synth 8-6157] synthesizing module 'register' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
+CRITICAL WARNING: [Synth 8-9873] overwriting previous definition of module 'Wrapper' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/Vivado Timing files/Wrapper_timing.v:110]
+INFO: [Synth 8-13127] previous definition of module 'Wrapper' is here [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/Wrapper.v:75]
+INFO: [Synth 8-6157] synthesizing module 'Wrapper' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/Vivado Timing files/Wrapper_timing.v:27]
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1/.Xil/Vivado-29164-rachelsLaptop/realtime/clk_wiz_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1/.Xil/Vivado-29164-rachelsLaptop/realtime/clk_wiz_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'processor' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:20]
+INFO: [Synth 8-6157] synthesizing module 'register' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
 	Parameter WIDTH bound to: 32 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'dffe_ref' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/dffe_ref.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'dffe_ref' (2#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/dffe_ref.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'register' (3#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
-INFO: [Synth 8-6157] synthesizing module 'cla_level2' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/cla_level2.v:1]
-INFO: [Synth 8-6157] synthesizing module 'cla_8' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/cla_8.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'cla_8' (4#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/cla_8.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'cla_level2' (5#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/cla_level2.v:1]
-WARNING: [Synth 8-7071] port 'cout' of module 'cla_level2' is unconnected for instance 'pcCounter' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:79]
-WARNING: [Synth 8-7071] port 'last4' of module 'cla_level2' is unconnected for instance 'pcCounter' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:79]
-WARNING: [Synth 8-7023] instance 'pcCounter' of module 'cla_level2' has 6 connections declared, but only 4 given [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:79]
-INFO: [Synth 8-6157] synthesizing module 'latch' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/latch.v:1]
-INFO: [Synth 8-6157] synthesizing module 'register__parameterized0' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
+INFO: [Synth 8-6157] synthesizing module 'dffe_ref' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/dffe_ref.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'dffe_ref' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/dffe_ref.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'register' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
+INFO: [Synth 8-6157] synthesizing module 'cla_level2' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/cla_level2.v:1]
+INFO: [Synth 8-6157] synthesizing module 'cla_8' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/cla_8.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'cla_8' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/cla_8.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'cla_level2' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/cla_level2.v:1]
+WARNING: [Synth 8-7071] port 'cout' of module 'cla_level2' is unconnected for instance 'pcCounter' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:79]
+WARNING: [Synth 8-7071] port 'last4' of module 'cla_level2' is unconnected for instance 'pcCounter' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:79]
+WARNING: [Synth 8-7023] instance 'pcCounter' of module 'cla_level2' has 6 connections declared, but only 4 given [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:79]
+INFO: [Synth 8-6157] synthesizing module 'latch' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/latch.v:1]
+INFO: [Synth 8-6157] synthesizing module 'register__parameterized0' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
 	Parameter WIDTH bound to: 5 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'register__parameterized0' (5#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
-INFO: [Synth 8-6157] synthesizing module 'register__parameterized1' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'register__parameterized0' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
+INFO: [Synth 8-6157] synthesizing module 'register__parameterized1' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
 	Parameter WIDTH bound to: 17 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'register__parameterized1' (5#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
-INFO: [Synth 8-6157] synthesizing module 'register__parameterized2' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'register__parameterized1' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
+INFO: [Synth 8-6157] synthesizing module 'register__parameterized2' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
 	Parameter WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'register__parameterized2' (5#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
-INFO: [Synth 8-6157] synthesizing module 'register__parameterized3' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'register__parameterized2' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
+INFO: [Synth 8-6157] synthesizing module 'register__parameterized3' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
 	Parameter WIDTH bound to: 27 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'register__parameterized3' (5#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'latch' (6#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/latch.v:1]
-WARNING: [Synth 8-7071] port 'rs_din' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'rs_dout' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'rt_din' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'rt_dout' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'rs_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'rs_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'rt_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'rt_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'rd_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'rd_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'shamt_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'shamt_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'imme_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'imme_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'alu_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'alu_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'isNotEq_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'isNotEq_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'data_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'data_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'muldivRes_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'muldivRes_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'mulDivReady_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'mulDivReady_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'exception_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'exception_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'target_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'target_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7023] instance 'FD_INSN' of module 'latch' has 35 connections declared, but only 7 given [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:113]
-WARNING: [Synth 8-7071] port 'alu_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7071] port 'alu_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7071] port 'isNotEq_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7071] port 'isNotEq_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7071] port 'data_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7071] port 'data_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7071] port 'muldivRes_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7071] port 'muldivRes_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7071] port 'mulDivReady_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7071] port 'mulDivReady_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7071] port 'exception_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7071] port 'exception_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-WARNING: [Synth 8-7023] instance 'DX' of module 'latch' has 35 connections declared, but only 23 given [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:237]
-INFO: [Synth 8-6157] synthesizing module 'alu' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/alu.v:1]
-INFO: [Synth 8-6157] synthesizing module 'not_32' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/not_32.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'not_32' (7#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/not_32.v:1]
-WARNING: [Synth 8-7071] port 'cout' of module 'cla_level2' is unconnected for instance 'sub' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/alu.v:33]
-WARNING: [Synth 8-7071] port 'last4' of module 'cla_level2' is unconnected for instance 'sub' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/alu.v:33]
-WARNING: [Synth 8-7023] instance 'sub' of module 'cla_level2' has 6 connections declared, but only 4 given [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/alu.v:33]
-INFO: [Synth 8-6157] synthesizing module 'notEqual_32' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/notEqual_32.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'notEqual_32' (8#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/notEqual_32.v:1]
-INFO: [Synth 8-6157] synthesizing module 'or_32' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/or_32.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'or_32' (9#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/or_32.v:1]
-INFO: [Synth 8-6157] synthesizing module 'and_32' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/and_32.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'and_32' (10#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/and_32.v:1]
-INFO: [Synth 8-6157] synthesizing module 'sll' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/sll.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'sll' (11#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/sll.v:1]
-INFO: [Synth 8-6157] synthesizing module 'sra' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/sra.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'sra' (12#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/sra.v:1]
-INFO: [Synth 8-6157] synthesizing module 'mux_8' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_8.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'register__parameterized3' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'latch' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/latch.v:1]
+WARNING: [Synth 8-7071] port 'rs_din' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'rs_dout' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'rt_din' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'rt_dout' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'rs_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'rs_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'rt_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'rt_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'rd_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'rd_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'shamt_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'shamt_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'imme_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'imme_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'alu_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'alu_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'isNotEq_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'isNotEq_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'data_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'data_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'muldivRes_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'muldivRes_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'mulDivReady_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'mulDivReady_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'exception_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'exception_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'target_in' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'target_out' of module 'latch' is unconnected for instance 'FD_INSN' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7023] instance 'FD_INSN' of module 'latch' has 35 connections declared, but only 7 given [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:113]
+WARNING: [Synth 8-7071] port 'alu_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7071] port 'alu_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7071] port 'isNotEq_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7071] port 'isNotEq_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7071] port 'data_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7071] port 'data_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7071] port 'muldivRes_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7071] port 'muldivRes_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7071] port 'mulDivReady_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7071] port 'mulDivReady_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7071] port 'exception_in' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7071] port 'exception_out' of module 'latch' is unconnected for instance 'DX' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+WARNING: [Synth 8-7023] instance 'DX' of module 'latch' has 35 connections declared, but only 23 given [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:237]
+INFO: [Synth 8-6157] synthesizing module 'alu' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/alu.v:1]
+INFO: [Synth 8-6157] synthesizing module 'not_32' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/not_32.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'not_32' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/not_32.v:1]
+WARNING: [Synth 8-7071] port 'cout' of module 'cla_level2' is unconnected for instance 'sub' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/alu.v:33]
+WARNING: [Synth 8-7071] port 'last4' of module 'cla_level2' is unconnected for instance 'sub' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/alu.v:33]
+WARNING: [Synth 8-7023] instance 'sub' of module 'cla_level2' has 6 connections declared, but only 4 given [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/alu.v:33]
+INFO: [Synth 8-6157] synthesizing module 'notEqual_32' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/notEqual_32.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'notEqual_32' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/notEqual_32.v:1]
+INFO: [Synth 8-6157] synthesizing module 'or_32' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/or_32.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'or_32' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/or_32.v:1]
+INFO: [Synth 8-6157] synthesizing module 'and_32' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/and_32.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'and_32' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/and_32.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sll' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/sll.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sll' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/sll.v:1]
+INFO: [Synth 8-6157] synthesizing module 'sra' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/sra.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'sra' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/sra.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mux_8' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_8.v:1]
 	Parameter WIDTH bound to: 32 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'mux_4' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_4.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mux_4' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_4.v:1]
 	Parameter WIDTH bound to: 32 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'mux_2' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_2.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mux_2' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_2.v:1]
 	Parameter WIDTH bound to: 32 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'mux_2' (13#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_2.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'mux_4' (14#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_4.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'mux_8' (15#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_8.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'alu' (16#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/alu.v:1]
-WARNING: [Synth 8-7071] port 'shamt_in' of module 'latch' is unconnected for instance 'XM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:384]
-WARNING: [Synth 8-7071] port 'shamt_out' of module 'latch' is unconnected for instance 'XM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:384]
-WARNING: [Synth 8-7071] port 'isNotEq_in' of module 'latch' is unconnected for instance 'XM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:384]
-WARNING: [Synth 8-7071] port 'isNotEq_out' of module 'latch' is unconnected for instance 'XM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:384]
-WARNING: [Synth 8-7071] port 'data_in' of module 'latch' is unconnected for instance 'XM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:384]
-WARNING: [Synth 8-7071] port 'data_out' of module 'latch' is unconnected for instance 'XM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:384]
-WARNING: [Synth 8-7071] port 'muldivRes_in' of module 'latch' is unconnected for instance 'XM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:384]
-WARNING: [Synth 8-7071] port 'muldivRes_out' of module 'latch' is unconnected for instance 'XM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:384]
-WARNING: [Synth 8-7071] port 'mulDivReady_in' of module 'latch' is unconnected for instance 'XM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:384]
-WARNING: [Synth 8-7071] port 'mulDivReady_out' of module 'latch' is unconnected for instance 'XM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:384]
-WARNING: [Synth 8-7023] instance 'XM' of module 'latch' has 35 connections declared, but only 25 given [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:384]
-INFO: [Synth 8-6157] synthesizing module 'multdiv' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/multdiv.v:1]
-INFO: [Synth 8-6157] synthesizing module 'mult' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/mult.v:1]
-INFO: [Synth 8-6157] synthesizing module 'register__parameterized4' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'register__parameterized4' (16#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
-INFO: [Synth 8-6157] synthesizing module 'mux_8__parameterized0' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_8.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_2' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_2.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_4' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_4.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_8' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_8.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'alu' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/alu.v:1]
+WARNING: [Synth 8-7071] port 'shamt_in' of module 'latch' is unconnected for instance 'XM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:384]
+WARNING: [Synth 8-7071] port 'shamt_out' of module 'latch' is unconnected for instance 'XM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:384]
+WARNING: [Synth 8-7071] port 'isNotEq_in' of module 'latch' is unconnected for instance 'XM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:384]
+WARNING: [Synth 8-7071] port 'isNotEq_out' of module 'latch' is unconnected for instance 'XM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:384]
+WARNING: [Synth 8-7071] port 'data_in' of module 'latch' is unconnected for instance 'XM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:384]
+WARNING: [Synth 8-7071] port 'data_out' of module 'latch' is unconnected for instance 'XM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:384]
+WARNING: [Synth 8-7071] port 'muldivRes_in' of module 'latch' is unconnected for instance 'XM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:384]
+WARNING: [Synth 8-7071] port 'muldivRes_out' of module 'latch' is unconnected for instance 'XM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:384]
+WARNING: [Synth 8-7071] port 'mulDivReady_in' of module 'latch' is unconnected for instance 'XM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:384]
+WARNING: [Synth 8-7071] port 'mulDivReady_out' of module 'latch' is unconnected for instance 'XM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:384]
+WARNING: [Synth 8-7023] instance 'XM' of module 'latch' has 35 connections declared, but only 25 given [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:384]
+INFO: [Synth 8-6157] synthesizing module 'multdiv' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/multdiv.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mult' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/mult.v:1]
+INFO: [Synth 8-6157] synthesizing module 'register__parameterized4' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'register__parameterized4' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mux_8__parameterized0' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_8.v:1]
 	Parameter WIDTH bound to: 33 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'mux_4__parameterized0' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_4.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mux_4__parameterized0' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_4.v:1]
 	Parameter WIDTH bound to: 33 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'mux_2__parameterized0' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_2.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mux_2__parameterized0' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_2.v:1]
 	Parameter WIDTH bound to: 33 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'mux_2__parameterized0' (16#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_2.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'mux_4__parameterized0' (16#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_4.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'mux_8__parameterized0' (16#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_8.v:1]
-INFO: [Synth 8-6157] synthesizing module 'register__parameterized5' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_2__parameterized0' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_2.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_4__parameterized0' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_4.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_8__parameterized0' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_8.v:1]
+INFO: [Synth 8-6157] synthesizing module 'register__parameterized5' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
 	Parameter WIDTH bound to: 66 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'register__parameterized5' (16#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'mult' (17#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/mult.v:1]
-INFO: [Synth 8-6157] synthesizing module 'div' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/div.v:1]
-INFO: [Synth 8-6157] synthesizing module 'comparator_32' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/comparator_32.v:1]
-INFO: [Synth 8-6157] synthesizing module 'comp_8' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/comp_8.v:1]
-INFO: [Synth 8-6157] synthesizing module 'twobit_comparator' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/twobit_comparator.v:1]
-INFO: [Synth 8-6157] synthesizing module 'mux_8__parameterized1' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_8.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'register__parameterized5' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mult' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/mult.v:1]
+INFO: [Synth 8-6157] synthesizing module 'div' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/div.v:1]
+INFO: [Synth 8-6157] synthesizing module 'comparator_32' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/comparator_32.v:1]
+INFO: [Synth 8-6157] synthesizing module 'comp_8' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/comp_8.v:1]
+INFO: [Synth 8-6157] synthesizing module 'twobit_comparator' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/twobit_comparator.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mux_8__parameterized1' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_8.v:1]
 	Parameter WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'mux_4__parameterized1' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_4.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mux_4__parameterized1' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_4.v:1]
 	Parameter WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-6157] synthesizing module 'mux_2__parameterized1' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_2.v:1]
+INFO: [Synth 8-6157] synthesizing module 'mux_2__parameterized1' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_2.v:1]
 	Parameter WIDTH bound to: 1 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'mux_2__parameterized1' (17#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_2.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'mux_4__parameterized1' (17#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_4.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'mux_8__parameterized1' (17#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/alu/mux_8.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'twobit_comparator' (18#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/twobit_comparator.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'comp_8' (19#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/comp_8.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'comparator_32' (20#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/comparator_32.v:1]
-INFO: [Synth 8-6157] synthesizing module 'tff' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/tff.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'tff' (21#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/tff.v:1]
-INFO: [Synth 8-6157] synthesizing module 'register__parameterized6' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_2__parameterized1' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_2.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_4__parameterized1' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_4.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'mux_8__parameterized1' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/alu/mux_8.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'twobit_comparator' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/twobit_comparator.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'comp_8' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/comp_8.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'comparator_32' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/comparator_32.v:1]
+INFO: [Synth 8-6157] synthesizing module 'tff' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/tff.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'tff' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/tff.v:1]
+INFO: [Synth 8-6157] synthesizing module 'register__parameterized6' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
 	Parameter WIDTH bound to: 64 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'register__parameterized6' (21#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/register.v:1]
-INFO: [Synth 8-6157] synthesizing module 'tristate' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/tristate.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'tristate' (22#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/tristate.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'div' (23#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/div.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'multdiv' (24#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/multdiv/multdiv.v:1]
-WARNING: [Synth 8-7071] port 'rs_din' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'rs_dout' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'rt_din' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'rt_dout' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'rs_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'rs_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'rt_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'rt_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'shamt_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'shamt_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'imme_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'imme_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'alu_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'alu_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'isNotEq_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'isNotEq_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'data_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'data_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'target_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'target_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7023] instance 'PW' of module 'latch' has 35 connections declared, but only 15 given [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:478]
-WARNING: [Synth 8-7071] port 'shamt_in' of module 'latch' is unconnected for instance 'MW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:539]
-WARNING: [Synth 8-7071] port 'shamt_out' of module 'latch' is unconnected for instance 'MW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:539]
-WARNING: [Synth 8-7071] port 'isNotEq_in' of module 'latch' is unconnected for instance 'MW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:539]
-WARNING: [Synth 8-7071] port 'isNotEq_out' of module 'latch' is unconnected for instance 'MW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:539]
-WARNING: [Synth 8-7071] port 'muldivRes_in' of module 'latch' is unconnected for instance 'MW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:539]
-WARNING: [Synth 8-7071] port 'muldivRes_out' of module 'latch' is unconnected for instance 'MW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:539]
-WARNING: [Synth 8-7071] port 'mulDivReady_in' of module 'latch' is unconnected for instance 'MW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:539]
-WARNING: [Synth 8-7071] port 'mulDivReady_out' of module 'latch' is unconnected for instance 'MW' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:539]
-WARNING: [Synth 8-7023] instance 'MW' of module 'latch' has 35 connections declared, but only 27 given [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:539]
-INFO: [Synth 8-6155] done synthesizing module 'processor' (25#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/processor.v:20]
-INFO: [Synth 8-6157] synthesizing module 'ROM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/ROM.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'register__parameterized6' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/register.v:1]
+INFO: [Synth 8-6157] synthesizing module 'tristate' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/tristate.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'tristate' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/tristate.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'div' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/div.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'multdiv' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/multdiv/multdiv.v:1]
+WARNING: [Synth 8-7071] port 'rs_din' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'rs_dout' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'rt_din' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'rt_dout' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'rs_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'rs_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'rt_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'rt_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'shamt_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'shamt_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'imme_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'imme_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'alu_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'alu_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'isNotEq_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'isNotEq_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'data_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'data_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'target_in' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'target_out' of module 'latch' is unconnected for instance 'PW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7023] instance 'PW' of module 'latch' has 35 connections declared, but only 15 given [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:478]
+WARNING: [Synth 8-7071] port 'shamt_in' of module 'latch' is unconnected for instance 'MW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:539]
+WARNING: [Synth 8-7071] port 'shamt_out' of module 'latch' is unconnected for instance 'MW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:539]
+WARNING: [Synth 8-7071] port 'isNotEq_in' of module 'latch' is unconnected for instance 'MW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:539]
+WARNING: [Synth 8-7071] port 'isNotEq_out' of module 'latch' is unconnected for instance 'MW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:539]
+WARNING: [Synth 8-7071] port 'muldivRes_in' of module 'latch' is unconnected for instance 'MW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:539]
+WARNING: [Synth 8-7071] port 'muldivRes_out' of module 'latch' is unconnected for instance 'MW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:539]
+WARNING: [Synth 8-7071] port 'mulDivReady_in' of module 'latch' is unconnected for instance 'MW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:539]
+WARNING: [Synth 8-7071] port 'mulDivReady_out' of module 'latch' is unconnected for instance 'MW' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:539]
+WARNING: [Synth 8-7023] instance 'MW' of module 'latch' has 35 connections declared, but only 27 given [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:539]
+INFO: [Synth 8-6155] done synthesizing module 'processor' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/processor.v:20]
+INFO: [Synth 8-6157] synthesizing module 'ROM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/ROM.v:2]
 	Parameter MEMFILE bound to: 80'b01110100011010010110110101101001011011100110011100101110011011010110010101101101 
-INFO: [Synth 8-3876] $readmem data file 'timing.mem' is read successfully [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/ROM.v:11]
-INFO: [Synth 8-6155] done synthesizing module 'ROM' (26#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/ROM.v:2]
-INFO: [Synth 8-6157] synthesizing module 'regfile' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/regfile.v:1]
-INFO: [Synth 8-6157] synthesizing module 'tristate__parameterized0' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/tristate.v:1]
+INFO: [Synth 8-3876] $readmem data file 'timing.mem' is read successfully [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/ROM.v:11]
+INFO: [Synth 8-6155] done synthesizing module 'ROM' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/ROM.v:2]
+INFO: [Synth 8-6157] synthesizing module 'regfile' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/regfile.v:1]
+INFO: [Synth 8-6157] synthesizing module 'tristate__parameterized0' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/tristate.v:1]
 	Parameter WIDTH bound to: 32 - type: integer 
-INFO: [Synth 8-6155] done synthesizing module 'tristate__parameterized0' (26#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/tristate.v:1]
-INFO: [Synth 8-6157] synthesizing module 'decoder' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/decoder.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'decoder' (27#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/decoder.v:1]
-INFO: [Synth 8-6155] done synthesizing module 'regfile' (28#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/regfile/regfile.v:1]
-INFO: [Synth 8-6157] synthesizing module 'RAM' [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/RAM.v:2]
-INFO: [Synth 8-6155] done synthesizing module 'RAM' (29#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/proc/RAM.v:2]
-INFO: [Synth 8-6155] done synthesizing module 'Wrapper' (30#1) [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/Vivado Timing files/Wrapper_timing.v:27]
+INFO: [Synth 8-6155] done synthesizing module 'tristate__parameterized0' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/tristate.v:1]
+INFO: [Synth 8-6157] synthesizing module 'decoder' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/decoder.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'decoder' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/decoder.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'regfile' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/regfile/regfile.v:1]
+INFO: [Synth 8-6157] synthesizing module 'RAM' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/RAM.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'RAM' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/jill_proc/RAM.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'Wrapper' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/Vivado Timing files/Wrapper_timing.v:27]
+WARNING: [Synth 8-7129] Port ctrl_ALUopcode[4] in module alu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ctrl_ALUopcode[3] in module alu is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 1329.160 ; gain = 0.000
+Finished RTL Elaboration : Time (s): cpu = 00:00:22 ; elapsed = 00:00:27 . Memory (MB): peak = 1428.227 ; gain = 683.059
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1329.160 ; gain = 0.000
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:23 ; elapsed = 00:00:27 . Memory (MB): peak = 1428.227 ; gain = 683.059
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 1329.160 ; gain = 0.000
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:23 ; elapsed = 00:00:27 . Memory (MB): peak = 1428.227 ; gain = 683.059
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.103 . Memory (MB): peak = 1329.160 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.572 . Memory (MB): peak = 1428.227 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [c:/Users/jaw185/Desktop/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.gen/sources_1/ip/clk_wiz_5/clk_wiz_5/clk_wiz_5_in_context.xdc] for cell 'pll'
-Finished Parsing XDC File [c:/Users/jaw185/Desktop/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.gen/sources_1/ip/clk_wiz_5/clk_wiz_5/clk_wiz_5_in_context.xdc] for cell 'pll'
-Parsing XDC File [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/Vivado Timing files/Nexys-A7-100T-Master.xdc]
-Finished Parsing XDC File [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/Vivado Timing files/Nexys-A7-100T-Master.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/Vivado Timing files/Nexys-A7-100T-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/Wrapper_propImpl.xdc].
+Parsing XDC File [c:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.gen/sources_1/ip/clk_wiz_0_6/clk_wiz_0/clk_wiz_0_in_context.xdc] for cell 'pll'
+Finished Parsing XDC File [c:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.gen/sources_1/ip/clk_wiz_0_6/clk_wiz_0/clk_wiz_0_in_context.xdc] for cell 'pll'
+Parsing XDC File [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/Vivado Timing files/Nexys-A7-100T-Master.xdc]
+Finished Parsing XDC File [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/Vivado Timing files/Nexys-A7-100T-Master.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/Vivado Timing files/Nexys-A7-100T-Master.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/Wrapper_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/Wrapper_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Parsing XDC File [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1/dont_touch.xdc]
+Finished Parsing XDC File [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1/dont_touch.xdc]
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.008 . Memory (MB): peak = 1403.141 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.069 . Memory (MB): peak = 1501.555 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.033 . Memory (MB): peak = 1403.141 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.425 . Memory (MB): peak = 1501.555 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1403.141 ; gain = 73.980
+Finished Constraint Validation : Time (s): cpu = 00:00:55 ; elapsed = 00:01:08 . Memory (MB): peak = 1501.555 ; gain = 756.387
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1403.141 ; gain = 73.980
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:55 ; elapsed = 00:01:08 . Memory (MB): peak = 1501.555 ; gain = 756.387
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property IO_BUFFER_TYPE = NONE for clk_100mhz. (constraint file  c:/Users/jaw185/Desktop/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.gen/sources_1/ip/clk_wiz_5/clk_wiz_5/clk_wiz_5_in_context.xdc, line 3).
-Applied set_property CLOCK_BUFFER_TYPE = NONE for clk_100mhz. (constraint file  c:/Users/jaw185/Desktop/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.gen/sources_1/ip/clk_wiz_5/clk_wiz_5/clk_wiz_5_in_context.xdc, line 4).
-Applied set_property KEEP_HIERARCHY = SOFT for pll. (constraint file  auto generated constraint).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 1403.141 ; gain = 73.980
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:55 ; elapsed = 00:01:09 . Memory (MB): peak = 1501.555 ; gain = 756.387
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:10 ; elapsed = 00:00:11 . Memory (MB): peak = 1403.141 ; gain = 73.980
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:57 ; elapsed = 00:01:12 . Memory (MB): peak = 1501.555 ; gain = 756.387
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -392,7 +408,6 @@ Detailed RTL Component Info :
 	   2 Input   32 Bit        Muxes := 59    
 	   5 Input   32 Bit        Muxes := 1     
 	   2 Input    5 Bit        Muxes := 7     
-	   4 Input    5 Bit        Muxes := 1     
 	   4 Input    2 Bit        Muxes := 1     
 	   2 Input    1 Bit        Muxes := 231   
 ---------------------------------------------------------------------------------
@@ -410,8 +425,10 @@ Finished Part Resource Summary
 ---------------------------------------------------------------------------------
 Start Cross Boundary and Area Optimization
 ---------------------------------------------------------------------------------
+WARNING: [Synth 8-7129] Port ctrl_ALUopcode[4] in module alu is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ctrl_ALUopcode[3] in module alu is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:27 ; elapsed = 00:00:28 . Memory (MB): peak = 1403.141 ; gain = 73.980
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:02:16 ; elapsed = 00:02:53 . Memory (MB): peak = 1657.840 ; gain = 912.672
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -440,13 +457,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:33 . Memory (MB): peak = 1403.141 ; gain = 73.980
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:02:31 ; elapsed = 00:03:13 . Memory (MB): peak = 1657.840 ; gain = 912.672
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:43 ; elapsed = 00:00:44 . Memory (MB): peak = 1631.027 ; gain = 301.867
+Finished Timing Optimization : Time (s): cpu = 00:03:13 ; elapsed = 00:04:17 . Memory (MB): peak = 1908.586 ; gain = 1163.418
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -472,7 +489,7 @@ INFO: [Synth 8-7052] The timing for the instance ProcMem/MemoryArray_reg_3 (impl
 INFO: [Synth 8-7052] The timing for the instance InstMem/dataOut_reg_0 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance InstMem/dataOut_reg_1 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:44 ; elapsed = 00:00:46 . Memory (MB): peak = 1632.094 ; gain = 302.934
+Finished Technology Mapping : Time (s): cpu = 00:03:21 ; elapsed = 00:04:28 . Memory (MB): peak = 1914.055 ; gain = 1168.887
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -490,37 +507,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:47 ; elapsed = 00:00:49 . Memory (MB): peak = 1632.094 ; gain = 302.934
+Finished IO Insertion : Time (s): cpu = 00:03:32 ; elapsed = 00:04:44 . Memory (MB): peak = 2011.609 ; gain = 1266.441
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:47 ; elapsed = 00:00:49 . Memory (MB): peak = 1632.094 ; gain = 302.934
+Finished Renaming Generated Instances : Time (s): cpu = 00:03:32 ; elapsed = 00:04:44 . Memory (MB): peak = 2011.609 ; gain = 1266.441
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:48 ; elapsed = 00:00:49 . Memory (MB): peak = 1632.094 ; gain = 302.934
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:03:34 ; elapsed = 00:04:47 . Memory (MB): peak = 2011.609 ; gain = 1266.441
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:48 ; elapsed = 00:00:49 . Memory (MB): peak = 1632.094 ; gain = 302.934
+Finished Renaming Generated Ports : Time (s): cpu = 00:03:35 ; elapsed = 00:04:48 . Memory (MB): peak = 2011.609 ; gain = 1266.441
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:48 ; elapsed = 00:00:50 . Memory (MB): peak = 1632.094 ; gain = 302.934
+Finished Handling Custom Attributes : Time (s): cpu = 00:03:35 ; elapsed = 00:04:48 . Memory (MB): peak = 2025.699 ; gain = 1280.531
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:48 ; elapsed = 00:00:50 . Memory (MB): peak = 1632.094 ; gain = 302.934
+Finished Renaming Generated Nets : Time (s): cpu = 00:03:35 ; elapsed = 00:04:49 . Memory (MB): peak = 2025.699 ; gain = 1280.531
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -530,7 +547,7 @@ Report BlackBoxes:
 +------+--------------+----------+
 |      |BlackBox name |Instances |
 +------+--------------+----------+
-|1     |clk_wiz_5     |         1|
+|1     |clk_wiz_0     |         1|
 +------+--------------+----------+
 
 Report Cell Usage: 
@@ -540,12 +557,12 @@ Report Cell Usage:
 |1     |clk_wiz  |     1|
 |2     |BUFG     |     1|
 |3     |CARRY4   |     3|
-|4     |LUT1     |    18|
-|5     |LUT2     |   410|
-|6     |LUT3     |   291|
-|7     |LUT4     |   452|
-|8     |LUT5     |   619|
-|9     |LUT6     |  1829|
+|4     |LUT1     |    17|
+|5     |LUT2     |   274|
+|6     |LUT3     |   287|
+|7     |LUT4     |   427|
+|8     |LUT5     |   557|
+|9     |LUT6     |  1920|
 |10    |RAMB36E1 |     6|
 |13    |FDCE     |  1729|
 |14    |FDPE     |     1|
@@ -554,26 +571,28 @@ Report Cell Usage:
 |17    |OBUF     |    16|
 +------+---------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:48 ; elapsed = 00:00:50 . Memory (MB): peak = 1632.094 ; gain = 302.934
+Finished Writing Synthesis Report : Time (s): cpu = 00:03:36 ; elapsed = 00:04:49 . Memory (MB): peak = 2025.699 ; gain = 1280.531
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 0 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:42 ; elapsed = 00:00:47 . Memory (MB): peak = 1632.094 ; gain = 228.953
-Synthesis Optimization Complete : Time (s): cpu = 00:00:48 ; elapsed = 00:00:50 . Memory (MB): peak = 1632.094 ; gain = 302.934
+Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:03:01 ; elapsed = 00:04:34 . Memory (MB): peak = 2025.699 ; gain = 1207.203
+Synthesis Optimization Complete : Time (s): cpu = 00:03:36 ; elapsed = 00:04:49 . Memory (MB): peak = 2025.699 ; gain = 1280.531
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.080 . Memory (MB): peak = 1643.988 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.469 . Memory (MB): peak = 2034.812 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 9 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1647.664 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.137 . Memory (MB): peak = 2038.496 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Synth Design complete, checksum: ce48aeef
+Synth Design complete | Checksum: 79e141c8
 INFO: [Common 17-83] Releasing license: Synthesis
-111 Infos, 189 Warnings, 0 Critical Warnings and 0 Errors encountered.
+112 Infos, 193 Warnings, 1 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:52 ; elapsed = 00:00:55 . Memory (MB): peak = 1647.664 ; gain = 318.504
-INFO: [Common 17-1381] The checkpoint 'C:/Users/jaw185/Desktop/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1/Wrapper.dcp' has been generated.
-INFO: [runtcl-4] Executing : report_utilization -file Wrapper_utilization_synth.rpt -pb Wrapper_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Thu Mar 26 16:43:54 2026...
+synth_design: Time (s): cpu = 00:03:53 ; elapsed = 00:05:20 . Memory (MB): peak = 2038.496 ; gain = 1499.664
+INFO: [runtcl-6] Synthesis results are not added to the cache due to CRITICAL_WARNING
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.011 . Memory (MB): peak = 2038.496 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/ECE350_processor/ECE350_processor.runs/synth_1/Wrapper.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file Wrapper_utilization_synth.rpt -pb Wrapper_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Mar 28 00:12:35 2026...

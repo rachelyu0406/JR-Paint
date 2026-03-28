@@ -33,7 +33,7 @@ module Wrapper (
     
     wire clk33;
     wire locked;
-    clk_wiz_5 pll(.clk_out1(clk33),
+    clk_wiz_0 pll(.clk_out1(clk33),
     .reset(reset),
     .locked(locked),
     .clk_in1(clk_100mhz)
