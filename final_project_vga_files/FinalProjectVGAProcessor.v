@@ -46,11 +46,11 @@ module FinalProjectVGAProcessor(
     localparam CURSOR_SPRITE_PIXELS = CURSOR_SPRITE_SIZE * CURSOR_SPRITE_SIZE;
     localparam CURSOR_SPRITE_ADDR_W = $clog2(CURSOR_SPRITE_PIXELS);
     localparam CURSOR_CENTER_OFFSET = CELL_SIZE;
-    localparam CURSOR_FILE = "cursor.mem";
-    localparam COLORS_FILE = "colors.mem";
+    localparam CURSOR_FILE = "/Users/jillwang/Documents/ECE350/ece350_final_proj/final_project_vga_files/cursor.mem";
+    localparam COLORS_FILE = "/Users/jillwang/Documents/ECE350/ece350_final_proj/final_project_vga_files/colors.mem";
     localparam [7:0] CURSOR_COLOR_INDEX = 8'd94; // colors.mem[94] = e88
 
-    localparam INSTR_FILE = "finalproject_vga_cpu.mem";
+    localparam INSTR_FILE = "/Users/jillwang/Documents/ECE350/ece350_final_proj/final_project_vga_files/finalproject_vga_cpu.mem";
 
     wire clk25;
     wire locked;
