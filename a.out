@@ -1,0 +1,1240 @@
+`timescale 1ns / 1ps
+
+// Prefixed copy of Rachel's processor source tree.
+// This avoids module-name collisions with the other processor implementation
+// in the repo without editing Rachel's original files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module dffe_ref (q, d, clk, en, clr);
+   
+   //Inputs
+   input d, clk, en, clr;
+   
+   //Internal wire
+   wire clr;
+
+   //Output
+   output q;
+   
+   //Register
+   reg q;
+
+   //Intialize q to 0
+   initial
+   begin
+       q = 1'b0;
+   end
+
+   //Set value of q on positive edge of the clock or clear
+   always @(posedge clk or posedge clr) begin
+       //If clear is high, set q to 0
+       if (clr) begin
+           q <= 1'b0;
+       //If enable is high, set q to the value of d
+       end else if (en) begin
+           q <= d;
+       end
+   end
+endmodulemodule register #(parameter W=32)(clock,out,in,enable,reset);
+    input clock,enable,reset;
+    input [W-1:0] in;
+    output [W-1:0] out;
+    genvar i;
+    generate
+    for(i=0;i<W;i=i+1) begin:genDFFs
+    dffe_ref ff(out[i],in[i],clock,enable,reset);
+    end
+    endgenerate
+endmodulemodule regfile (
+	clock,
+	ctrl_writeEnable, ctrl_reset, ctrl_writeReg,
+	ctrl_readRegA, ctrl_readRegB, data_writeReg,
+	data_readRegA, data_readRegB
+);
+
+    input clock,ctrl_writeEnable,ctrl_reset;
+    input [4:0] ctrl_writeReg,ctrl_readRegA,ctrl_readRegB;
+    input [31:0] data_writeReg;
+
+    output [31:0] data_readRegA,data_readRegB;
+
+    wire [31:0] readSelectA;
+    wire [31:0] readSelectB;
+    assign readSelectA=32'b1<<ctrl_readRegA;
+    assign readSelectB=32'b1<<ctrl_readRegB;
+
+    wire [31:0] r0;
+    assign r0=32'b0;
+
+    wire flagWEnonZero;
+    wire t0,t1,t2;
+    or o0(t0,ctrl_writeReg[0],ctrl_writeReg[1]);
+    or o1(t1,ctrl_writeReg[2],ctrl_writeReg[3]);
+    or o2(t2,t0,t1);
+    or o3(flagWEnonZero,t2,ctrl_writeReg[4]);
+
+    wire actualWE;
+    and a0(actualWE,ctrl_writeEnable,flagWEnonZero);
+
+    wire [31:0] writeSelectBits;
+    assign writeSelectBits=actualWE<<ctrl_writeReg;
+
+    tristateBuffer tri0A(.out(data_readRegA),.in(r0),.en(readSelectA[0]));
+    tristateBuffer tri0B(.out(data_readRegB),.in(r0),.en(readSelectB[0]));
+
+    genvar i;
+    generate
+    for(i=1;i<32;i=i+1) begin:REG_AND_READS
+        wire [31:0] qi;
+        register #(.W(32)) regN(.clock(clock),.out(qi),.in(data_writeReg),.enable(writeSelectBits[i]),.reset(ctrl_reset));
+        tristateBuffer triA(.out(data_readRegA),.in(qi),.en(readSelectA[i]));
+        tristateBuffer triB(.out(data_readRegB),.in(qi),.en(readSelectB[i]));
+    end
+    endgenerate
+endmodule
+
+module tristateBuffer(out,in,en);
+    input [31:0] in;
+    input en;
+    output [31:0] out;
+    assign out=en?in:32'bz;
+endmodulemodule mux2 #(parameter W=8)(out,select,a,b);
+    input select;
+    input [W-1:0] a,b;
+    output [W-1:0] out;
+    assign out = select ? b : a;
+endmodule
+
+module mux4 #(parameter W=8)(out,select,a0,a1,a2,a3);
+    input [1:0] select;
+    input [W-1:0] a0,a1,a2,a3;
+    output [W-1:0] out;
+    wire [W-1:0] t0,t1;
+
+    mux2 #(W) choose0or1(t0,select[0],a0,a1);
+    mux2 #(W) choose2or3(t1,select[0],a2,a3);
+    mux2 #(W) lastMux(out,select[1],t0,t1);
+endmodule
+
+module mux8 #(parameter W=8)(out,select,a0,a1,a2,a3,a4,a5,a6,a7);
+    input [2:0] select;
+    input [W-1:0] a0,a1,a2,a3,a4,a5,a6,a7;
+    output [W-1:0] out;
+    wire [W-1:0] m0,m1;
+
+    mux4 #(W) choose0or1or2or3(m0,select[1:0],a0,a1,a2,a3);
+    mux4 #(W) choose4or5or6or7(m1,select[1:0],a4,a5,a6,a7);
+    mux2 #(W) u2(out,select[2],m0,m1);
+endmodule
+
+module tFlipFlop(t, clock, reset, q);
+    input t, clock, reset;
+    output q;
+
+    wire d;
+    wire tNot;
+    wire qNot;
+    wire andTop;
+    wire andBottom;
+
+    not invt(tNot, t);
+    not invq(qNot, q);
+    and and1(andTop, q, tNot);
+    and and2(andBottom, qNot, t);
+    or or1(d, andTop, andBottom);
+    dffe_ref ff(.q(q), .d(d), .clk(clock), .en(1'b1), .clr(reset));
+
+endmodulemodule alu(data_operandA, data_operandB, ctrl_ALUopcode, ctrl_shiftamt, data_result, isNotEqual, isLessThan, overflow);
+        
+    input [31:0] data_operandA, data_operandB;
+    input [4:0] ctrl_ALUopcode, ctrl_shiftamt;
+
+    output [31:0] data_result;
+    output isNotEqual, isLessThan, overflow;
+
+    wire [31:0] sum, and_out, or_out, sll_out, sra_out;
+    wire is_add, is_sub, is_and, is_or, is_sll, is_sra;
+    wire c32, c31;
+
+    decoder DECODER(.ctrl_ALUopcode(ctrl_ALUopcode), .is_add(is_add), .is_sub(is_sub), .is_and(is_and), .is_or(is_or), .is_sll(is_sll), .is_sra(is_sra));
+    
+    add_sub ADD_OR_SUB(.a(data_operandA), .b(data_operandB), .is_sub(is_sub), .sum(sum), .cout(c32), .c31(c31));
+    and_or AND_OR_RESULT(.a(data_operandA), .b(data_operandB), .and_out(and_out), .or_out(or_out));
+    barrelsll SLL(.in(data_operandA), .shamt(ctrl_shiftamt), .out(sll_out));
+    barrelsra SRA(.in(data_operandA), .shamt(ctrl_shiftamt), .out(sra_out));
+
+    signals SIGNALS(.sum(sum), .c31(c31), .c32(c32), .is_add(is_add), .is_sub(is_sub), .isNotEqual(isNotEqual), .isLessThan(isLessThan), .overflow(overflow));
+    final_result_mux FINAL_RES_MUX(.sum(sum), .and_out(and_out), .or_out(or_out), .sll_out(sll_out), .sra_out(sra_out), .is_add(is_add), .is_sub(is_sub), .is_and(is_and), .is_or(is_or), .is_sll(is_sll), .is_sra(is_sra), .res(data_result));
+endmodule
+
+
+module decoder(ctrl_ALUopcode, is_add, is_sub, is_and, is_or, is_sll, is_sra);
+    input [4:0] ctrl_ALUopcode;
+    output is_add, is_sub, is_and, is_or, is_sll, is_sra;
+
+    wire op4, op3, op2, op1, op0;
+    wire nop4, nop3, nop2, nop1, nop0;
+
+    assign op4 = ctrl_ALUopcode[4];
+    assign op3 = ctrl_ALUopcode[3];
+    assign op2 = ctrl_ALUopcode[2];
+    assign op1 = ctrl_ALUopcode[1];
+    assign op0 = ctrl_ALUopcode[0];
+
+    not (nop4, op4);
+    not (nop3, op3);
+    not (nop2, op2);
+    not (nop1, op1);
+    not (nop0, op0);
+
+    and (is_add, nop4, nop3, nop2, nop1, nop0);
+    and (is_sub, nop4, nop3, nop2, nop1, op0);
+    and (is_and, nop4, nop3, nop2, op1, nop0);
+    and (is_or, nop4, nop3, nop2, op1, op0);
+    and (is_sll, nop4, nop3, op2, nop1, nop0);
+    and (is_sra, nop4, nop3, op2, nop1, op0);
+endmodule
+
+module final_result_mux(sum, and_out, or_out, sll_out, sra_out, is_add, is_sub, is_and, is_or, is_sll, is_sra, res);
+    input [31:0] sum, and_out, or_out, sll_out, sra_out;
+    input is_add, is_sub, is_and, is_or, is_sll, is_sra;
+    output [31:0] res;
+
+    assign res =
+        is_add ? sum :
+        is_sub ? sum :
+        is_and ? and_out :
+        is_or ? or_out :
+        is_sll ? sll_out :
+        is_sra ? sra_out :
+        32'b0;
+endmodule
+
+module and_or(a, b, and_out, or_out);
+    input [31:0] a, b;
+    output [31:0] and_out, or_out;
+
+    genvar i;
+    generate
+        for (i = 0; i < 32; i = i + 1) begin : AND_OR
+            and (and_out[i], a[i], b[i]);
+            or (or_out[i], a[i], b[i]);
+        end
+    endgenerate
+endmodule
+
+module add_sub(a, b, is_sub, sum, cout, c31);
+    input [31:0] a, b;
+    input is_sub;
+    output [31:0] sum;
+    output cout, c31;
+
+    wire [31:0] b_after_xor;
+    genvar i;
+    generate
+        for (i = 0; i < 32; i = i + 1) begin : B_XOR
+            xor (b_after_xor[i], b[i], is_sub);
+        end
+    endgenerate
+    cla32bit cla(.a(a), .b(b_after_xor), .cin(is_sub), .cout(cout), .sum(sum), .carryIn31(c31));
+endmodule
+
+module signals(sum, c31, c32, is_add, is_sub, isNotEqual, isLessThan, overflow);
+    input [31:0] sum;
+    input c31, c32, is_add, is_sub;
+    output isNotEqual, isLessThan, overflow;
+
+    xor (overflow, c31, c32);
+
+    xor (isLessThan, sum[31], overflow);
+
+    wire [32:0] checkneq;
+    assign checkneq[0] = 1'b0;
+    genvar i;
+    generate
+        for (i = 0; i < 32; i = i + 1) begin : NEQ
+            or (checkneq[i+1], checkneq[i], sum[i]);
+        end
+    endgenerate
+    assign isNotEqual = checkneq[32];
+endmodule
+
+module cla8bit(a, b, cin, cout, sum, P, G, prev);
+    input [7:0] a;
+    input [7:0] b;
+    input cin;
+    output cout;
+    output [7:0] sum;
+    output P;
+    output G;
+    output prev;
+
+    wire [7:0] p, g;
+    wire c0, c1, c2, c3, c4, c5, c6, c7, c8;
+    assign c0 = cin;
+
+    or (p[0], a[0], b[0]);
+    and (g[0], a[0], b[0]);
+    or (p[1], a[1], b[1]);
+    and (g[1], a[1], b[1]);
+    or (p[2], a[2], b[2]);
+    and (g[2], a[2], b[2]);
+    or (p[3], a[3], b[3]);
+    and (g[3], a[3], b[3]);
+    or (p[4], a[4], b[4]);
+    and (g[4], a[4], b[4]);
+    or (p[5], a[5], b[5]);
+    and (g[5], a[5], b[5]);
+    or (p[6], a[6], b[6]);
+    and (g[6], a[6], b[6]);
+    or (p[7], a[7], b[7]);
+    and (g[7], a[7], b[7]);
+
+    wire c1_temp0;
+    and (c1_temp0, p[0], c0);
+    or (c1, g[0], c1_temp0);
+
+    wire c2_temp0, c2_temp1;
+    and (c2_temp0, p[1], g[0]);
+    and (c2_temp1, p[1], p[0], c0);
+    or (c2, g[1], c2_temp0, c2_temp1);
+
+    wire c3_temp0, c3_temp1, c3_temp2;
+    and (c3_temp0, p[2], g[1]);
+    and (c3_temp1, p[2], p[1], g[0]);
+    and (c3_temp2, p[2], p[1], p[0], c0);
+    or (c3, g[2], c3_temp0, c3_temp1, c3_temp2);
+
+    wire c4_temp0, c4_temp1, c4_temp2, c4_temp3;
+    and (c4_temp0, p[3], g[2]);
+    and (c4_temp1, p[3], p[2], g[1]);
+    and (c4_temp2, p[3], p[2], p[1], g[0]);
+    and (c4_temp3, p[3], p[2], p[1], p[0], c0);
+    or (c4, g[3], c4_temp0, c4_temp1, c4_temp2, c4_temp3);
+
+    wire c5_temp0, c5_temp1, c5_temp2, c5_temp3, c5_temp4;
+    and (c5_temp0, p[4], g[3]);
+    and (c5_temp1, p[4], p[3], g[2]);
+    and (c5_temp2, p[4], p[3], p[2], g[1]);
+    and (c5_temp3, p[4], p[3], p[2], p[1], g[0]);
+    and (c5_temp4, p[4], p[3], p[2], p[1], p[0], c0);
+    or (c5, g[4], c5_temp0, c5_temp1, c5_temp2, c5_temp3, c5_temp4);
+
+    wire c6_temp0, c6_temp1, c6_temp2, c6_temp3, c6_temp4, c6_temp5;
+    and (c6_temp0, p[5], g[4]);
+    and (c6_temp1, p[5], p[4], g[3]);
+    and (c6_temp2, p[5], p[4], p[3], g[2]);
+    and (c6_temp3, p[5], p[4], p[3], p[2], g[1]);
+    and (c6_temp4, p[5], p[4], p[3], p[2], p[1], g[0]);
+    and (c6_temp5, p[5], p[4], p[3], p[2], p[1], p[0], c0);
+    or (c6, g[5], c6_temp0, c6_temp1, c6_temp2, c6_temp3, c6_temp4, c6_temp5);
+
+    wire c7_temp0, c7_temp1, c7_temp2, c7_temp3, c7_temp4, c7_temp5, c7_temp6;
+    and (c7_temp0, p[6], g[5]);
+    and (c7_temp1, p[6], p[5], g[4]);
+    and (c7_temp2, p[6], p[5], p[4], g[3]);
+    and (c7_temp3, p[6], p[5], p[4], p[3], g[2]);
+    and (c7_temp4, p[6], p[5], p[4], p[3], p[2], g[1]);
+    and (c7_temp5, p[6], p[5], p[4], p[3], p[2], p[1], g[0]);
+    and (c7_temp6, p[6], p[5], p[4], p[3], p[2], p[1], p[0], c0);
+    or (c7, g[6], c7_temp0, c7_temp1, c7_temp2, c7_temp3, c7_temp4, c7_temp5, c7_temp6);
+
+    wire c8_temp0, c8_temp1, c8_temp2, c8_temp3, c8_temp4, c8_temp5, c8_temp6, c8_temp7;
+    and (c8_temp0, p[7], g[6]);
+    and (c8_temp1, p[7], p[6], g[5]);
+    and (c8_temp2, p[7], p[6], p[5], g[4]);
+    and (c8_temp3, p[7], p[6], p[5], p[4], g[3]);
+    and (c8_temp4, p[7], p[6], p[5], p[4], p[3], g[2]);
+    and (c8_temp5, p[7], p[6], p[5], p[4], p[3], p[2], g[1]);
+    and (c8_temp6, p[7], p[6], p[5], p[4], p[3], p[2], p[1], g[0]);
+    and (c8_temp7, p[7], p[6], p[5], p[4], p[3], p[2], p[1], p[0], c0);
+    or (c8, g[7], c8_temp0, c8_temp1, c8_temp2, c8_temp3, c8_temp4, c8_temp5, c8_temp6, c8_temp7);
+
+    assign cout = c8;
+    assign prev   = c7;
+
+    xor (sum[0], a[0], b[0], c0);
+    xor (sum[1], a[1], b[1], c1);
+    xor (sum[2], a[2], b[2], c2);
+    xor (sum[3], a[3], b[3], c3);
+    xor (sum[4], a[4], b[4], c4);
+    xor (sum[5], a[5], b[5], c5);
+    xor (sum[6], a[6], b[6], c6);
+    xor (sum[7], a[7], b[7], c7);
+
+    and (P, p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7]);
+
+    wire t6, t5, t4, t3, t2, t1, t0;
+    and (t6, p[7], g[6]);
+    and (t5, p[7], p[6], g[5]);
+    and (t4, p[7], p[6], p[5], g[4]);
+    and (t3, p[7], p[6], p[5], p[4], g[3]);
+    and (t2, p[7], p[6], p[5], p[4], p[3], g[2]);
+    and (t1, p[7], p[6], p[5], p[4], p[3], p[2], g[1]);
+    and (t0, p[7], p[6], p[5], p[4], p[3], p[2], p[1], g[0]);
+    or (G, g[7], t6, t5, t4, t3, t2, t1, t0);
+endmodule
+
+module cla32bit(a, b, cin, cout, sum, carryIn31);
+    input [31:0] a, b;
+    input cin;
+    output cout;
+    output [31:0] sum;
+    output carryIn31;
+
+    wire c0, c8, c16, c24, c32;
+    assign c0 = cin;
+    wire P0, G0, P1, G1, P2, G2, P3, G3;
+
+    wire temp0;
+    and (temp0, P0, c0);
+    or (c8, G0, temp0);
+
+    wire temp1, temp2;
+    and (temp1, P1, G0);
+    and (temp2, P1, P0, c0);
+    or (c16, G1, temp1, temp2);
+
+    wire temp3, temp4, temp5;
+    and (temp3, P2, G1);
+    and (temp4, P2, P1, G0);
+    and (temp5, P2, P1, P0, c0);
+    or (c24, G2, temp3, temp4, temp5);
+
+    wire temp6, temp7, temp8, temp9;
+    and (temp6, P3, G2);
+    and (temp7, P3, P2, G1);
+    and (temp8, P3, P2, P1, G0);
+    and (temp9, P3, P2, P1, P0, c0);
+    or (c32, G3, temp6, temp7, temp8, temp9);
+
+    cla8bit one (.a(a[7:0]), .b(b[7:0]), .cin(c0), .sum(sum[7:0]), .cout(), .P(P0), .G(G0), .prev());
+    cla8bit two (.a(a[15:8]), .b(b[15:8]), .cin(c8), .sum(sum[15:8]), .cout(), .P(P1), .G(G1), .prev());
+    cla8bit three (.a(a[23:16]), .b(b[23:16]), .cin(c16), .sum(sum[23:16]), .cout(), .P(P2), .G(G2), .prev());
+    cla8bit four (.a(a[31:24]), .b(b[31:24]), .cin(c24), .sum(sum[31:24]), .cout(), .P(P3), .G(G3), .prev(carryIn31));
+    assign cout = c32;
+endmodule
+
+module barrelsll(in, shamt, out);
+    input [31:0] in;
+    input [4:0] shamt;
+    output [31:0] out;
+
+    wire [31:0] step1, step2, step3, step4, step5;
+
+    assign step1 = shamt[0] ? {in[30:0], 1'b0} : in;
+    assign step2 = shamt[1] ? {step1[29:0], 2'b00} : step1;
+    assign step3 = shamt[2] ? {step2[27:0], 4'b0000} : step2;
+    assign step4 = shamt[3] ? {step3[23:0], 8'b00000000} : step3;
+    assign step5 = shamt[4] ? {step4[15:0], 16'b0000000000000000} : step4;
+    assign out = step5;
+endmodule
+
+module barrelsra(in, shamt, out);
+    input [31:0] in;
+    input [4:0]  shamt;
+    output [31:0] out;
+
+    wire [31:0] step1, step2, step3, step4, step5;
+
+    assign step1 = shamt[0] ? {1'b0, in[31:1]} : in;
+    assign step2 = shamt[1] ? {2'b00, step1[31:2]} : step1;
+    assign step3 = shamt[2] ? {4'b0000, step2[31:4]} : step2;
+    assign step4 = shamt[3] ? {8'b00000000, step3[31:8]} : step3;
+    assign step5 = shamt[4] ? {16'b0000000000000000, step4[31:16]} : step4;
+
+    wire [31:0] step1temp, step2temp, step3temp, step4temp, step5temp;
+
+    assign step1temp = shamt[0] ? {1'b1, in[31:1]} : in;
+    assign step2temp = shamt[1] ? {2'b11, step1temp[31:2]} : step1temp;
+    assign step3temp = shamt[2] ? {4'b1111, step2temp[31:4]} : step2temp;
+    assign step4temp = shamt[3] ? {8'b11111111, step3temp[31:8]} : step3temp;
+    assign step5temp = shamt[4] ? {16'b1111111111111111, step4temp[31:16]} : step4temp;
+    
+    assign out = in[31] ? step5temp : step5;
+endmodulemodule multdiv(
+	data_operandA, data_operandB, 
+	ctrl_MULT, ctrl_DIV, 
+	clock, 
+	data_result, data_exception, data_resultRDY);
+
+    input [31:0] data_operandA, data_operandB;
+    input ctrl_MULT, ctrl_DIV, clock;
+
+    output [31:0] data_result;
+    output data_exception, data_resultRDY;
+
+    wire [4:0] multCount;
+    wire multActive_q, multActive_d;
+
+    wire multDone;
+    wire multReady;
+    wire [64:0] boothNum_q,boothNum_d;
+    wire [2:0] boothBits;
+    wire [31:0] boothAluOut;
+    wire boothNoOp;
+    wire boothDoOp;
+    wire [31:0] boothOperand;
+    wire signed [64:0] boothPreShift,boothPostShift;
+    wire multException;
+    wire [31:0] multResult;
+
+    tFlipFlop m0(.t(multActive_q),.clock(clock),.reset(ctrl_MULT|ctrl_DIV),.q(multCount[0]));
+    tFlipFlop m1(.t(multActive_q&multCount[0]),.clock(clock),.reset(ctrl_MULT|ctrl_DIV),.q(multCount[1]));
+    tFlipFlop m2(.t(multActive_q&multCount[0]&multCount[1]),.clock(clock),.reset(ctrl_MULT|ctrl_DIV),.q(multCount[2]));
+    tFlipFlop m3(.t(multActive_q&multCount[0]&multCount[1]&multCount[2]),.clock(clock),.reset(ctrl_MULT|ctrl_DIV),.q(multCount[3]));
+    tFlipFlop m4(.t(multActive_q&multCount[0]&multCount[1]&multCount[2]&multCount[3]),.clock(clock),.reset(ctrl_MULT|ctrl_DIV),.q(multCount[4]));
+
+    assign multDone=multCount[4]&multCount[0]&~multCount[3]&~multCount[2]&~multCount[1];
+    assign multReady=multActive_q&multDone;
+
+    register #(.W(65)) multStateReg(.clock(clock),.in(boothNum_d),.out(boothNum_q),.enable(1'b1),.reset(ctrl_MULT));
+
+    assign boothBits=boothNum_q[2:0];
+
+    assign boothNoOp =(~boothBits[2] & ~boothBits[1] & ~boothBits[0]) | ( boothBits[2] &  boothBits[1] &  boothBits[0]);
+    assign boothDoOp = (~boothBits[2] &  boothBits[1] &  boothBits[0]) | ( boothBits[2] & ~boothBits[1] & ~boothBits[0]);
+
+    assign boothOperand=boothDoOp?(data_operandA<<1):data_operandA;
+
+    alu multAlu(.data_operandA(boothNum_q[64:33]),.data_operandB(boothOperand),.ctrl_ALUopcode({4'b0000,boothBits[2]}),.ctrl_shiftamt(5'b0),.data_result(boothAluOut),.isNotEqual(),.isLessThan(),.overflow());
+    assign boothPreShift=boothNoOp?boothNum_q:{boothAluOut,boothNum_q[32:0]};
+
+    assign boothPostShift=boothPreShift>>>2;
+
+    assign boothNum_d=(~(multCount[4] | multCount[3] | multCount[2] | multCount[1] | multCount[0]))?{32'b0,data_operandB,1'b0}:boothPostShift;
+
+    wire m_aIsMinInt,m_bIsMinInt,m_aIsNegOne,m_bIsNegOne;
+    wire m_specialOvf;
+
+    assign m_aIsMinInt= (data_operandA[31]& ~data_operandA[30]& ~data_operandA[29]& ~data_operandA[28]&
+    ~data_operandA[27]& ~data_operandA[26]& ~data_operandA[25]& ~data_operandA[24]&
+    ~data_operandA[23]& ~data_operandA[22]& ~data_operandA[21]& ~data_operandA[20]&
+    ~data_operandA[19]& ~data_operandA[18]& ~data_operandA[17]& ~data_operandA[16]&
+    ~data_operandA[15]& ~data_operandA[14]& ~data_operandA[13]& ~data_operandA[12]&
+    ~data_operandA[11]& ~data_operandA[10]& ~data_operandA[9]& ~data_operandA[8]&
+    ~data_operandA[7]& ~data_operandA[6]& ~data_operandA[5]& ~data_operandA[4]&
+    ~data_operandA[3]& ~data_operandA[2]& ~data_operandA[1]& ~data_operandA[0]);
+    assign m_bIsMinInt= (data_operandB[31]& ~data_operandB[30]& ~data_operandB[29]&
+    ~data_operandB[28]& ~data_operandB[27]& ~data_operandB[26]&
+    ~data_operandB[25]& ~data_operandB[24]& ~data_operandB[23]&
+    ~data_operandB[22]& ~data_operandB[21]& ~data_operandB[20]&
+    ~data_operandB[19]& ~data_operandB[18]& ~data_operandB[17]&
+    ~data_operandB[16]& ~data_operandB[15]& ~data_operandB[14]&
+    ~data_operandB[13]& ~data_operandB[12]& ~data_operandB[11]&
+    ~data_operandB[10]& ~data_operandB[9]& ~data_operandB[8]&
+    ~data_operandB[7]& ~data_operandB[6]& ~data_operandB[5]&
+    ~data_operandB[4]& ~data_operandB[3]& ~data_operandB[2]&
+    ~data_operandB[1]& ~data_operandB[0]);
+    assign m_aIsNegOne=&data_operandA;
+    assign m_bIsNegOne=&data_operandB;
+    assign m_specialOvf=(m_aIsMinInt&m_bIsNegOne)|(m_bIsMinInt&m_aIsNegOne);
+
+    wire upperAllZero;
+    wire upperAllOne;
+    wire resultSignBit;
+    wire signExtendOk;
+    wire signExtendOverflow;
+
+    assign upperAllZero=~(|boothNum_q[64:33]);
+    assign upperAllOne=&boothNum_q[64:33];
+    assign resultSignBit=boothNum_q[32];
+
+    assign signExtendOk= ((~resultSignBit&upperAllZero)|
+    (resultSignBit&upperAllOne));
+
+    assign signExtendOverflow=~signExtendOk;
+    assign multException=m_specialOvf|signExtendOverflow;
+    assign multResult=boothNum_q[32:1];
+
+    assign multActive_d=ctrl_MULT?1'b1:(ctrl_DIV|multDone)?1'b0:multActive_q;
+    dffe_ref multActiveFf(.q(multActive_q),.d(multActive_d),.clk(clock),.en(1'b1),.clr(1'b0));
+
+    //div
+    wire [31:0] divResult;
+    wire divReady;
+    wire divException;
+
+    div divUnit(.clock(clock),.clr(1'b0),.start(ctrl_DIV),.cancel(ctrl_MULT),.opA(data_operandA),.opB(data_operandB),.result(divResult),.resultRDY(divReady),.exception(divException));
+
+    assign data_result=multReady?multResult:divReady?divResult:32'b0;
+    assign data_exception=multReady?multException:divReady?divException:1'b0;
+    assign data_resultRDY=multReady|divReady;
+endmodule
+
+module div(clock,clr,start,cancel,opA,opB,result,resultRDY,exception);
+    input clock,clr;
+    input start;
+    input cancel;
+    input [31:0] opA,opB;
+    output [31:0] result;
+    output resultRDY;
+    output exception;
+
+    wire [5:0] divCount;
+    wire resetAll;
+    wire divActive_q,divActive_d;
+    wire divDone;
+
+    assign resetAll=clr|start|cancel;
+
+    tFlipFlop d0(.t(divActive_q),.clock(clock),.reset(resetAll),.q(divCount[0]));
+    tFlipFlop d1(.t(divActive_q&divCount[0]),.clock(clock),.reset(resetAll),.q(divCount[1]));
+    tFlipFlop d2(.t(divActive_q&divCount[0]&divCount[1]),.clock(clock),.reset(resetAll),.q(divCount[2]));
+    tFlipFlop d3(.t(divActive_q&divCount[0]&divCount[1]&divCount[2]),.clock(clock),.reset(resetAll),.q(divCount[3]));
+    tFlipFlop d4(.t(divActive_q&divCount[0]&divCount[1]&divCount[2]&divCount[3]),.clock(clock),.reset(resetAll),.q(divCount[4]));
+    tFlipFlop d5(.t(divActive_q&divCount[0]&divCount[1]&divCount[2]&divCount[3]&divCount[4]),.clock(clock),.reset(resetAll),.q(divCount[5]));
+
+    assign divDone=divCount[5]&~divCount[4]&~divCount[3]&~divCount[2]&~divCount[1]&divCount[0];
+    assign resultRDY=divActive_q&divDone;
+
+    wire [31:0] dividendAbs_in,divisorAbs_in;
+    wire quotientSign_in;
+    wire [31:0] dividendAbs_q,divisorAbs_q,dividendAbs_d,divisorAbs_d;
+    wire quotientSign_q,quotientSign_d;
+    wire divideByZero_q,divideByZero_d;
+    wire overflow_q,overflow_d;
+
+    assign quotientSign_in=opA[31]^opB[31];
+
+    wire [31:0] opANeg,opBNeg;
+    negate32 negA(.in(opA),.out(opANeg));
+    negate32 negB(.in(opB),.out(opBNeg));
+
+    assign dividendAbs_in=opA[31]?opANeg:opA;
+    assign divisorAbs_in=opB[31]?opBNeg:opB;
+
+    assign dividendAbs_d=
+    (divCount[5]|divCount[4]|divCount[3]|divCount[2]|divCount[1]|divCount[0])?
+    dividendAbs_q:dividendAbs_in;
+
+    assign divisorAbs_d=
+    (divCount[5]|divCount[4]|divCount[3]|divCount[2]|divCount[1]|divCount[0])?
+    divisorAbs_q:divisorAbs_in;
+
+    assign quotientSign_d=
+    (divCount[5]|divCount[4]|divCount[3]|divCount[2]|divCount[1]|divCount[0])?
+    quotientSign_q:quotientSign_in;
+
+    assign divideByZero_d=
+    (divCount[5]|divCount[4]|divCount[3]|divCount[2]|divCount[1]|divCount[0])?
+    divideByZero_q:
+    ~(opB[31]|opB[30]|opB[29]|opB[28]|opB[27]|opB[26]|opB[25]|opB[24]|
+    opB[23]|opB[22]|opB[21]|opB[20]|opB[19]|opB[18]|opB[17]|opB[16]|
+    opB[15]|opB[14]|opB[13]|opB[12]|opB[11]|opB[10]|opB[9]|opB[8]|
+    opB[7]|opB[6]|opB[5]|opB[4]|opB[3]|opB[2]|opB[1]|opB[0]);
+
+    wire opAIsMinInt,opBIsNegOne;
+    assign opAIsMinInt=opA[31]&~(|opA[30:0]);
+    assign opBIsNegOne=&opB;
+    assign overflow_d=
+    (divCount[5]|divCount[4]|divCount[3]|divCount[2]|divCount[1]|divCount[0])?
+    overflow_q: (opAIsMinInt&opBIsNegOne);
+
+    register #(.W(32)) dividendAbsReg(.clock(clock),.in(dividendAbs_d),.out(dividendAbs_q),.enable(1'b1),.reset(resetAll));
+    register #(.W(32)) divisorAbsReg(.clock(clock),.in(divisorAbs_d),.out(divisorAbs_q),.enable(1'b1),.reset(resetAll));
+    dffe_ref quotientSignFf(.q(quotientSign_q),.d(quotientSign_d),.clk(clock),.en(1'b1),.clr(resetAll));
+    dffe_ref divideByZeroFf(.q(divideByZero_q),.d(divideByZero_d),.clk(clock),.en(1'b1),.clr(resetAll));
+    dffe_ref overflowFf(.q(overflow_q),.d(overflow_d),.clk(clock),.en(1'b1),.clr(resetAll));
+
+    assign divActive_d=start?1'b1:(cancel|divDone)?1'b0:divActive_q;
+    dffe_ref divActiveFf(.q(divActive_q),.d(divActive_d),.clk(clock),.en(1'b1),.clr(1'b0));
+
+    wire [64:0] divState_q,divState_d;
+    wire [64:0] divStateInit;
+    wire [64:0] divStateShifted;
+    wire [32:0] remShift_u,divisor33_u;
+    wire [31:0] quotShift_u;
+    wire signed [32:0] remShift_s,divisor33_s,remNext_s;
+
+    wire nextQuotBit;
+    wire [31:0] quotNext_u;
+
+    wire [64:0] divStateNext;
+
+    register #(.W(65)) divStateReg(.clock(clock),.in(divState_d),.out(divState_q),.enable(1'b1),.reset(resetAll));
+
+    assign divStateInit={33'b0,dividendAbs_in};
+    assign divStateShifted={divState_q[63:0],1'b0};
+    assign remShift_u=divStateShifted[64:32];
+    assign quotShift_u=divStateShifted[31:0];
+    assign divisor33_u={1'b0,divisorAbs_q};
+    assign remShift_s=remShift_u;
+    assign divisor33_s=divisor33_u;
+
+    wire [32:0] remAdd_u,remSub_u;
+    wire [32:0] remNext_u;
+
+    addsub33 remAdd(.a(remShift_u),.b(divisor33_u),.is_sub(1'b0),.sum(remAdd_u));
+    addsub33 remSub(.a(remShift_u),.b(divisor33_u),.is_sub(1'b1),.sum(remSub_u));
+
+    assign remNext_u=remShift_u[32]?remAdd_u:remSub_u;
+    assign remNext_s=remNext_u;
+
+    assign nextQuotBit=~remNext_s[32];
+    assign quotNext_u={quotShift_u[31:1],nextQuotBit};
+    assign divStateNext={remNext_s,quotNext_u};
+
+    assign divState_d=
+    (divCount[5]|divCount[4]|divCount[3]|divCount[2]|divCount[1]|divCount[0])?
+    (resultRDY?divState_q:divStateNext):
+    divStateInit;
+
+    wire [31:0] quotientMag,quotientOut;
+    wire [31:0] quotientMagNeg;
+
+    assign quotientMag=divState_q[31:0];
+    negate32 negQ(.in(quotientMag),.out(quotientMagNeg));
+
+    assign quotientOut=quotientSign_q?quotientMagNeg:quotientMag;
+
+    assign result=(divideByZero_q|overflow_q)?32'b0:quotientOut;
+    assign exception=divideByZero_q|overflow_q;
+endmodule
+
+module negate32(in,out);
+    input [31:0] in;
+    output [31:0] out;
+    wire cout_dummy,c31_dummy;
+    add_sub n0(.a(32'b0),.b(in),.is_sub(1'b1),.sum(out),.cout(cout_dummy),.c31(c31_dummy));
+endmodule
+
+module addsub33(a,b,is_sub,sum);
+    input [32:0] a,b;
+    input is_sub;
+    output [32:0] sum;
+
+    wire [32:0] bx;
+    wire c32,c31_dummy;
+    genvar i;
+    generate
+    for(i=0;i<33;i=i+1) begin:loop
+    xor(bx[i],b[i],is_sub);
+    end
+    endgenerate
+
+    cla32bit lo(.a(a[31:0]),.b(bx[31:0]),.cin(is_sub),.cout(c32),.sum(sum[31:0]),.carryIn31(c31_dummy));
+    xor(sum[32],a[32],bx[32],c32);
+endmodule/**
+ * READ THIS DESCRIPTION!
+ *
+ * This is your processor module that will contain the bulk of your code submission. You are to implement
+ * a 5-stage pipelined processor in this module, accounting for hazards and implementing bypasses as
+ * necessary.
+ *
+ * Ultimately, your processor will be tested by a master skeleton, so the
+ * testbench can see which controls signal you active when. Therefore, there needs to be a way to
+ * "inject" imem, dmem, and regfile interfaces from some external controller module. The skeleton
+ * file, Wrapper.v, acts as a small wrapper around your processor for this purpose. Refer to Wrapper.v
+ * for more details.
+ *
+ * As a result, this module will NOT contain the RegFile nor the memory modules. Study the inputs 
+ * very carefully - the RegFile-related I/Os are merely signals to be sent to the RegFile instantiated
+ * in your Wrapper module. This is the same for your memory elements. 
+ *
+ *
+ */
+module processor(
+    // Control signals
+    clock,                          // I: The master clock
+    reset,                          // I: A reset signal
+
+    // Imem
+    address_imem,                   // O: The address of the data to get from imem
+    q_imem,                         // I: The data from imem
+
+    // Dmem
+    address_dmem,                   // O: The address of the data to get or put from/to dmem
+    data,                           // O: The data to write to dmem
+    wren,                           // O: Write enable for dmem
+    q_dmem,                         // I: The data from dmem
+
+    // Regfile
+    ctrl_writeEnable,               // O: Write enable for RegFile
+    ctrl_writeReg,                  // O: Register to write to in RegFile
+    ctrl_readRegA,                  // O: Register to read from port A of RegFile
+    ctrl_readRegB,                  // O: Register to read from port B of RegFile
+    data_writeReg,                  // O: Data to write to for RegFile
+    data_readRegA,                  // I: Data from port A of RegFile
+    data_readRegB                   // I: Data from port B of RegFile
+	 
+	);
+
+	// Control signals
+	input clock, reset;
+	
+	// Imem
+    output [31:0] address_imem;
+	input [31:0] q_imem;
+
+	// Dmem
+	output [31:0] address_dmem, data;
+	output wren;
+	input [31:0] q_dmem;
+
+	// Regfile
+	output ctrl_writeEnable;
+	output [4:0] ctrl_writeReg, ctrl_readRegA, ctrl_readRegB;
+	output [31:0] data_writeReg;
+	input [31:0] data_readRegA, data_readRegB;
+
+	/* YOUR CODE STARTS HERE */
+
+    wire [31:0] pc_curr, pc_next, pc_plus1;
+    wire pc_cout, pc_c31;
+    add_sub pcAdd(.a(pc_curr), .b(32'b1), .is_sub(1'b0), .sum(pc_plus1), .cout(pc_cout), .c31(pc_c31));
+
+    wire [31:0] fd_insn_q, fd_pcplus1_q;
+    wire [31:0] fd_insn_in;
+    wire [31:0] fd_pcplus1_in;
+    wire fd_en;
+
+    wire [31:0] dx_insn_q, dx_pcplus1_q, dx_val_a_q, dx_val_b_q;
+    wire [31:0] dx_insn_in, dx_pcplus1_in, dx_val_a_in, dx_val_b_in;
+    wire dx_en;
+
+    wire [31:0] xm_result_q, xm_store_q, xm_r30val_q, xm_pcplus1_q;
+    wire [4:0] xm_rd_q, xm_store_src_q;
+    wire xm_we_q, xm_memToReg_q, xm_is_sw_q, xm_force_r30_q;
+    wire [31:0] xm_result_in, xm_store_in, xm_r30val_in, xm_pcplus1_in;
+    wire [4:0] xm_rd_in, xm_store_src_in;
+    wire xm_we_in, xm_memToReg_in, xm_is_sw_in, xm_force_r30_in;
+
+    wire [31:0] mw_result_q, mw_mem_q, mw_r30val_q, mw_pcplus1_q;
+    wire [4:0] mw_rd_q;
+    wire mw_we_q, mw_memToReg_q, mw_force_r30_q;
+    wire [31:0] mw_result_in, mw_mem_in, mw_r30val_in, mw_pcplus1_in;
+    wire [4:0] mw_rd_in;
+    wire mw_we_in, mw_memToReg_in, mw_force_r30_in;
+
+    wire [4:0] fd_opcode;
+    wire [4:0] fd_rd, fd_rs, fd_rt;
+    assign fd_opcode = fd_insn_q[31:27];
+    assign fd_rd = fd_insn_q[26:22];
+    assign fd_rs = fd_insn_q[21:17];
+    assign fd_rt = fd_insn_q[16:12];
+
+    wire fd_is_rtype, fd_is_addi, fd_is_lw, fd_is_sw, fd_is_bne, fd_is_blt, fd_is_j, fd_is_jal, fd_is_jr, fd_is_bex, fd_is_setx;
+    assign fd_is_rtype = (fd_opcode == 5'b00000);
+    assign fd_is_j = (fd_opcode == 5'b00001);
+    assign fd_is_bne = (fd_opcode == 5'b00010);
+    assign fd_is_jal = (fd_opcode == 5'b00011);
+    assign fd_is_jr = (fd_opcode == 5'b00100);
+    assign fd_is_addi = (fd_opcode == 5'b00101);
+    assign fd_is_blt = (fd_opcode == 5'b00110);
+    assign fd_is_sw = (fd_opcode == 5'b00111);
+    assign fd_is_lw = (fd_opcode == 5'b01000);
+    assign fd_is_setx = (fd_opcode == 5'b10101);
+    assign fd_is_bex = (fd_opcode == 5'b10110);
+
+    wire [4:0] readA_sel, readB_sel;
+
+	assign readA_sel = fd_is_rtype ? fd_rs : fd_is_addi ? fd_rs : fd_is_lw ? fd_rs : 
+		fd_is_sw ? fd_rs : fd_is_bne ? fd_rd : fd_is_blt ? fd_rd : fd_is_jr ? fd_rd : fd_is_bex ? 5'd30 : 5'd0;
+	assign readB_sel = fd_is_rtype ? fd_rt : fd_is_sw ? fd_rd : fd_is_bne ? fd_rs : fd_is_blt ? fd_rs : 5'd0;
+
+    assign ctrl_readRegA = readA_sel;
+    assign ctrl_readRegB = readB_sel;
+
+    assign dx_val_a_in = data_readRegA;
+    assign dx_val_b_in = data_readRegB;
+
+    wire [4:0] dx_opcode;
+    wire [4:0] dx_rd, dx_rs, dx_rt;
+    wire [4:0] dx_aluop_r, dx_shamt;
+    wire [16:0] dx_imm17;
+    wire [26:0] dx_target27;
+
+    assign dx_opcode = dx_insn_q[31:27];
+    assign dx_rd = dx_insn_q[26:22];
+    assign dx_rs = dx_insn_q[21:17];
+    assign dx_rt = dx_insn_q[16:12];
+    assign dx_shamt = dx_insn_q[11:7];
+    assign dx_aluop_r = dx_insn_q[6:2];
+    assign dx_imm17 = dx_insn_q[16:0];
+    assign dx_target27 = dx_insn_q[26:0];
+
+    wire [31:0] dx_imm_sext;
+    assign dx_imm_sext = {{15{dx_imm17[16]}}, dx_imm17};
+
+    wire dx_is_rtype, dx_is_addi, dx_is_lw, dx_is_sw, dx_is_bne, dx_is_blt, dx_is_j, dx_is_jal, dx_is_jr, dx_is_bex, dx_is_setx;
+    assign dx_is_rtype = (dx_opcode == 5'b00000);
+    assign dx_is_j = (dx_opcode == 5'b00001);
+    assign dx_is_bne = (dx_opcode == 5'b00010);
+    assign dx_is_jal = (dx_opcode == 5'b00011);
+    assign dx_is_jr = (dx_opcode == 5'b00100);
+    assign dx_is_addi = (dx_opcode == 5'b00101);
+    assign dx_is_blt = (dx_opcode == 5'b00110);
+    assign dx_is_sw = (dx_opcode == 5'b00111);
+    assign dx_is_lw = (dx_opcode == 5'b01000);
+    assign dx_is_setx = (dx_opcode == 5'b10101);
+    assign dx_is_bex = (dx_opcode == 5'b10110);
+
+    wire dx_is_mul, dx_is_div;
+    assign dx_is_mul = dx_is_rtype & (dx_aluop_r == 5'b00110);
+    assign dx_is_div = dx_is_rtype & (dx_aluop_r == 5'b00111);
+    wire dx_is_md;
+    assign dx_is_md = dx_is_mul | dx_is_div;
+
+    wire [31:0] target32;
+    assign target32 = {5'b0, dx_target27};
+
+    wire [31:0] branch_base, branch_target;
+    assign branch_base = dx_pcplus1_q;
+    wire br_cout, br_c31;
+    add_sub brAdd(.a(branch_base), .b(dx_imm_sext), .is_sub(1'b0), .sum(branch_target), .cout(br_cout), .c31(br_c31));
+
+    wire [4:0] dx_srcA, dx_srcB;
+
+	assign dx_srcA = dx_is_rtype ? dx_rs : dx_is_addi ? dx_rs : dx_is_lw ? dx_rs : 
+		dx_is_sw ? dx_rs : dx_is_bne ? dx_rd : dx_is_blt ? dx_rd : dx_is_jr ? dx_rd : dx_is_bex ? 5'd30 : 5'd0;
+	assign dx_srcB = dx_is_rtype ? dx_rt : dx_is_sw ? dx_rd : dx_is_bne ? dx_rs : dx_is_blt ? dx_rs : 5'd0;
+
+    wire [4:0] xm_bypass_rd;
+    wire [31:0] xm_bypass_data;
+    wire xm_can_bypass;
+
+    assign xm_bypass_rd = xm_force_r30_q ? 5'd30 : xm_rd_q;
+    assign xm_bypass_data = xm_force_r30_q ? xm_r30val_q : xm_result_q;
+    assign xm_can_bypass = xm_we_q & ~xm_memToReg_q & (xm_bypass_rd != 5'd0);
+
+    wire [4:0] mw_bypass_rd;
+    wire [31:0] mw_bypass_data;
+    wire mw_can_bypass;
+
+    assign mw_bypass_rd = mw_force_r30_q ? 5'd30 : mw_rd_q;
+
+    assign mw_bypass_data = mw_force_r30_q ? mw_r30val_q : (mw_memToReg_q ? mw_mem_q : mw_result_q);
+
+    assign mw_can_bypass = mw_we_q & (mw_bypass_rd != 5'd0);
+
+        wire [4:0] wb_bypass_rd;
+    wire [31:0] wb_bypass_data;
+    wire wb_can_bypass;
+
+    assign wb_bypass_rd = ctrl_writeReg;
+    assign wb_bypass_data = data_writeReg;
+    assign wb_can_bypass = ctrl_writeEnable & (wb_bypass_rd != 5'd0);
+
+    wire [31:0] dx_opA, dx_opB_raw;
+
+    assign dx_opA =
+        (xm_can_bypass && (dx_srcA == xm_bypass_rd)) ? xm_bypass_data :
+        (mw_can_bypass && (dx_srcA == mw_bypass_rd)) ? mw_bypass_data :
+        (wb_can_bypass && (dx_srcA == wb_bypass_rd)) ? wb_bypass_data :
+        dx_val_a_q;
+
+    assign dx_opB_raw =
+        (xm_can_bypass && (dx_srcB == xm_bypass_rd)) ? xm_bypass_data :
+        (mw_can_bypass && (dx_srcB == mw_bypass_rd)) ? mw_bypass_data :
+        (wb_can_bypass && (dx_srcB == wb_bypass_rd)) ? wb_bypass_data :
+        dx_val_b_q;
+
+    wire [4:0] aluOpcode_in;
+    assign aluOpcode_in =
+        (dx_is_addi | dx_is_lw | dx_is_sw) ? 5'b00000 :
+        (dx_is_bne | dx_is_blt) ? 5'b00001 :
+        dx_is_rtype ? dx_aluop_r :
+        5'b00000;
+
+    wire [31:0] aluB_in;
+    mux2 #(.W(32)) aluBMux(.out(aluB_in), .select(dx_is_addi | dx_is_lw | dx_is_sw), .a(dx_opB_raw), .b(dx_imm_sext));
+
+    wire [31:0] alu_out;
+    wire alu_neq, alu_lt, alu_ovf;
+    alu theALU(.data_operandA(dx_opA), .data_operandB(aluB_in), .ctrl_ALUopcode(aluOpcode_in), .ctrl_shiftamt(dx_shamt),
+        .data_result(alu_out), .isNotEqual(alu_neq), .isLessThan(alu_lt), .overflow(alu_ovf));
+
+    wire [32:0] bex_or;
+    assign bex_or[0] = 1'b0;
+    genvar bi;
+    generate
+        for (bi = 0; bi < 32; bi = bi + 1) begin:BEXNZ
+            or(bex_or[bi+1], bex_or[bi], dx_opA[bi]);
+        end
+    endgenerate
+    wire bex_nz;
+    assign bex_nz = bex_or[32];
+
+    wire take_bne, take_blt, take_j, take_jal, take_jr, take_bex;
+    assign take_bne = dx_is_bne & alu_neq;
+    assign take_blt = dx_is_blt & alu_lt;
+    assign take_j = dx_is_j;
+    assign take_jal = dx_is_jal;
+    assign take_jr = dx_is_jr;
+    assign take_bex = dx_is_bex & bex_nz;
+
+    wire take_ctrl;
+    assign take_ctrl = take_bne | take_blt | take_j | take_jal | take_jr | take_bex;
+
+    wire [31:0] ctrl_target;
+    assign ctrl_target = (take_jr ? dx_opA : ((take_bne | take_blt) ? branch_target :
+		((take_bex | take_j | take_jal) ? target32 : pc_plus1)));
+
+    assign pc_next = take_ctrl ? ctrl_target : pc_plus1;
+
+    wire [31:0] md_result;
+    wire md_exc, md_rdy;
+
+    wire md_busy_q, md_busy_d;
+    wire md_start_mul, md_start_div;
+    wire md_finish;
+
+    wire [31:0] pw_result_q;
+    wire [4:0] pw_rd_q;
+    wire pw_is_mul_q, pw_is_div_q;
+    wire pw_exc_q;
+    wire pw_valid_q;
+
+    assign md_start_mul = dx_is_mul & ~md_busy_q;
+    assign md_start_div = dx_is_div & ~md_busy_q;
+
+    wire [31:0] md_operandA_q, md_operandB_q;
+    wire [31:0] md_operandA, md_operandB;
+
+    multdiv MD(.data_operandA(md_operandA), .data_operandB(md_operandB), .ctrl_MULT(md_start_mul),
+        .ctrl_DIV(md_start_div), .clock(clock), .data_result(md_result), .data_exception(md_exc), .data_resultRDY(md_rdy));
+
+    wire md_start;
+    assign md_start = md_start_mul | md_start_div;
+
+    register #(.W(32)) mdOpA( .clock(clock), .out(md_operandA_q), .in(dx_opA), .enable(md_start), .reset(reset));
+    register #(.W(32)) mdOpB(.clock(clock), .out(md_operandB_q), .in(dx_opB_raw), .enable(md_start), .reset(reset));
+
+    assign md_operandA = md_busy_q ? md_operandA_q : dx_opA;
+    assign md_operandB = md_busy_q ? md_operandB_q : dx_opB_raw;
+    assign md_finish = md_busy_q & md_rdy;
+    assign md_busy_d = reset ? 1'b0 : ((md_start_mul | md_start_div) ? 1'b1 : (md_finish ? 1'b0 : md_busy_q));
+    dffe_ref mdBusy(.q(md_busy_q), .d(md_busy_d), .clk(clock), .en(1'b1), .clr(1'b0));
+    register #(.W(5)) pwRd(.clock(~clock), .out(pw_rd_q), .in(dx_rd), .enable(dx_is_md), .reset(reset));
+    register #(.W(1)) pwMul(.clock(~clock), .out(pw_is_mul_q), .in(dx_is_mul), .enable(dx_is_md), .reset(reset));
+    register #(.W(1)) pwDiv(.clock(~clock), .out(pw_is_div_q), .in(dx_is_div), .enable(dx_is_md), .reset(reset));
+    register #(.W(32)) pwRes(.clock(~clock), .out(pw_result_q), .in(md_result), .enable(md_finish), .reset(reset));
+
+    register #(.W(1)) pwExc(.clock(~clock), .out(pw_exc_q), .in(md_exc), .enable(md_finish), .reset(reset));
+
+    wire pw_valid_d;
+    assign pw_valid_d = reset ? 1'b0 : (pw_valid_q ? 1'b0 : (md_finish ? 1'b1 : 1'b0));
+
+    dffe_ref pwValid(.q(pw_valid_q), .d(pw_valid_d), .clk(~clock), .en(1'b1), .clr(1'b0));
+
+    wire stall_md;
+    assign stall_md = dx_is_md | md_busy_q;
+
+    wire release_md;
+    assign release_md = md_finish;
+
+    wire stall_lw;
+    assign stall_lw = dx_is_lw && (dx_rd != 5'd0) && (((readA_sel == dx_rd) && (readA_sel != 5'd0)) ||
+        ((readB_sel == dx_rd) && (readB_sel != 5'd0) && ~fd_is_sw));
+
+    wire [4:0] md_done_rd;
+    wire stall_md_dep;
+
+    assign md_done_rd = md_exc ? 5'd30 : pw_rd_q;
+
+    assign stall_md_dep = release_md && (md_done_rd != 5'd0) && (((readA_sel == md_done_rd) && (readA_sel != 5'd0)) ||
+        ((readB_sel == md_done_rd) && (readB_sel != 5'd0)));
+
+    wire flush;
+    assign flush = take_ctrl;
+
+    assign fd_en = (~(stall_md | stall_lw | stall_md_dep)) | (release_md & ~stall_md_dep);
+    assign dx_en = (~stall_md) | release_md;
+
+    register #(.W(32)) pcReg(.clock(~clock), .out(pc_curr), .in(pc_next),
+        .enable((~(stall_md | stall_lw | stall_md_dep)) | (release_md & ~stall_md_dep)), .reset(reset));
+    assign address_imem = pc_curr;
+
+    assign fd_insn_in = flush ? 32'b0 : q_imem;
+    assign dx_insn_in = flush ? 32'b0 : (stall_lw ? 32'b0 : (stall_md_dep ? 32'b0 : fd_insn_q));
+    assign dx_pcplus1_in = fd_pcplus1_q;
+    assign fd_pcplus1_in = pc_plus1;
+
+    register #(.W(32)) fdInsn(.clock(~clock), .out(fd_insn_q), .in(fd_insn_in), .enable(fd_en), .reset(reset));
+    register #(.W(32)) fdPc1(.clock(~clock), .out(fd_pcplus1_q), .in(fd_pcplus1_in), .enable(fd_en), .reset(reset));
+	register #(.W(32)) dxInsn(.clock(~clock), .out(dx_insn_q), .in(dx_insn_in), .enable(dx_en), .reset(reset));
+	register #(.W(32)) dxPc1(.clock(~clock), .out(dx_pcplus1_q), .in(dx_pcplus1_in), .enable(dx_en), .reset(reset));
+	register #(.W(32)) dxA(.clock(~clock), .out(dx_val_a_q), .in(dx_val_a_in), .enable(dx_en), .reset(reset));
+	register #(.W(32)) dxB(.clock(~clock), .out(dx_val_b_q), .in(dx_val_b_in), .enable(dx_en), .reset(reset));
+
+    wire [31:0] x_exec_result;
+    assign x_exec_result = (dx_is_jal ? dx_pcplus1_q : (dx_is_setx ? target32 : alu_out));
+
+    wire x_memToReg, x_is_sw;
+    assign x_memToReg = dx_is_lw;
+    assign x_is_sw = dx_is_sw;
+
+    wire [31:0] x_store_data;
+    assign x_store_data = dx_opB_raw;
+
+    wire [4:0] x_dest_rd;
+    assign x_dest_rd = dx_is_jal ? 5'd31 : (dx_is_setx ? 5'd30 : dx_rd);
+
+    wire x_is_rtype_nmd;
+    assign x_is_rtype_nmd = dx_is_rtype & ~dx_is_md;
+
+    wire x_writes_rd;
+    assign x_writes_rd = (x_is_rtype_nmd | dx_is_addi | dx_is_lw | dx_is_jal | dx_is_setx);
+
+    wire dest_is_r0_x;
+    assign dest_is_r0_x = (x_dest_rd == 5'd0);
+
+    wire dx_is_add, dx_is_sub;
+    assign dx_is_add = dx_is_rtype & (dx_aluop_r == 5'b00000);
+    assign dx_is_sub = dx_is_rtype & (dx_aluop_r == 5'b00001);
+
+    wire [31:0] ovf_code_x;
+    assign ovf_code_x = dx_is_add ? 32'd1 : dx_is_addi ? 32'd2 : dx_is_sub ? 32'd3 : 32'd0;
+
+    wire ovf_alu_trap;
+    assign ovf_alu_trap = alu_ovf & (dx_is_add | dx_is_addi | dx_is_sub);
+
+    wire force_r30_x;
+    assign force_r30_x = dx_is_setx | ovf_alu_trap;
+
+    wire [31:0] r30_value_x;
+    assign r30_value_x = dx_is_setx ? target32 : ovf_code_x;
+
+    wire we_non_trap_x;
+    assign we_non_trap_x = x_writes_rd & ~dest_is_r0_x & ~force_r30_x;
+
+    wire we_final_x;
+    assign we_final_x = we_non_trap_x | force_r30_x;
+
+    assign xm_rd_in = x_dest_rd;
+    assign xm_result_in = x_exec_result;
+    assign xm_store_in = x_store_data;
+    assign xm_store_src_in = dx_srcB;
+    assign xm_we_in = we_final_x;
+    assign xm_memToReg_in = x_memToReg & ~force_r30_x;
+    assign xm_is_sw_in = x_is_sw & ~force_r30_x;
+    assign xm_force_r30_in = force_r30_x;
+    assign xm_r30val_in = r30_value_x;
+    assign xm_pcplus1_in = dx_pcplus1_q;
+
+    wire xm_en;
+    assign xm_en = 1'b1;
+
+	register #(.W(5)) xmRd(.clock(~clock), .out(xm_rd_q), .in(xm_rd_in), .enable(xm_en), .reset(reset));
+	register #(.W(32)) xmRes(.clock(~clock), .out(xm_result_q), .in(xm_result_in), .enable(xm_en), .reset(reset));
+	register #(.W(32)) xmStore(.clock(~clock), .out(xm_store_q), .in(xm_store_in), .enable(xm_en), .reset(reset));
+	register #(.W(5)) xmStoreSrc(.clock(~clock), .out(xm_store_src_q), .in(xm_store_src_in), .enable(xm_en), .reset(reset));
+	register #(.W(1)) xmWe(.clock(~clock), .out(xm_we_q), .in(xm_we_in), .enable(xm_en), .reset(reset));
+	register #(.W(1)) xmM2R(.clock(~clock), .out(xm_memToReg_q), .in(xm_memToReg_in), .enable(xm_en), .reset(reset));
+	register #(.W(1)) xmSw(.clock(~clock), .out(xm_is_sw_q), .in(xm_is_sw_in), .enable(xm_en), .reset(reset));
+	register #(.W(1)) xmFR30(.clock(~clock), .out(xm_force_r30_q), .in(xm_force_r30_in), .enable(xm_en), .reset(reset));
+	register #(.W(32)) xmR30v(.clock(~clock), .out(xm_r30val_q), .in(xm_r30val_in), .enable(xm_en), .reset(reset));
+	register #(.W(32)) xmPc1(.clock(~clock), .out(xm_pcplus1_q), .in(xm_pcplus1_in), .enable(xm_en), .reset(reset));
+
+    wire [31:0] mem_store_data;
+    assign mem_store_data =
+        (xm_is_sw_q && mw_can_bypass && (xm_store_src_q == mw_bypass_rd)) ? mw_bypass_data :
+        (xm_is_sw_q && wb_can_bypass && (xm_store_src_q == wb_bypass_rd)) ? wb_bypass_data : xm_store_q;
+
+    assign address_dmem = xm_result_q;
+    assign data = mem_store_data;
+    assign wren = xm_is_sw_q;
+
+    assign mw_rd_in = xm_rd_q;
+    assign mw_result_in = xm_result_q;
+    assign mw_mem_in = q_dmem;
+    assign mw_we_in = xm_we_q;
+    assign mw_memToReg_in = xm_memToReg_q;
+    assign mw_force_r30_in = xm_force_r30_q;
+    assign mw_r30val_in = xm_r30val_q;
+    assign mw_pcplus1_in = xm_pcplus1_q;
+
+    wire mw_en;
+    assign mw_en = 1'b1;
+	register #(.W(5)) mwRd(.clock(~clock), .out(mw_rd_q), .in(mw_rd_in), .enable(mw_en), .reset(reset));
+	register #(.W(32)) mwRes(.clock(~clock), .out(mw_result_q), .in(mw_result_in), .enable(mw_en), .reset(reset));
+	register #(.W(32)) mwMem(.clock(~clock), .out(mw_mem_q), .in(mw_mem_in), .enable(mw_en), .reset(reset));
+	register #(.W(1)) mwWe(.clock(~clock), .out(mw_we_q), .in(mw_we_in), .enable(mw_en), .reset(reset));
+	register #(.W(1)) mwM2R(.clock(~clock), .out(mw_memToReg_q), .in(mw_memToReg_in), .enable(mw_en), .reset(reset));
+	register #(.W(1)) mwFR30(.clock(~clock), .out(mw_force_r30_q), .in(mw_force_r30_in), .enable(mw_en), .reset(reset));
+	register #(.W(32)) mwR30v(.clock(~clock), .out(mw_r30val_q), .in(mw_r30val_in), .enable(mw_en), .reset(reset));
+	register #(.W(32)) mwPc1(.clock(~clock), .out(mw_pcplus1_q), .in(mw_pcplus1_in), .enable(mw_en), .reset(reset));
+    wire [31:0] wb_from_mem;
+    assign wb_from_mem = mw_mem_q;
+
+    wire [31:0] wb_nontrap_data;
+    assign wb_nontrap_data = mw_memToReg_q ? wb_from_mem : mw_result_q;
+
+    wire [31:0] wb_pipe_data;
+    assign wb_pipe_data = mw_force_r30_q ? mw_r30val_q : wb_nontrap_data;
+
+    wire [4:0] wb_pipe_reg;
+    assign wb_pipe_reg = mw_force_r30_q ? 5'd30 : mw_rd_q;
+
+    wire wb_pipe_we;
+    assign wb_pipe_we = mw_we_q;
+
+    wire pw_force_r30;
+    assign pw_force_r30 = pw_exc_q;
+
+    wire [31:0] pw_r30val;
+    assign pw_r30val = pw_is_mul_q ? 32'd4 : (pw_is_div_q ? 32'd5 : 32'd0);
+
+    wire [4:0] wb_pw_reg;
+    assign wb_pw_reg = pw_force_r30 ? 5'd30 : pw_rd_q;
+
+    wire [31:0] wb_pw_data;
+    assign wb_pw_data = pw_force_r30 ? pw_r30val : pw_result_q;
+
+    wire wb_pw_we;
+    assign wb_pw_we = pw_valid_q;
+
+    assign ctrl_writeReg = wb_pw_we ? wb_pw_reg : wb_pipe_reg;
+    assign data_writeReg = wb_pw_we ? wb_pw_data : wb_pipe_data;
+    assign ctrl_writeEnable = wb_pw_we ? 1'b1 : wb_pipe_we;
+
+	/* END CODE */
+
+endmodule
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
