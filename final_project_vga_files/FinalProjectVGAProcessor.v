@@ -46,12 +46,11 @@ module FinalProjectVGAProcessor(
     localparam CURSOR_SPRITE_PIXELS = CURSOR_SPRITE_SIZE * CURSOR_SPRITE_SIZE;
     localparam CURSOR_SPRITE_ADDR_W = $clog2(CURSOR_SPRITE_PIXELS);
     localparam CURSOR_CENTER_OFFSET = CELL_SIZE;
-    localparam FILES_PATH = "final_project_vga_files/";
-    localparam CURSOR_FILE = {FILES_PATH, "cursor.mem"};
-    localparam COLORS_FILE = {FILES_PATH, "colors.mem"};
+    localparam CURSOR_FILE = "cursor.mem";
+    localparam COLORS_FILE = "colors.mem";
     localparam [7:0] CURSOR_COLOR_INDEX = 8'd94; // colors.mem[94] = e88
 
-    localparam INSTR_FILE = {FILES_PATH, "finalproject_vga_cpu.mem"};
+    localparam INSTR_FILE = "finalproject_vga_cpu.mem";
 
     wire clk25;
     wire locked;
@@ -311,8 +310,7 @@ module FinalProjectVGAProcessor(
     end
 
     wire [11:0] colorOut;
-    assign colorOut = active ? (cursor_sprite_pixel ? cursor_color : ((clearing || ~canvas_pixel) ? WHITE : BLACK)) : BLACK;
-
+    assign colorOut = active ? (cursor_sprite_pixel ? 12'hF00 : ((clearing || ~canvas_pixel) ? 12'h0F0 : 12'h00F)) : 12'h000;
     assign {VGA_R, VGA_G, VGA_B} = colorOut;
 
     assign ps2_clk  = 1'bz;

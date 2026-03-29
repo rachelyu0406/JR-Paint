@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1774751521">
+  <File Type="PA-TCL" Name="FinalProjectVGAProcessor.tcl"/>
+  <File Type="REPORTS-TCL" Name="FinalProjectVGAProcessor_reports.tcl"/>
+  <File Type="INIT-TIMING" Name="FinalProjectVGAProcessor_timing_summary_init.rpt"/>
+  <File Type="OPT-DCP" Name="FinalProjectVGAProcessor_opt.dcp"/>
+  <File Type="OPT-DRC" Name="FinalProjectVGAProcessor_drc_opted.rpt"/>
+  <File Type="OPT-UTIL" Name="FinalProjectVGAProcessor_utilization_opted.rpt"/>
+  <File Type="OPT-UTIL-PB" Name="FinalProjectVGAProcessor_utilization_opted.pb"/>
+  <File Type="OPT-METHODOLOGY-DRC" Name="FinalProjectVGAProcessor_methodology_drc_opted.rpt"/>
+  <File Type="OPT-HWDEF" Name="FinalProjectVGAProcessor.hwdef"/>
+  <File Type="OPT-TIMING" Name="FinalProjectVGAProcessor_timing_summary_opted.rpt"/>
+  <File Type="OPT-RQA-PB" Name="FinalProjectVGAProcessor_rqa_opted.pb"/>
+  <File Type="PWROPT-DCP" Name="FinalProjectVGAProcessor_pwropt.dcp"/>
+  <File Type="PWROPT-DRC" Name="FinalProjectVGAProcessor_drc_pwropted.rpt"/>
+  <File Type="PWROPT-TIMING" Name="FinalProjectVGAProcessor_timing_summary_pwropted.rpt"/>
+  <File Type="PLACE-DCP" Name="FinalProjectVGAProcessor_placed.dcp"/>
+  <File Type="PLACE-IO" Name="FinalProjectVGAProcessor_io_placed.rpt"/>
+  <File Type="PLACE-CLK" Name="FinalProjectVGAProcessor_clock_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="FinalProjectVGAProcessor_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="FinalProjectVGAProcessor_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="FinalProjectVGAProcessor_control_sets_placed.rpt"/>
+  <File Type="PLACE-SIMILARITY" Name="FinalProjectVGAProcessor_incremental_reuse_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="FinalProjectVGAProcessor_incremental_reuse_pre_placed.rpt"/>
+  <File Type="PLACE-TIMING" Name="FinalProjectVGAProcessor_timing_summary_placed.rpt"/>
+  <File Type="PLACE-RQA-PB" Name="FinalProjectVGAProcessor_rqa_placed.pb"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="FinalProjectVGAProcessor_postplace_pwropt.dcp"/>
+  <File Type="POSTPLACE-PWROPT-TIMING" Name="FinalProjectVGAProcessor_timing_summary_postplace_pwropted.rpt"/>
+  <File Type="PHYSOPT-DCP" Name="FinalProjectVGAProcessor_physopt.dcp"/>
+  <File Type="PHYSOPT-DRC" Name="FinalProjectVGAProcessor_drc_physopted.rpt"/>
+  <File Type="PHYSOPT-TIMING" Name="FinalProjectVGAProcessor_timing_summary_physopted.rpt"/>
+  <File Type="ROUTE-ERROR-DCP" Name="FinalProjectVGAProcessor_routed_error.dcp"/>
+  <File Type="ROUTE-DCP" Name="FinalProjectVGAProcessor_routed.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="FinalProjectVGAProcessor_routed_bb.dcp"/>
+  <File Type="ROUTE-UTIL" Name="FinalProjectVGAProcessor_utilization_routed.rpt"/>
+  <File Type="ROUTE-UTIL-PB" Name="FinalProjectVGAProcessor_utilization_routed.pb"/>
+  <File Type="ROUTE-DRC" Name="FinalProjectVGAProcessor_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="FinalProjectVGAProcessor_drc_routed.pb"/>
+  <File Type="ROUTE-DRC-RPX" Name="FinalProjectVGAProcessor_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="FinalProjectVGAProcessor_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="FinalProjectVGAProcessor_methodology_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="FinalProjectVGAProcessor_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-PWR" Name="FinalProjectVGAProcessor_power_routed.rpt"/>
+  <File Type="ROUTE-PWR-SUM" Name="FinalProjectVGAProcessor_power_summary_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="FinalProjectVGAProcessor_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="FinalProjectVGAProcessor_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="FinalProjectVGAProcessor_route_status.pb"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="FinalProjectVGAProcessor_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="FinalProjectVGAProcessor_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="FinalProjectVGAProcessor_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="FinalProjectVGAProcessor_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-CLK" Name="FinalProjectVGAProcessor_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="FinalProjectVGAProcessor_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="FinalProjectVGAProcessor_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="FinalProjectVGAProcessor_bus_skew_routed.rpx"/>
+  <File Type="ROUTE-RQS-PB" Name="FinalProjectVGAProcessor_rqs_routed.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="FinalProjectVGAProcessor_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="FinalProjectVGAProcessor_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="FinalProjectVGAProcessor_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="FinalProjectVGAProcessor_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="FinalProjectVGAProcessor_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="FinalProjectVGAProcessor_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="FinalProjectVGAProcessor_bus_skew_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="FinalProjectVGAProcessor_bus_skew_postroute_physopted.rpx"/>
+  <File Type="NOC_TRAFFIC_SPEC_FILE" Name="FinalProjectVGAProcessor.nts"/>
+  <File Type="NOC_SOLUTION_FILE" Name="FinalProjectVGAProcessor.ncr"/>
+  <File Type="BG-BIT" Name="FinalProjectVGAProcessor.bit"/>
+  <File Type="BG-BIN" Name="FinalProjectVGAProcessor.bin"/>
+  <File Type="BITSTR-MSK" Name="FinalProjectVGAProcessor.msk"/>
+  <File Type="BITSTR-RBT" Name="FinalProjectVGAProcessor.rbt"/>
+  <File Type="BITSTR-NKY" Name="FinalProjectVGAProcessor.nky"/>
+  <File Type="BITSTR-BMM" Name="FinalProjectVGAProcessor_bd.bmm"/>
+  <File Type="BITSTR-MMI" Name="FinalProjectVGAProcessor.mmi"/>
+  <File Type="PDI-FILE" Name="FinalProjectVGAProcessor.pdi"/>
+  <File Type="BOOT-PDI-FILE" Name="FinalProjectVGAProcessor_boot.pdi"/>
+  <File Type="PL-PDI-FILE" Name="FinalProjectVGAProcessor_pld.pdi"/>
+  <File Type="RCFI_FILE" Name="FinalProjectVGAProcessor.rcfi"/>
+  <File Type="CFI_FILE" Name="FinalProjectVGAProcessor.cfi"/>
+  <File Type="RNPI_FILE" Name="FinalProjectVGAProcessor.rnpi"/>
+  <File Type="RCDO-FILE" Name="FinalProjectVGAProcessor.rcdo"/>
+  <File Type="MARKER-RNPI-FILE" Name="FinalProjectVGAProcessor_markers.rnpi"/>
+  <File Type="MARKER-RCDO-FILE" Name="FinalProjectVGAProcessor_markers.rcdo"/>
+  <File Type="BOOT_RNPI_FILE" Name="FinalProjectVGAProcessor_boot.rnpi"/>
+  <File Type="BOOT_MARKER_RNPI_FILE" Name="FinalProjectVGAProcessor_boot_markers.rnpi"/>
+  <File Type="PL_RNPI_FILE" Name="FinalProjectVGAProcessor_pld.rnpi"/>
+  <File Type="PL_MARKER_RNPI_FILE" Name="FinalProjectVGAProcessor_pld_markers.rnpi"/>
+  <File Type="PL_MASK_RNPI_FILE" Name="FinalProjectVGAProcessor_pld_mask.rnpi"/>
+  <File Type="PL_SHUTDOWN_RNPI_FILE" Name="FinalProjectVGAProcessor_pld_shutdown.rnpi"/>
+  <File Type="PL_UNMASK_RNPI_FILE" Name="FinalProjectVGAProcessor_pld_unmask.rnpi"/>
+  <File Type="PL-RCDO-FILE" Name="FinalProjectVGAProcessor_pld.rcdo"/>
+  <File Type="PL-CLEAR-RCDO-FILE" Name="FinalProjectVGAProcessor_pld_clear.rcdo"/>
+  <File Type="PL_MARKER_RCDO_FILE" Name="FinalProjectVGAProcessor_pld_markers.rcdo"/>
+  <File Type="PL_MASK_RCDO_FILE" Name="FinalProjectVGAProcessor_pld_mask.rcdo"/>
+  <File Type="PL_UNMASK_MARKER_RCDO_FILE" Name="FinalProjectVGAProcessor_pld_unmask_markers.rcdo"/>
+  <File Type="PL_UNMASK_RCDO_FILE" Name="FinalProjectVGAProcessor_pld_unmask.rcdo"/>
+  <File Type="NPI_FILE" Name="FinalProjectVGAProcessor.npi"/>
+  <File Type="RBD_FILE" Name="FinalProjectVGAProcessor.rbd"/>
+  <File Type="MMI-FILE" Name="FinalProjectVGAProcessor.mmi"/>
+  <File Type="BIF-FILE" Name="FinalProjectVGAProcessor.bif"/>
+  <File Type="BOOT-BIF-FILE" Name="FinalProjectVGAProcessor_boot.bif"/>
+  <File Type="PL-BIF-FILE" Name="FinalProjectVGAProcessor_pld.bif"/>
+  <File Type="LTX-FILE" Name="FinalProjectVGAProcessor.ltx"/>
+  <File Type="BOOT-LTX-FILE" Name="FinalProjectVGAProcessor_boot.ltx"/>
+  <File Type="PL-LTX-FILE" Name="FinalProjectVGAProcessor_pld.ltx"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="FinalProjectVGAProcessor.ltx"/>
+  <File Type="BITSTR-SYSDEF" Name="FinalProjectVGAProcessor.sysdef"/>
+  <File Type="BG-BGN" Name="FinalProjectVGAProcessor.bgn"/>
+  <File Type="BG-DRC" Name="FinalProjectVGAProcessor.drc"/>
+  <File Type="RDI-RDI" Name="FinalProjectVGAProcessor.vdi"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="ROUTE-RQS" Name="FinalProjectVGAProcessor_routed.rqs"/>
+  <File Type="POSTROUTE-PHYSOPT-RQS" Name="FinalProjectVGAProcessor_postroute_physopted.rqs"/>
+  <File Type="ROUTE-RQS-RPT" Name="route_report_qor_suggestions_0.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-RQS-RPT" Name="postroute_physopt_report_qor_suggestions_0.rpt"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PPRDIR/../final_project_vga_files/ascii.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/finalproject_vga_cpu.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/image.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/sprites.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/colors.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/RAM.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/FinalProjectVGABehavioral.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../rachel_processor/proc/ROM.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../rachel_processor/proc/Wrapper.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../rachel_processor/proc/RAM.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/Ps2Interface.vhd">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/VGAController.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/cursor.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/VGATimingGenerator.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../rachel_processor/proc/alu.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../rachel_processor/proc/dffe_ref.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../rachel_processor/proc/multdiv.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../rachel_processor/proc/processor.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../rachel_processor/proc/regfile.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../rachel_processor/proc/register.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../rachel_processor/proc/tFlipFlipAndMux.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/FinalProjectVGAProcessor.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="FinalProjectVGAProcessor"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PPRDIR/../final_project_vga_files/constraints.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1" RelGenDir="$PGENDIR/utils_1">
+    <Filter Type="Utils"/>
+    <File Path="$PSRCDIR/utils_1/imports/synth_1/FinalProjectVGAProcessor.dcp">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedInSteps" Val="synth_1"/>
+        <Attr Name="AutoDcp" Val="1"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2025">
+      <Desc>Default settings for Implementation.</Desc>
+    </StratHandle>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+  </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="clk_wiz_0"/>
+</GenRun>
