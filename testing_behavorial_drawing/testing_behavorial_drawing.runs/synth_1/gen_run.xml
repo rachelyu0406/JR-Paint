@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1774742386" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/VGAController.dcp">
-  <File Type="PA-TCL" Name="VGAController.tcl"/>
-  <File Type="REPORTS-TCL" Name="VGAController_reports.tcl"/>
-  <File Type="RDS-RDS" Name="VGAController.vds"/>
-  <File Type="RDS-PROPCONSTRS" Name="VGAController_drc_synth.rpt"/>
-  <File Type="RDS-UTIL" Name="VGAController_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="VGAController_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="VGAController.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="VGAController_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="VGAController_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1774745477" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/VGAController.dcp">
+  <File Type="PA-TCL" Name="FinalProjectVGABehavioral.tcl"/>
+  <File Type="REPORTS-TCL" Name="FinalProjectVGABehavioral_reports.tcl"/>
+  <File Type="RDS-RDS" Name="FinalProjectVGABehavioral.vds"/>
+  <File Type="RDS-PROPCONSTRS" Name="FinalProjectVGABehavioral_drc_synth.rpt"/>
+  <File Type="RDS-UTIL" Name="FinalProjectVGABehavioral_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="FinalProjectVGABehavioral_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="FinalProjectVGABehavioral.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="FinalProjectVGABehavioral_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="FinalProjectVGABehavioral_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PPRDIR/../lab7-8_kit/ascii.mem">
@@ -35,7 +35,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../lab7-8_kit/FinalProjectVGABehavorial.v">
+    <File Path="$PPRDIR/../lab7-8_kit/RAM.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
@@ -43,8 +43,16 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../lab7-8_kit/RAM.v">
+    <File Path="$PPRDIR/../lab7-8_kit/Ps2Interface.vhd">
       <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../lab7-8_kit/VGAController.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -57,13 +65,7 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../lab7-8_kit/Ps2Interface.vhd">
-      <FileInfo>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/../lab7-8_kit/VGAController.v">
+    <File Path="$PPRDIR/../lab7-8_kit/FinalProjectVGABehavioral.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -72,7 +74,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="VGAController"/>
+      <Option Name="TopModule" Val="FinalProjectVGABehavioral"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">

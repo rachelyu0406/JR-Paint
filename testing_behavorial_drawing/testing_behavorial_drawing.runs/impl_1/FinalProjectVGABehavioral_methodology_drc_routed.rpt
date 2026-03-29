@@ -1,0 +1,405 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Sat Mar 28 20:54:59 2026
+| Host         : rachelsLaptop running 64-bit major release  (build 9200)
+| Command      : report_methodology -file FinalProjectVGABehavioral_methodology_drc_routed.rpt -pb FinalProjectVGABehavioral_methodology_drc_routed.pb -rpx FinalProjectVGABehavioral_methodology_drc_routed.rpx
+| Design       : FinalProjectVGABehavioral
+| Device       : xc7a100tcsg324-1
+| Speed File   : -1
+| Design State : Fully Routed
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Report Methodology
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: design_1
+      Design limits: <entire design considered>
+             Max checks: <unlimited>
+             Checks found: 74
++---------+----------+-----------------------------------------------------------+--------+
+| Rule    | Severity | Description                                               | Checks |
++---------+----------+-----------------------------------------------------------+--------+
+| SYNTH-5 | Warning  | Mapped onto distributed RAM because of timing constraints | 74     |
++---------+----------+-----------------------------------------------------------+--------+
+
+2. REPORT DETAILS
+-----------------
+SYNTH-5#1 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_0_127_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#2 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_1024_1151_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#3 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_1152_1279_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#4 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_1280_1407_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#5 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_128_255_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#6 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_1408_1535_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#7 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_1536_1663_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#8 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_1664_1791_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#9 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_1792_1919_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#10 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_1920_2047_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#11 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_2048_2175_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#12 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_2176_2303_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#13 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_2304_2431_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#14 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_2432_2559_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#15 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_2560_2687_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#16 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_256_383_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#17 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_2688_2815_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#18 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_2816_2943_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#19 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_2944_3071_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#20 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_3072_3199_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#21 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_3200_3327_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#22 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_3328_3455_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#23 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_3456_3583_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#24 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_3584_3711_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#25 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_3712_3839_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#26 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_3840_3967_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#27 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_384_511_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#28 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_3968_4095_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#29 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_4096_4223_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#30 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_4224_4351_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#31 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_4352_4479_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#32 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_4480_4607_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#33 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_4608_4735_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#34 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_512_639_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#35 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_640_767_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#36 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_768_895_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#37 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r1_896_1023_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#38 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_0_127_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#39 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_1024_1151_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#40 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_1152_1279_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#41 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_1280_1407_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#42 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_128_255_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#43 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_1408_1535_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#44 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_1536_1663_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#45 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_1664_1791_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#46 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_1792_1919_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#47 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_1920_2047_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#48 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_2048_2175_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#49 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_2176_2303_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#50 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_2304_2431_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#51 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_2432_2559_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#52 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_2560_2687_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#53 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_256_383_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#54 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_2688_2815_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#55 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_2816_2943_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#56 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_2944_3071_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#57 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_3072_3199_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#58 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_3200_3327_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#59 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_3328_3455_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#60 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_3456_3583_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#61 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_3584_3711_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#62 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_3712_3839_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#63 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_3840_3967_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#64 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_384_511_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#65 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_3968_4095_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#66 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_4096_4223_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#67 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_4224_4351_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#68 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_4352_4479_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#69 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_4480_4607_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#70 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_4608_4735_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#71 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_512_639_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#72 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_640_767_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#73 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_768_895_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+SYNTH-5#74 Warning
+Mapped onto distributed RAM because of timing constraints  
+The instance canvas_reg_r2_896_1023_0_0 is implemented as distributed LUT RAM for the following reason: The timing constraints suggest that the chosen mapping will yield a better timing.
+Related violations: <none>
+
+

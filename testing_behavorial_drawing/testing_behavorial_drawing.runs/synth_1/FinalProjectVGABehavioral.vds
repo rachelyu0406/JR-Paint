@@ -1,0 +1,304 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Sat Mar 28 20:51:19 2026
+# Process ID         : 33592
+# Current directory  : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_behavorial_drawing/testing_behavorial_drawing.runs/synth_1
+# Command line       : vivado.exe -log FinalProjectVGABehavioral.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source FinalProjectVGABehavioral.tcl
+# Log file           : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_behavorial_drawing/testing_behavorial_drawing.runs/synth_1/FinalProjectVGABehavioral.vds
+# Journal file       : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_behavorial_drawing/testing_behavorial_drawing.runs/synth_1\vivado.jou
+# Running On         : rachelsLaptop
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : Intel(R) Core(TM) Ultra 7 165U
+# CPU Frequency      : 2688 MHz
+# CPU Physical cores : 12
+# CPU Logical cores  : 14
+# Host memory        : 33782 MB
+# Swap memory        : 8053 MB
+# Total Virtual      : 41835 MB
+# Available Virtual  : 5135 MB
+#-----------------------------------------------------------
+source FinalProjectVGABehavioral.tcl -notrace
+create_project: Time (s): cpu = 00:00:08 ; elapsed = 00:00:07 . Memory (MB): peak = 523.988 ; gain = 217.617
+Command: read_checkpoint -auto_incremental -incremental C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_behavorial_drawing/testing_behavorial_drawing.srcs/utils_1/imports/synth_1/VGAController.dcp
+INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_behavorial_drawing/testing_behavorial_drawing.srcs/utils_1/imports/synth_1/VGAController.dcp for incremental synthesis
+INFO: [Vivado 12-7989] Please ensure there are no constraint changes
+Command: synth_design -top FinalProjectVGABehavioral -part xc7a100tcsg324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 2348
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:10 ; elapsed = 00:00:16 . Memory (MB): peak = 1281.977 ; gain = 540.566
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'FinalProjectVGABehavioral' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/lab7-8_kit/FinalProjectVGABehavioral.v:3]
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_behavorial_drawing/testing_behavorial_drawing.runs/synth_1/.Xil/Vivado-33592-rachelsLaptop/realtime/clk_wiz_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_behavorial_drawing/testing_behavorial_drawing.runs/synth_1/.Xil/Vivado-33592-rachelsLaptop/realtime/clk_wiz_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'VGATimingGenerator' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/lab7-8_kit/VGATimingGenerator.v:2]
+	Parameter HEIGHT bound to: 480 - type: integer 
+	Parameter WIDTH bound to: 640 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'VGATimingGenerator' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/lab7-8_kit/VGATimingGenerator.v:2]
+INFO: [Synth 8-6155] done synthesizing module 'FinalProjectVGABehavioral' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/lab7-8_kit/FinalProjectVGABehavioral.v:3]
+WARNING: [Synth 8-7129] Port ps2_clk in module FinalProjectVGABehavioral is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ps2_data in module FinalProjectVGABehavioral is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:13 ; elapsed = 00:00:20 . Memory (MB): peak = 1406.113 ; gain = 664.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:13 ; elapsed = 00:00:20 . Memory (MB): peak = 1406.113 ; gain = 664.703
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:13 ; elapsed = 00:00:20 . Memory (MB): peak = 1406.113 ; gain = 664.703
+---------------------------------------------------------------------------------
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1406.113 ; gain = 0.000
+INFO: [Project 1-570] Preparing netlist for logic optimization
+
+Processing XDC Constraints
+Initializing timing engine
+Parsing XDC File [c:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_behavorial_drawing/testing_behavorial_drawing.gen/sources_1/ip/clk_wiz_0_1/clk_wiz_0/clk_wiz_0_in_context.xdc] for cell 'pll'
+Finished Parsing XDC File [c:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_behavorial_drawing/testing_behavorial_drawing.gen/sources_1/ip/clk_wiz_0_1/clk_wiz_0/clk_wiz_0_in_context.xdc] for cell 'pll'
+Parsing XDC File [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/lab7-8_kit/constraints.xdc]
+Finished Parsing XDC File [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/lab7-8_kit/constraints.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/lab7-8_kit/constraints.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/FinalProjectVGABehavioral_propImpl.xdc].
+Resolution: To avoid this warning, move constraints listed in [.Xil/FinalProjectVGABehavioral_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
+Completed Processing XDC Constraints
+
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1477.566 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1477.566 ; gain = 0.000
+INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
+INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:22 ; elapsed = 00:00:30 . Memory (MB): peak = 1477.566 ; gain = 736.156
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7a100tcsg324-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:22 ; elapsed = 00:00:30 . Memory (MB): peak = 1477.566 ; gain = 736.156
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying 'set_property' XDC Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:22 ; elapsed = 00:00:30 . Memory (MB): peak = 1477.566 ; gain = 736.156
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:23 ; elapsed = 00:00:31 . Memory (MB): peak = 1477.566 ; gain = 736.156
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input   10 Bit       Adders := 2     
+	   2 Input    8 Bit       Adders := 3     
+	   2 Input    7 Bit       Adders := 5     
+	   2 Input    6 Bit       Adders := 3     
+	   2 Input    2 Bit       Adders := 2     
++---Registers : 
+	               10 Bit    Registers := 2     
+	                7 Bit    Registers := 2     
+	                6 Bit    Registers := 2     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 3     
++---RAMs : 
+	               4K Bit	(4800 X 1 bit)          RAMs := 1     
++---Muxes : 
+	   2 Input   13 Bit        Muxes := 1     
+	   2 Input   12 Bit        Muxes := 1     
+	   2 Input   10 Bit        Muxes := 1     
+	   2 Input    9 Bit        Muxes := 1     
+	   2 Input    7 Bit        Muxes := 1     
+	   2 Input    6 Bit        Muxes := 1     
+	   2 Input    2 Bit        Muxes := 8     
+	   2 Input    1 Bit        Muxes := 12    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 240 (col length:80)
+BRAMs: 270 (col length: RAMB18 80 RAMB36 40)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Cross Boundary and Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-7129] Port ps2_clk in module FinalProjectVGABehavioral is either unconnected or has no load
+WARNING: [Synth 8-7129] Port ps2_data in module FinalProjectVGABehavioral is either unconnected or has no load
+---------------------------------------------------------------------------------
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:26 ; elapsed = 00:00:34 . Memory (MB): peak = 1477.711 ; gain = 736.301
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Preliminary Mapping Report (see note below)
++--------------------------+------------+-----------+----------------------+------------------------------+
+|Module Name               | RTL Object | Inference | Size (Depth x Width) | Primitives                   | 
++--------------------------+------------+-----------+----------------------+------------------------------+
+|FinalProjectVGABehavioral | canvas_reg | Implied   | 8 K x 1              | RAM64X1D x 2 RAM128X1D x 74  | 
++--------------------------+------------+-----------+----------------------+------------------------------+
+
+Note: The table above is a preliminary report that shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Applying XDC Timing Constraints
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:31 ; elapsed = 00:00:40 . Memory (MB): peak = 1601.434 ; gain = 860.023
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:41 . Memory (MB): peak = 1638.758 ; gain = 897.348
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+
+Distributed RAM: Final Mapping Report
++--------------------------+------------+-----------+----------------------+------------------------------+
+|Module Name               | RTL Object | Inference | Size (Depth x Width) | Primitives                   | 
++--------------------------+------------+-----------+----------------------+------------------------------+
+|FinalProjectVGABehavioral | canvas_reg | Implied   | 8 K x 1              | RAM64X1D x 2 RAM128X1D x 74  | 
++--------------------------+------------+-----------+----------------------+------------------------------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:32 ; elapsed = 00:00:41 . Memory (MB): peak = 1638.758 ; gain = 897.348
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Flattening Before IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:36 ; elapsed = 00:00:45 . Memory (MB): peak = 1862.465 ; gain = 1121.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:36 ; elapsed = 00:00:45 . Memory (MB): peak = 1862.465 ; gain = 1121.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:36 ; elapsed = 00:00:46 . Memory (MB): peak = 1862.465 ; gain = 1121.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:36 ; elapsed = 00:00:46 . Memory (MB): peak = 1862.465 ; gain = 1121.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Handling Custom Attributes
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:36 ; elapsed = 00:00:46 . Memory (MB): peak = 1862.465 ; gain = 1121.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Nets
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:36 ; elapsed = 00:00:46 . Memory (MB): peak = 1862.465 ; gain = 1121.055
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++------+--------------+----------+
+|      |BlackBox name |Instances |
++------+--------------+----------+
+|1     |clk_wiz_0     |         1|
++------+--------------+----------+
+
+Report Cell Usage: 
++------+----------+------+
+|      |Cell      |Count |
++------+----------+------+
+|1     |clk_wiz   |     1|
+|2     |CARRY4    |    29|
+|3     |LUT1      |     8|
+|4     |LUT2      |    44|
+|5     |LUT3      |    44|
+|6     |LUT4      |    30|
+|7     |LUT5      |    58|
+|8     |LUT6      |   103|
+|9     |MUXF7     |    10|
+|10    |MUXF8     |     4|
+|11    |RAM128X1D |    74|
+|12    |RAM64X1D  |     2|
+|13    |FDCE      |    56|
+|14    |FDPE      |     7|
+|15    |FDRE      |     1|
+|16    |IBUF      |     5|
+|17    |OBUF      |    14|
++------+----------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:36 ; elapsed = 00:00:46 . Memory (MB): peak = 1862.465 ; gain = 1121.055
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 2 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:21 ; elapsed = 00:00:43 . Memory (MB): peak = 1862.465 ; gain = 1049.602
+Synthesis Optimization Complete : Time (s): cpu = 00:00:36 ; elapsed = 00:00:46 . Memory (MB): peak = 1862.465 ; gain = 1121.055
+INFO: [Project 1-571] Translating synthesized netlist
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.005 . Memory (MB): peak = 1871.645 ; gain = 0.000
+INFO: [Netlist 29-17] Analyzing 119 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1875.352 ; gain = 0.000
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 76 instances were transformed.
+  RAM128X1D => RAM128X1D (MUXF7(x2), RAMD64E(x4)): 74 instances
+  RAM64X1D => RAM64X1D (RAMD64E(x2)): 2 instances
+
+Synth Design complete | Checksum: 922bbbb6
+INFO: [Common 17-83] Releasing license: Synthesis
+27 Infos, 4 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:43 ; elapsed = 00:00:57 . Memory (MB): peak = 1875.352 ; gain = 1337.477
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 1875.352 ; gain = 0.000
+INFO: [Common 17-1381] The checkpoint 'C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_behavorial_drawing/testing_behavorial_drawing.runs/synth_1/FinalProjectVGABehavioral.dcp' has been generated.
+INFO: [Vivado 12-24828] Executing command : report_utilization -file FinalProjectVGABehavioral_utilization_synth.rpt -pb FinalProjectVGABehavioral_utilization_synth.pb
+INFO: [Common 17-206] Exiting Vivado at Sat Mar 28 20:52:27 2026...
