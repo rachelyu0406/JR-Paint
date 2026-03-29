@@ -3,8 +3,8 @@
 # SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Sat Mar 28 22:29:10 2026
-# Process ID         : 44996
+# Start of session at: Sat Mar 28 23:59:07 2026
+# Process ID         : 45436
 # Current directory  : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_drawing_w_processor/testing_drawing_w_processor.runs/synth_1
 # Command line       : vivado.exe -log FinalProjectVGAProcessor.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source FinalProjectVGAProcessor.tcl
 # Log file           : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_drawing_w_processor/testing_drawing_w_processor.runs/synth_1/FinalProjectVGAProcessor.vds
@@ -19,6 +19,6 @@
 # Host memory        : 33782 MB
 # Swap memory        : 8053 MB
 # Total Virtual      : 41835 MB
-# Available Virtual  : 4583 MB
+# Available Virtual  : 3807 MB
 #-----------------------------------------------------------
 source FinalProjectVGAProcessor.tcl -notrace
