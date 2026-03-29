@@ -9,12 +9,16 @@ main:
     addi $s7, $0, 4098      # BTNL MMIO
     addi $t0, $0, 4099      # BTNR MMIO
     addi $t1, $0, 4100      # frame-toggle MMIO
+    addi $a3, $0, 4101      # cursor x MMIO
+    addi $v0, $0, 4102      # cursor y MMIO
     addi $t2, $0, 1         # pixel value to write
     addi $t3, $0, 80        # one canvas row
     addi $t4, $0, 81        # one row plus one column
     addi $t5, $0, 58        # y must stay < 58 to move down
     addi $t6, $0, 78        # x must stay < 78 to move right
 
+    sw $s0, 0($a3)
+    sw $s1, 0($v0)
     jal paint_current
 
 loop_wait:
@@ -85,6 +89,8 @@ do_right:
     addi $a1, $0, 1
 
 do_paint:
+    sw $s0, 0($a3)
+    sw $s1, 0($v0)
     jal paint_current
     j loop_wait
 
@@ -105,4 +111,6 @@ paint_current:
 # 4098: BTNL
 # 4099: BTNR
 # 4100: frame toggle, flips once per screen refresh
+# 4101: live cursor x position in grid cells
+# 4102: live cursor y position in grid cells
 # 8192 + n: canvas cell n, 0 <= n < 4800

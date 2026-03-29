@@ -34,11 +34,21 @@ module FinalProjectVGAProcessor(
     localparam [31:0] MMIO_BTNL_ADDR = 32'd4098;
     localparam [31:0] MMIO_BTNR_ADDR = 32'd4099;
     localparam [31:0] MMIO_FRAME_ADDR = 32'd4100;
+    localparam [31:0] MMIO_CURSOR_X_ADDR = 32'd4101;
+    localparam [31:0] MMIO_CURSOR_Y_ADDR = 32'd4102;
     localparam [31:0] MMIO_DRAW_BASE = 32'd8192;
     localparam [31:0] MMIO_DRAW_LAST = MMIO_DRAW_BASE + GRID_COUNT - 1;
 
     localparam [11:0] WHITE = 12'hFFF;
     localparam [11:0] BLACK = 12'h000;
+
+    localparam CURSOR_SPRITE_SIZE = 50;
+    localparam CURSOR_SPRITE_PIXELS = CURSOR_SPRITE_SIZE * CURSOR_SPRITE_SIZE;
+    localparam CURSOR_SPRITE_ADDR_W = $clog2(CURSOR_SPRITE_PIXELS);
+    localparam CURSOR_CENTER_OFFSET = CELL_SIZE;
+    localparam CURSOR_FILE = "cursor.mem";
+    localparam COLORS_FILE = "colors.mem";
+    localparam [7:0] CURSOR_COLOR_INDEX = 8'd94; // colors.mem[94] = e88
 
     localparam INSTR_FILE = "finalproject_vga_cpu.mem";
 
@@ -83,6 +93,13 @@ module FinalProjectVGAProcessor(
     reg canvas_pixel;
     reg clearing;
     reg [GRID_ADDR_W-1:0] clear_addr;
+    reg [6:0] cursor_grid_x;
+    reg [5:0] cursor_grid_y;
+    reg cursor_sprite [0:CURSOR_SPRITE_PIXELS-1];
+    reg cursor_sprite_pixel;
+    reg [11:0] color_palette [0:255];
+    integer cursor_i;
+    integer palette_i;
 
     wire [6:0] cell_x;
     wire [5:0] cell_y;
@@ -111,12 +128,19 @@ module FinalProjectVGAProcessor(
 
     wire cpu_draw_sel;
     wire cpu_readonly_mmio_sel;
+    wire cpu_cursor_x_sel;
+    wire cpu_cursor_y_sel;
+    wire cpu_cursor_mmio_sel;
     wire cpu_ram_wen;
     wire [GRID_ADDR_W-1:0] cpu_draw_addr;
     wire [31:0] ram_q;
 
     assign cpu_draw_sel = (cpu_dmem_addr >= MMIO_DRAW_BASE) && (cpu_dmem_addr <= MMIO_DRAW_LAST);
     assign cpu_draw_addr = cpu_dmem_addr - MMIO_DRAW_BASE;
+
+    assign cpu_cursor_x_sel = (cpu_dmem_addr == MMIO_CURSOR_X_ADDR);
+    assign cpu_cursor_y_sel = (cpu_dmem_addr == MMIO_CURSOR_Y_ADDR);
+    assign cpu_cursor_mmio_sel = cpu_cursor_x_sel || cpu_cursor_y_sel;
 
     assign cpu_readonly_mmio_sel =
         (cpu_dmem_addr == MMIO_BTNU_ADDR)  ||
@@ -125,7 +149,7 @@ module FinalProjectVGAProcessor(
         (cpu_dmem_addr == MMIO_BTNR_ADDR)  ||
         (cpu_dmem_addr == MMIO_FRAME_ADDR);
 
-    assign cpu_ram_wen = cpu_wren && ~cpu_draw_sel && ~cpu_readonly_mmio_sel;
+    assign cpu_ram_wen = cpu_wren && ~cpu_draw_sel && ~cpu_readonly_mmio_sel && ~cpu_cursor_mmio_sel;
 
     assign cpu_dmem_q =
         (cpu_dmem_addr == MMIO_BTNU_ADDR)  ? {31'd0, btnu_sync} :
@@ -133,6 +157,8 @@ module FinalProjectVGAProcessor(
         (cpu_dmem_addr == MMIO_BTNL_ADDR)  ? {31'd0, btnl_sync} :
         (cpu_dmem_addr == MMIO_BTNR_ADDR)  ? {31'd0, btnr_sync} :
         (cpu_dmem_addr == MMIO_FRAME_ADDR) ? {31'd0, frame_toggle} :
+        cpu_cursor_x_sel                    ? {25'd0, cursor_grid_x} :
+        cpu_cursor_y_sel                    ? {26'd0, cursor_grid_y} :
         cpu_draw_sel                       ? {31'd0, canvas[cpu_draw_addr]} :
                                              ram_q;
 
@@ -182,6 +208,53 @@ module FinalProjectVGAProcessor(
         .dataOut(ram_q)
     );
 
+    initial begin
+        for (cursor_i = 0; cursor_i < CURSOR_SPRITE_PIXELS; cursor_i = cursor_i + 1)
+            cursor_sprite[cursor_i] = 1'b0;
+        $readmemh(CURSOR_FILE, cursor_sprite);
+    end
+
+    initial begin
+        for (palette_i = 0; palette_i < 256; palette_i = palette_i + 1)
+            color_palette[palette_i] = 12'h000;
+        $readmemh(COLORS_FILE, color_palette);
+    end
+
+    wire [11:0] cursor_color;
+    assign cursor_color = color_palette[CURSOR_COLOR_INDEX];
+
+    wire signed [11:0] screen_x_signed;
+    wire signed [11:0] screen_y_signed;
+    wire signed [11:0] cursor_origin_x;
+    wire signed [11:0] cursor_origin_y;
+    wire in_cursor_sprite;
+    wire [5:0] cursor_local_x;
+    wire [5:0] cursor_local_y;
+    wire [CURSOR_SPRITE_ADDR_W-1:0] cursor_sprite_addr;
+
+    assign screen_x_signed = $signed({2'b00, x});
+    assign screen_y_signed = $signed({3'b000, y});
+    assign cursor_origin_x = $signed({2'b00, cursor_grid_x, 3'b000}) + CURSOR_CENTER_OFFSET - (CURSOR_SPRITE_SIZE / 2);
+    assign cursor_origin_y = $signed({3'b000, cursor_grid_y, 3'b000}) + CURSOR_CENTER_OFFSET - (CURSOR_SPRITE_SIZE / 2);
+
+    assign in_cursor_sprite =
+        active &&
+        (screen_x_signed >= cursor_origin_x) &&
+        (screen_x_signed < cursor_origin_x + CURSOR_SPRITE_SIZE) &&
+        (screen_y_signed >= cursor_origin_y) &&
+        (screen_y_signed < cursor_origin_y + CURSOR_SPRITE_SIZE);
+
+    assign cursor_local_x = screen_x_signed - cursor_origin_x;
+    assign cursor_local_y = screen_y_signed - cursor_origin_y;
+    assign cursor_sprite_addr = cursor_local_y * CURSOR_SPRITE_SIZE + cursor_local_x;
+
+    always @(*) begin
+        if (in_cursor_sprite)
+            cursor_sprite_pixel = cursor_sprite[cursor_sprite_addr];
+        else
+            cursor_sprite_pixel = 1'b0;
+    end
+
     always @(posedge clk25) begin
         canvas_pixel <= canvas[read_addr];
 
@@ -204,6 +277,8 @@ module FinalProjectVGAProcessor(
             frame_toggle <= 1'b0;
             clearing    <= 1'b1;
             clear_addr  <= {GRID_ADDR_W{1'b0}};
+            cursor_grid_x <= GRID_WIDTH / 2;
+            cursor_grid_y <= GRID_HEIGHT / 2;
         end else begin
             btnu_meta <= BTNU;
             btnu_sync <= btnu_meta;
@@ -213,6 +288,12 @@ module FinalProjectVGAProcessor(
             btnl_sync <= btnl_meta;
             btnr_meta <= BTNR;
             btnr_sync <= btnr_meta;
+
+            if (cpu_wren && cpu_cursor_x_sel)
+                cursor_grid_x <= cpu_dmem_data[6:0];
+
+            if (cpu_wren && cpu_cursor_y_sel)
+                cursor_grid_y <= cpu_dmem_data[5:0];
 
             if (screenEnd)
                 frame_toggle <= ~frame_toggle;
@@ -229,7 +310,7 @@ module FinalProjectVGAProcessor(
     end
 
     wire [11:0] colorOut;
-    assign colorOut = active ? ((clearing || ~canvas_pixel) ? WHITE : BLACK) : BLACK;
+    assign colorOut = active ? (cursor_sprite_pixel ? cursor_color : ((clearing || ~canvas_pixel) ? WHITE : BLACK)) : BLACK;
 
     assign {VGA_R, VGA_G, VGA_B} = colorOut;
 
