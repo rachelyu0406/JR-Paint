@@ -8,12 +8,12 @@
   **** SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
   **** IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
   **** SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-  **** Start of session at: Sat Mar 28 23:59:08 2026
+  **** Start of session at: Tue Mar 31 18:02:22 2026
     ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
     ** Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 
 source FinalProjectVGAProcessor.tcl -notrace
-create_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:07 . Memory (MB): peak = 527.309 ; gain = 221.520
+create_project: Time (s): cpu = 00:00:10 ; elapsed = 00:00:10 . Memory (MB): peak = 526.633 ; gain = 219.902
 Command: read_checkpoint -auto_incremental -incremental C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_drawing_w_processor/testing_drawing_w_processor.srcs/utils_1/imports/synth_1/FinalProjectVGAProcessor.dcp
 INFO: [Vivado 12-5825] Read reference checkpoint from C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_drawing_w_processor/testing_drawing_w_processor.srcs/utils_1/imports/synth_1/FinalProjectVGAProcessor.dcp for incremental synthesis
 INFO: [Vivado 12-7989] Please ensure there are no constraint changes
@@ -26,15 +26,15 @@ INFO: [Designutils 20-5440] No compile time benefit to using incremental synthes
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
 INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
-INFO: [Synth 8-7075] Helper process launched with PID 36236
+INFO: [Synth 8-7075] Helper process launched with PID 42160
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:06 . Memory (MB): peak = 1281.777 ; gain = 541.801
+Starting RTL Elaboration : Time (s): cpu = 00:00:09 ; elapsed = 00:00:14 . Memory (MB): peak = 1286.418 ; gain = 542.875
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-6157] synthesizing module 'FinalProjectVGAProcessor' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/FinalProjectVGAProcessor.v:7]
 WARNING: [Synth 8-2898] ignoring malformed $readmem task: invalid memory name [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/FinalProjectVGAProcessor.v:214]
 INFO: [Synth 8-3876] $readmem data file 'C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/colors.mem' is read successfully [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/FinalProjectVGAProcessor.v:220]
-INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_drawing_w_processor/testing_drawing_w_processor.runs/synth_1/.Xil/Vivado-45436-rachelsLaptop/realtime/clk_wiz_0_stub.v:6]
-INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_drawing_w_processor/testing_drawing_w_processor.runs/synth_1/.Xil/Vivado-45436-rachelsLaptop/realtime/clk_wiz_0_stub.v:6]
+INFO: [Synth 8-6157] synthesizing module 'clk_wiz_0' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_drawing_w_processor/testing_drawing_w_processor.runs/synth_1/.Xil/Vivado-25928-rachelsLaptop/realtime/clk_wiz_0_stub.v:6]
+INFO: [Synth 8-6155] done synthesizing module 'clk_wiz_0' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_drawing_w_processor/testing_drawing_w_processor.runs/synth_1/.Xil/Vivado-25928-rachelsLaptop/realtime/clk_wiz_0_stub.v:6]
 INFO: [Synth 8-6157] synthesizing module 'VGATimingGenerator' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/VGATimingGenerator.v:2]
 	Parameter HEIGHT bound to: 480 - type: integer 
 	Parameter WIDTH bound to: 640 - type: integer 
@@ -104,18 +104,18 @@ WARNING: [Synth 8-7129] Port is_sub in module signals is either unconnected or h
 WARNING: [Synth 8-7129] Port ps2_clk in module FinalProjectVGAProcessor is either unconnected or has no load
 WARNING: [Synth 8-7129] Port ps2_data in module FinalProjectVGAProcessor is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1427.762 ; gain = 687.785
+Finished RTL Elaboration : Time (s): cpu = 00:00:14 ; elapsed = 00:00:20 . Memory (MB): peak = 1430.355 ; gain = 686.812
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1427.762 ; gain = 687.785
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:14 ; elapsed = 00:00:21 . Memory (MB): peak = 1430.355 ; gain = 686.812
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:08 ; elapsed = 00:00:09 . Memory (MB): peak = 1427.762 ; gain = 687.785
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:14 ; elapsed = 00:00:21 . Memory (MB): peak = 1430.355 ; gain = 686.812
 ---------------------------------------------------------------------------------
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.150 . Memory (MB): peak = 1427.762 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.315 . Memory (MB): peak = 1430.355 ; gain = 0.000
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
@@ -128,31 +128,31 @@ INFO: [Project 1-236] Implementation specific constraints were found while readi
 Resolution: To avoid this warning, move constraints listed in [.Xil/FinalProjectVGAProcessor_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.006 . Memory (MB): peak = 1481.469 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.022 . Memory (MB): peak = 1512.047 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.056 . Memory (MB): peak = 1481.469 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.215 . Memory (MB): peak = 1512.047 ; gain = 0.000
 INFO: [Designutils 20-5440] No compile time benefit to using incremental synthesis; A full resynthesis will be run
 INFO: [Designutils 20-4379] Flow is switching to default flow due to incremental criteria not met. If you would like to alter this behaviour and have the flow terminate instead, please set the following parameter config_implementation {autoIncr.Synth.RejectBehavior Terminate}
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 1481.469 ; gain = 741.492
+Finished Constraint Validation : Time (s): cpu = 00:00:39 ; elapsed = 00:01:04 . Memory (MB): peak = 1512.047 ; gain = 768.504
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tcsg324-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 1481.469 ; gain = 741.492
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:39 ; elapsed = 00:01:04 . Memory (MB): peak = 1512.047 ; gain = 768.504
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:18 ; elapsed = 00:00:20 . Memory (MB): peak = 1481.469 ; gain = 741.492
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:39 ; elapsed = 00:01:05 . Memory (MB): peak = 1512.047 ; gain = 768.504
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:20 ; elapsed = 00:00:21 . Memory (MB): peak = 1481.469 ; gain = 741.492
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:42 ; elapsed = 00:01:09 . Memory (MB): peak = 1512.047 ; gain = 768.504
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start RTL Component Statistics 
@@ -216,7 +216,7 @@ WARNING: [Synth 8-7129] Port is_sub in module signals is either unconnected or h
 WARNING: [Synth 8-7129] Port ps2_clk in module FinalProjectVGAProcessor is either unconnected or has no load
 WARNING: [Synth 8-7129] Port ps2_data in module FinalProjectVGAProcessor is either unconnected or has no load
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:01:11 ; elapsed = 00:01:16 . Memory (MB): peak = 1851.656 ; gain = 1111.680
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:03:12 ; elapsed = 00:04:25 . Memory (MB): peak = 1858.504 ; gain = 1114.961
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -256,13 +256,13 @@ Finished ROM, RAM, DSP, Shift Register and Retiming Reporting
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:01:17 ; elapsed = 00:01:22 . Memory (MB): peak = 1851.656 ; gain = 1111.680
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:03:26 ; elapsed = 00:04:43 . Memory (MB): peak = 1858.504 ; gain = 1114.961
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:59 ; elapsed = 00:02:08 . Memory (MB): peak = 2437.289 ; gain = 1697.312
+Finished Timing Optimization : Time (s): cpu = 00:05:31 ; elapsed = 00:07:37 . Memory (MB): peak = 2453.918 ; gain = 1710.375
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP, Shift Register and Retiming Reporting
@@ -298,7 +298,7 @@ INFO: [Synth 8-7052] The timing for the instance InstMem/dataOut_reg_1 (implemen
 INFO: [Synth 8-7052] The timing for the instance InstMem/dataOut_reg_2 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 INFO: [Synth 8-7052] The timing for the instance InstMem/dataOut_reg_3 (implemented as a Block RAM) might be sub-optimal as no optional output register could be merged into the ram block. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:02:02 ; elapsed = 00:02:10 . Memory (MB): peak = 2437.289 ; gain = 1697.312
+Finished Technology Mapping : Time (s): cpu = 00:05:40 ; elapsed = 00:07:49 . Memory (MB): peak = 2453.918 ; gain = 1710.375
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start IO Insertion
@@ -316,37 +316,37 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:02:05 ; elapsed = 00:02:15 . Memory (MB): peak = 2437.289 ; gain = 1697.312
+Finished IO Insertion : Time (s): cpu = 00:05:53 ; elapsed = 00:08:07 . Memory (MB): peak = 2453.918 ; gain = 1710.375
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:02:05 ; elapsed = 00:02:15 . Memory (MB): peak = 2437.289 ; gain = 1697.312
+Finished Renaming Generated Instances : Time (s): cpu = 00:05:53 ; elapsed = 00:08:07 . Memory (MB): peak = 2453.918 ; gain = 1710.375
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:02:06 ; elapsed = 00:02:15 . Memory (MB): peak = 2437.289 ; gain = 1697.312
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:05:55 ; elapsed = 00:08:09 . Memory (MB): peak = 2453.918 ; gain = 1710.375
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:02:06 ; elapsed = 00:02:16 . Memory (MB): peak = 2437.289 ; gain = 1697.312
+Finished Renaming Generated Ports : Time (s): cpu = 00:05:56 ; elapsed = 00:08:10 . Memory (MB): peak = 2453.918 ; gain = 1710.375
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:02:06 ; elapsed = 00:02:16 . Memory (MB): peak = 2437.289 ; gain = 1697.312
+Finished Handling Custom Attributes : Time (s): cpu = 00:05:56 ; elapsed = 00:08:11 . Memory (MB): peak = 2453.918 ; gain = 1710.375
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:02:06 ; elapsed = 00:02:16 . Memory (MB): peak = 2437.289 ; gain = 1697.312
+Finished Renaming Generated Nets : Time (s): cpu = 00:05:56 ; elapsed = 00:08:11 . Memory (MB): peak = 2453.918 ; gain = 1710.375
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -384,18 +384,18 @@ Report Cell Usage:
 |23    |OBUF      |    14|
 +------+----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:02:06 ; elapsed = 00:02:16 . Memory (MB): peak = 2437.289 ; gain = 1697.312
+Finished Writing Synthesis Report : Time (s): cpu = 00:05:56 ; elapsed = 00:08:11 . Memory (MB): peak = 2453.918 ; gain = 1710.375
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 4 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:55 ; elapsed = 00:02:12 . Memory (MB): peak = 2437.289 ; gain = 1643.605
-Synthesis Optimization Complete : Time (s): cpu = 00:02:07 ; elapsed = 00:02:16 . Memory (MB): peak = 2437.289 ; gain = 1697.312
+Synthesis Optimization Runtime : Time (s): cpu = 00:05:34 ; elapsed = 00:07:59 . Memory (MB): peak = 2453.918 ; gain = 1628.684
+Synthesis Optimization Complete : Time (s): cpu = 00:05:57 ; elapsed = 00:08:11 . Memory (MB): peak = 2453.918 ; gain = 1710.375
 INFO: [Project 1-571] Translating synthesized netlist
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.127 . Memory (MB): peak = 2437.289 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:01 ; elapsed = 00:00:00.305 . Memory (MB): peak = 2453.918 ; gain = 0.000
 INFO: [Netlist 29-17] Analyzing 108 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 2443.957 ; gain = 0.000
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.018 . Memory (MB): peak = 2453.918 ; gain = 0.000
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 76 instances were transformed.
   RAM128X1D => RAM128X1D (MUXF7(x2), RAMD64E(x4)): 74 instances
@@ -405,8 +405,8 @@ Synth Design complete | Checksum: e832e176
 INFO: [Common 17-83] Releasing license: Synthesis
 89 Infos, 9 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:02:14 ; elapsed = 00:02:26 . Memory (MB): peak = 2443.957 ; gain = 1903.172
-Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.003 . Memory (MB): peak = 2443.957 ; gain = 0.000
+synth_design: Time (s): cpu = 00:06:18 ; elapsed = 00:09:22 . Memory (MB): peak = 2453.918 ; gain = 1913.965
+Write ShapeDB Complete: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.035 . Memory (MB): peak = 2453.918 ; gain = 0.000
 INFO: [Common 17-1381] The checkpoint 'C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/testing_drawing_w_processor/testing_drawing_w_processor.runs/synth_1/FinalProjectVGAProcessor.dcp' has been generated.
 INFO: [Vivado 12-24828] Executing command : report_utilization -file FinalProjectVGAProcessor_utilization_synth.rpt -pb FinalProjectVGAProcessor_utilization_synth.pb
-INFO: [Common 17-206] Exiting Vivado at Sun Mar 29 00:01:46 2026...
+INFO: [Common 17-206] Exiting Vivado at Tue Mar 31 18:12:06 2026...
