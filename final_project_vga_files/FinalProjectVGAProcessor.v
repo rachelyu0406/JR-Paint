@@ -44,7 +44,7 @@ module FinalProjectVGAProcessor(
 
     localparam CURSOR_SPRITE_SIZE = 50;
     localparam CURSOR_SPRITE_PIXELS = CURSOR_SPRITE_SIZE * CURSOR_SPRITE_SIZE;
-    localparam CURSOR_SPRITE_ADDR_W = $clog2(CURSOR_SPRITE_PIXELS);
+    localparam CURSOR_SPRITE_ADDR_W = $clog2(CURSOR_SPRITE_PIXELS)+1;
     localparam CURSOR_CENTER_OFFSET = CELL_SIZE;
     localparam CURSOR_FILE = "C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/cursor.mem";
     localparam COLORS_FILE = "C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/colors.mem";
@@ -208,6 +208,25 @@ module FinalProjectVGAProcessor(
         .dataOut(ram_q)
     );
 
+    // Keep empty for project-relative .mem file paths.
+    localparam FILES_PATH = "";
+
+        wire cursor_bit;
+    RAM #(
+        .DEPTH(50 * 50),
+        .DATA_WIDTH(1),
+        .ADDRESS_WIDTH($clog2(50 * 50)+ 1),
+        .MEMFILE({FILES_PATH, "cursor.mem"})) 
+        CursorROM (
+        .clk(clk25),
+        .wEn(1'b0),
+        .addr(cursor_sprite_addr),
+        .dataIn(1'b0),
+        .dataOut(cursor_bit)
+    );
+    wire [11:0] cursor_color;
+    assign cursor_color = cursor_bit ? 12'h000 : 12'hFFF;
+
     initial begin
         for (cursor_i = 0; cursor_i < CURSOR_SPRITE_PIXELS; cursor_i = cursor_i + 1)
             cursor_sprite[cursor_i] = 1'b0;
@@ -246,7 +265,7 @@ module FinalProjectVGAProcessor(
 
     assign cursor_local_x = screen_x_signed - cursor_origin_x;
     assign cursor_local_y = screen_y_signed - cursor_origin_y;
-    assign cursor_sprite_addr = cursor_local_y * CURSOR_SPRITE_SIZE + cursor_local_x;
+    assign cursor_sprite_addr = (x - cursor_origin_x) + (y - cursor_origin_y) * CURSOR_SPRITE_SIZE;
 
     always @(*) begin
         if (in_cursor_sprite)
