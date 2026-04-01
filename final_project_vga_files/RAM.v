@@ -4,12 +4,16 @@ module RAM #( parameter DATA_WIDTH = 8, ADDRESS_WIDTH = 8, DEPTH = 256, MEMFILE 
     input wire                     wEn,
     input wire [ADDRESS_WIDTH-1:0] addr,
     input wire [DATA_WIDTH-1:0]    dataIn,
-    output reg [DATA_WIDTH-1:0]    dataOut);
+    output reg [DATA_WIDTH-1:0]    dataOut = 0);
     
     reg[DATA_WIDTH-1:0] MemoryArray[0:DEPTH-1];
+    integer i;
     
     initial begin
-        if(MEMFILE > 0) begin
+        for (i = 0; i < DEPTH; i = i + 1) begin
+            MemoryArray[i] = {DATA_WIDTH{1'b0}};
+        end
+        if (MEMFILE != "") begin
             $readmemh(MEMFILE, MemoryArray);
         end
     end

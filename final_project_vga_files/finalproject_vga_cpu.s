@@ -19,7 +19,14 @@ main:
 
     sw $s0, 0($a3)
     sw $s1, 0($v0)
-    jal paint_current
+    add $a0, $s4, $s2
+    sw $t2, 0($a0)
+    addi $a2, $a0, 1
+    sw $t2, 0($a2)
+    add $a2, $a0, $t3
+    sw $t2, 0($a2)
+    add $a2, $a0, $t4
+    sw $t2, 0($a2)
 
 loop_wait:
     lw $a0, 0($t1)
@@ -91,10 +98,6 @@ do_right:
 do_paint:
     sw $s0, 0($a3)
     sw $s1, 0($v0)
-    jal paint_current
-    j loop_wait
-
-paint_current:
     add $a0, $s4, $s2
     sw $t2, 0($a0)
     addi $a2, $a0, 1
@@ -103,7 +106,7 @@ paint_current:
     sw $t2, 0($a2)
     add $a2, $a0, $t4
     sw $t2, 0($a2)
-    jr $ra
+    j loop_wait
 
 # MMIO map used by the top file:
 # 4096: BTNU
