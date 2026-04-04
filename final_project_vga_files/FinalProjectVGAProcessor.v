@@ -46,11 +46,9 @@ module FinalProjectVGAProcessor(
     localparam CURSOR_PIXELS = CURSOR_SIZE * CURSOR_SIZE;
     localparam CURSOR_ADDR_W = $clog2(CURSOR_PIXELS) + 1;
     localparam signed [11:0] CURSOR_OFFSET = CELL_SIZE - (CURSOR_SIZE / 2);
-    localparam [7:0] CURSOR_COLOR_INDEX = 8'd94;
-
     localparam CURSOR_FILE = "cursor.mem";
-    localparam COLORS_FILE = "colors.mem";
     localparam INSTR_FILE  = "finalproject_vga_cpu.mem";
+    localparam [11:0] CURSOR_COLOR = 12'hE88;
 
     wire clk25;
     wire locked;
@@ -203,7 +201,6 @@ module FinalProjectVGAProcessor(
     wire [5:0] cursor_local_y;
     wire [CURSOR_ADDR_W-1:0] cursor_addr;
     wire cursor_bit;
-    wire [11:0] cursor_color;
 
     assign screen_x = $signed({2'b00, x});
     assign screen_y = $signed({3'b000, y});
@@ -221,30 +218,15 @@ module FinalProjectVGAProcessor(
     assign cursor_local_y = screen_y - cursor_origin_y;
     assign cursor_addr = cursor_local_y * CURSOR_SIZE + cursor_local_x;
 
-    RAM #(
-        .DEPTH(CURSOR_PIXELS),
+    ROM #(
         .DATA_WIDTH(1),
         .ADDRESS_WIDTH(CURSOR_ADDR_W),
+        .DEPTH(CURSOR_PIXELS),
         .MEMFILE(CURSOR_FILE)
     ) CursorSprite (
         .clk(clk25),
-        .wEn(1'b0),
         .addr(cursor_addr),
-        .dataIn(1'b0),
         .dataOut(cursor_bit)
-    );
-
-    RAM #(
-        .DEPTH(256),
-        .DATA_WIDTH(12),
-        .ADDRESS_WIDTH(8),
-        .MEMFILE(COLORS_FILE)
-    ) CursorPalette (
-        .clk(clk25),
-        .wEn(1'b0),
-        .addr(CURSOR_COLOR_INDEX),
-        .dataIn(12'd0),
-        .dataOut(cursor_color)
     );
 
     always @(posedge clk25 or posedge system_reset) begin
@@ -292,7 +274,7 @@ module FinalProjectVGAProcessor(
     wire [11:0] colorOut;
 
     assign draw_color = (canvas_read_d && canvas_bit) ? BLACK : WHITE;
-    assign colorOut = active_d ? ((in_cursor_d && cursor_bit) ? cursor_color : draw_color) : BLACK;
+    assign colorOut = active_d ? ((in_cursor_d && cursor_bit) ? CURSOR_COLOR : draw_color) : BLACK;
 
     assign {VGA_R, VGA_G, VGA_B} = colorOut;
     assign ps2_clk = 1'bz;
