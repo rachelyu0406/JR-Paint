@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date             : Fri Apr  3 21:50:09 2026
+| Date             : Sat Apr  4 19:22:22 2026
 | Host             : rachelsLaptop running 64-bit major release  (build 9200)
 | Command          : report_power -file FinalProjectVGAProcessor_power_routed.rpt -pb FinalProjectVGAProcessor_power_summary_routed.pb -rpx FinalProjectVGAProcessor_power_routed.rpx
 | Design           : FinalProjectVGAProcessor
@@ -52,17 +52,17 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.003 |        5 |       --- |             --- |
-| Slice Logic    |     0.004 |     5637 |       --- |             --- |
-|   LUT as Logic |     0.004 |     3134 |     63400 |            4.94 |
-|   Register     |    <0.001 |     1734 |    126800 |            1.37 |
+| Clocks         |     0.003 |        8 |       --- |             --- |
+| Slice Logic    |     0.004 |     5790 |       --- |             --- |
+|   LUT as Logic |     0.004 |     3241 |     63400 |            5.11 |
+|   Register     |    <0.001 |     1742 |    126800 |            1.37 |
 |   CARRY4       |    <0.001 |       20 |     15850 |            0.13 |
 |   F7/F8 Muxes  |    <0.001 |        2 |     63400 |           <0.01 |
-|   Others       |     0.000 |      361 |       --- |             --- |
-| Signals        |     0.004 |     4824 |       --- |             --- |
+|   Others       |     0.000 |      366 |       --- |             --- |
+| Signals        |     0.005 |     4975 |       --- |             --- |
 | Block RAM      |     0.005 |        9 |       135 |            6.67 |
 | PLL            |     0.098 |        1 |         6 |           16.67 |
-| I/O            |     0.003 |       20 |       210 |            9.52 |
+| I/O            |     0.002 |       20 |       210 |            9.52 |
 | Static Power   |     0.098 |          |           |                 |
 | Total          |     0.214 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.039 |       0.024 |      0.016 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.040 |       0.024 |      0.016 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.068 |       0.049 |      0.018 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.005 |       0.001 |      0.004 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -127,13 +127,16 @@ Table of Contents
 2.2 Clock Constraints
 ---------------------
 
-+--------------------+-----------------------------+-----------------+
-| Clock              | Domain                      | Constraint (ns) |
-+--------------------+-----------------------------+-----------------+
-| clk                | clk                         |            10.0 |
-| clk_out1_clk_wiz_0 | pll/inst/clk_out1_clk_wiz_0 |            40.0 |
-| clkfbout_clk_wiz_0 | pll/inst/clkfbout_clk_wiz_0 |            40.0 |
-+--------------------+-----------------------------+-----------------+
++----------------------+-----------------------------+-----------------+
+| Clock                | Domain                      | Constraint (ns) |
++----------------------+-----------------------------+-----------------+
+| clk                  | clk                         |            10.0 |
+| clk_out1_clk_wiz_0   | pll/inst/clk_out1_clk_wiz_0 |            40.0 |
+| clk_out1_clk_wiz_0_1 | pll/inst/clk_out1_clk_wiz_0 |            40.0 |
+| clkfbout_clk_wiz_0   | pll/inst/clkfbout_clk_wiz_0 |            40.0 |
+| clkfbout_clk_wiz_0_1 | pll/inst/clkfbout_clk_wiz_0 |            40.0 |
+| sys_clk_pin          | clk                         |            10.0 |
++----------------------+-----------------------------+-----------------+
 
 
 3. Detailed Reports
@@ -149,7 +152,8 @@ Table of Contents
 |   CPU                    |     0.009 |
 |     MD                   |     0.002 |
 |       multStateReg       |     0.001 |
-|     dxInsn               |     0.002 |
+|     dxInsn               |     0.003 |
+|       genDFFs[30].ff     |     0.001 |
 |     fdInsn               |     0.002 |
 |   InstMem                |     0.002 |
 |   ProcMem                |     0.002 |

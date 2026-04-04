@@ -1,0 +1,102 @@
+#-----------------------------------------------------------
+# Vivado v2025.2 (64-bit)
+# SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
+# IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
+# SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
+# Start of session at: Fri Apr  3 22:14:45 2026
+# Process ID         : 32576
+# Current directory  : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/RachelGPT_Test/RachelGPT_Test.runs/synth_1
+# Command line       : vivado.exe -log FinalProjectVGAProcessor2.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source FinalProjectVGAProcessor2.tcl
+# Log file           : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/RachelGPT_Test/RachelGPT_Test.runs/synth_1/FinalProjectVGAProcessor2.vds
+# Journal file       : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/RachelGPT_Test/RachelGPT_Test.runs/synth_1\vivado.jou
+# Running On         : rachelsLaptop
+# Platform           : Windows Server 2016 or Windows 10
+# Operating System   : 26200
+# Processor Detail   : Intel(R) Core(TM) Ultra 7 165U
+# CPU Frequency      : 2688 MHz
+# CPU Physical cores : 12
+# CPU Logical cores  : 14
+# Host memory        : 33782 MB
+# Swap memory        : 2952 MB
+# Total Virtual      : 36734 MB
+# Available Virtual  : 11458 MB
+#-----------------------------------------------------------
+source FinalProjectVGAProcessor2.tcl -notrace
+create_project: Time (s): cpu = 00:00:07 ; elapsed = 00:00:05 . Memory (MB): peak = 526.816 ; gain = 221.516
+Command: synth_design -top FinalProjectVGAProcessor2 -part xc7a100tcsg324-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
+INFO: [Device 21-403] Loading part xc7a100tcsg324-1
+INFO: [Synth 8-7079] Multithreading enabled for synth_design using a maximum of 2 processes.
+INFO: [Synth 8-7078] Launching helper process for spawning children vivado processes
+INFO: [Synth 8-7075] Helper process launched with PID 31828
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1269.703 ; gain = 541.512
+---------------------------------------------------------------------------------
+INFO: [Synth 8-6157] synthesizing module 'FinalProjectVGAProcessor2' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/FinalProjectVGAProcessor2.v:3]
+INFO: [Synth 8-6157] synthesizing module 'VGATimingGenerator' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/VGATimingGenerator.v:2]
+	Parameter HEIGHT bound to: 480 - type: integer 
+	Parameter WIDTH bound to: 640 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'VGATimingGenerator' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/VGATimingGenerator.v:2]
+INFO: [Synth 8-6157] synthesizing module 'processor' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/processor.v:20]
+INFO: [Synth 8-6157] synthesizing module 'add_sub' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:80]
+INFO: [Synth 8-6157] synthesizing module 'cla32bit' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:232]
+INFO: [Synth 8-6157] synthesizing module 'cla8bit' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:116]
+INFO: [Synth 8-6155] done synthesizing module 'cla8bit' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:116]
+INFO: [Synth 8-6155] done synthesizing module 'cla32bit' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:232]
+INFO: [Synth 8-6155] done synthesizing module 'add_sub' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:80]
+INFO: [Synth 8-6157] synthesizing module 'mux2' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/tFlipFlipAndMux.v:1]
+	Parameter W bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'mux2' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/tFlipFlipAndMux.v:1]
+INFO: [Synth 8-6157] synthesizing module 'alu' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:1]
+INFO: [Synth 8-6157] synthesizing module 'decoder' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:25]
+INFO: [Synth 8-6155] done synthesizing module 'decoder' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:25]
+INFO: [Synth 8-6157] synthesizing module 'and_or' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:67]
+INFO: [Synth 8-6155] done synthesizing module 'and_or' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:67]
+INFO: [Synth 8-6157] synthesizing module 'barrelsll' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:272]
+INFO: [Synth 8-6155] done synthesizing module 'barrelsll' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:272]
+INFO: [Synth 8-6157] synthesizing module 'barrelsra' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:287]
+INFO: [Synth 8-6155] done synthesizing module 'barrelsra' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:287]
+INFO: [Synth 8-6157] synthesizing module 'signals' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:96]
+INFO: [Synth 8-6155] done synthesizing module 'signals' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:96]
+INFO: [Synth 8-6157] synthesizing module 'final_result_mux' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:52]
+INFO: [Synth 8-6155] done synthesizing module 'final_result_mux' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:52]
+INFO: [Synth 8-6155] done synthesizing module 'alu' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v:1]
+INFO: [Synth 8-6157] synthesizing module 'multdiv' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/multdiv.v:1]
+INFO: [Synth 8-6157] synthesizing module 'tFlipFlop' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/tFlipFlipAndMux.v:30]
+INFO: [Synth 8-6157] synthesizing module 'dffe_ref' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/dffe_ref.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'dffe_ref' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/dffe_ref.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'tFlipFlop' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/tFlipFlipAndMux.v:30]
+INFO: [Synth 8-6157] synthesizing module 'register' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/register.v:1]
+	Parameter W bound to: 65 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'register' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/register.v:1]
+INFO: [Synth 8-6157] synthesizing module 'div' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/multdiv.v:111]
+INFO: [Synth 8-6157] synthesizing module 'negate32' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/multdiv.v:241]
+INFO: [Synth 8-6155] done synthesizing module 'negate32' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/multdiv.v:241]
+INFO: [Synth 8-6157] synthesizing module 'register__parameterized0' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/register.v:1]
+	Parameter W bound to: 32 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'register__parameterized0' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/register.v:1]
+INFO: [Synth 8-6157] synthesizing module 'addsub33' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/multdiv.v:248]
+INFO: [Synth 8-6155] done synthesizing module 'addsub33' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/multdiv.v:248]
+INFO: [Synth 8-6155] done synthesizing module 'div' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/multdiv.v:111]
+INFO: [Synth 8-6155] done synthesizing module 'multdiv' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/multdiv.v:1]
+INFO: [Synth 8-6157] synthesizing module 'register__parameterized1' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/register.v:1]
+	Parameter W bound to: 5 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'register__parameterized1' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/register.v:1]
+INFO: [Synth 8-6157] synthesizing module 'register__parameterized2' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/register.v:1]
+	Parameter W bound to: 1 - type: integer 
+INFO: [Synth 8-6155] done synthesizing module 'register__parameterized2' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/register.v:1]
+INFO: [Synth 8-6155] done synthesizing module 'processor' (0#1) [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/processor.v:20]
+ERROR: [Synth 8-7136] In the module 'RAM' declared at 'C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/RAM.v:2', parameter 'MEMFILE' used as named parameter override, does not exist [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/FinalProjectVGAProcessor2.v:131]
+ERROR: [Synth 8-6156] failed synthesizing module 'FinalProjectVGAProcessor2' [C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/FinalProjectVGAProcessor2.v:3]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:08 ; elapsed = 00:00:08 . Memory (MB): peak = 1390.844 ; gain = 662.652
+---------------------------------------------------------------------------------
+RTL Elaboration failed
+INFO: [Common 17-83] Releasing license: Synthesis
+53 Infos, 0 Warnings, 0 Critical Warnings and 3 Errors encountered.
+synth_design failed
+synth_design: Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 1390.844 ; gain = 864.027
+ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+INFO: [Common 17-206] Exiting Vivado at Fri Apr  3 22:15:05 2026...
