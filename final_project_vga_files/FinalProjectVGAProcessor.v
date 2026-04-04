@@ -46,7 +46,7 @@ module FinalProjectVGAProcessor(
     localparam CURSOR_SIZE   = 50;
     localparam CURSOR_PIXELS = CURSOR_SIZE * CURSOR_SIZE;
     localparam CURSOR_ADDR_W = $clog2(CURSOR_PIXELS) + 1;
-    localparam signed [11:0] CURSOR_OFFSET = CELL_SIZE - (CURSOR_SIZE / 2);
+    localparam signed [11:0] CURSOR_OFFSET = (CELL_SIZE / 2) - (CURSOR_SIZE / 2);
     localparam CURSOR_FILE = "cursor.mem";
     localparam INSTR_FILE  = "finalproject_vga_cpu.mem";
     localparam [11:0] CURSOR_COLOR = 12'hE88;
