@@ -36,6 +36,7 @@ module FinalProjectVGAProcessor(
     localparam [31:0] MMIO_FRAME_ADDR    = 32'd4100;
     localparam [31:0] MMIO_CURSOR_X_ADDR = 32'd4101;
     localparam [31:0] MMIO_CURSOR_Y_ADDR = 32'd4102;
+    localparam [31:0] MMIO_BTNC_ADDR     = 32'd4103;
     localparam [31:0] MMIO_DRAW_BASE     = 32'd8192;
     localparam [31:0] MMIO_DRAW_LAST     = MMIO_DRAW_BASE + GRID_COUNT - 1;
 
@@ -53,11 +54,11 @@ module FinalProjectVGAProcessor(
     wire clk25;
     wire locked;
     wire system_reset;
-    assign system_reset = reset | ~locked;
+    assign system_reset = ~locked;
 
     clk_wiz_0 pll (
         .clk_out1(clk25),
-        .reset(reset),
+        .reset(1'b0),
         .locked(locked),
         .clk_in1(clk)
     );
@@ -262,6 +263,7 @@ module FinalProjectVGAProcessor(
                 MMIO_FRAME_ADDR:    mmio_q <= {31'd0, frame_toggle};
                 MMIO_CURSOR_X_ADDR: mmio_q <= {25'd0, cursor_x};
                 MMIO_CURSOR_Y_ADDR: mmio_q <= {26'd0, cursor_y};
+                MMIO_BTNC_ADDR:     mmio_q <= {31'd0, reset};
                 default: begin
                     mmio_read_d <= 1'b0;
                     mmio_q <= 32'd0;

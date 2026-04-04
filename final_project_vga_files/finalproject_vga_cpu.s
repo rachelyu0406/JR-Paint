@@ -11,22 +11,17 @@ main:
     addi $t1, $0, 4100      # frame-toggle MMIO
     addi $a3, $0, 4101      # cursor x MMIO
     addi $v0, $0, 4102      # cursor y MMIO
+    addi $t7, $0, 4103      # BTNC MMIO
     addi $t2, $0, 1         # pixel value to write
     addi $t3, $0, 80        # one canvas row
-    addi $t4, $0, 81        # one row plus one column
     addi $t5, $0, 58        # y must stay < 58 to move down
     addi $t6, $0, 78        # x must stay < 78 to move right
+    addi $t8, $0, 4800      # total canvas cells
 
     sw $s0, 0($a3)
     sw $s1, 0($v0)
     add $a0, $s4, $s2
     sw $t2, 0($a0)
-    addi $a2, $a0, 1
-    sw $t2, 0($a2)
-    add $a2, $a0, $t3
-    sw $t2, 0($a2)
-    add $a2, $a0, $t4
-    sw $t2, 0($a2)
 
 loop_wait:
     lw $a0, 0($t1)
@@ -35,6 +30,8 @@ loop_wait:
 
 frame_ready:
     add $s3, $a0, $0
+    lw $a0, 0($t7)
+    bne $a0, $0, do_clear
     addi $a1, $0, 0         # moved flag
 
     lw $a0, 0($s5)
@@ -100,12 +97,25 @@ do_paint:
     sw $s1, 0($v0)
     add $a0, $s4, $s2
     sw $t2, 0($a0)
-    addi $a2, $a0, 1
-    sw $t2, 0($a2)
-    add $a2, $a0, $t3
-    sw $t2, 0($a2)
-    add $a2, $a0, $t4
-    sw $t2, 0($a2)
+    j loop_wait
+
+do_clear:
+    addi $s0, $0, 40
+    addi $s1, $0, 30
+    addi $s2, $0, 2440
+    sw $s0, 0($a3)
+    sw $s1, 0($v0)
+    addi $a2, $0, 0
+
+clear_loop:
+    add $a0, $s4, $a2
+    sw $0, 0($a0)
+    addi $a2, $a2, 1
+    blt $a2, $t8, clear_loop
+
+clear_wait:
+    lw $a0, 0($t7)
+    bne $a0, $0, clear_wait
     j loop_wait
 
 # MMIO map used by the top file:
@@ -116,4 +126,5 @@ do_paint:
 # 4100: frame toggle, flips once per screen refresh
 # 4101: live cursor x position in grid cells
 # 4102: live cursor y position in grid cells
+# 4103: BTNC, clears the canvas and recenters the cursor
 # 8192 + n: canvas cell n, 0 <= n < 4800
