@@ -6,7 +6,6 @@
 
 module FinalProjectVGAProcessor(
     input clk,
-    input reset,
     output hSync,
     output vSync,
     output [3:0] VGA_R,
@@ -17,7 +16,8 @@ module FinalProjectVGAProcessor(
     input BTNU,
     input BTNL,
     input BTNR,
-    input BTND
+    input BTND,
+    input BTNC
 );
 
     localparam VIDEO_WIDTH  = 640;
@@ -263,7 +263,7 @@ module FinalProjectVGAProcessor(
                 MMIO_FRAME_ADDR:    mmio_q <= {31'd0, frame_toggle};
                 MMIO_CURSOR_X_ADDR: mmio_q <= {25'd0, cursor_x};
                 MMIO_CURSOR_Y_ADDR: mmio_q <= {26'd0, cursor_y};
-                MMIO_BTNC_ADDR:     mmio_q <= {31'd0, reset};
+                MMIO_BTNC_ADDR:     mmio_q <= {31'd0, BTNC};
                 default: begin
                     mmio_read_d <= 1'b0;
                     mmio_q <= 32'd0;
