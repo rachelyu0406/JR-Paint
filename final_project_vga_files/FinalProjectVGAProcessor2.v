@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module FinalProjectVGAProcessor(
+module FinalProjectVGAProcessor2(
     input clk,
     input reset,
     output hSync,
