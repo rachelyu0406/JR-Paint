@@ -57,7 +57,6 @@ if {$::dispatch::connected} {
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param general.usePosixSpawnForFork 1
-set_param xicom.use_bs_reader 1
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-1
 
@@ -83,6 +82,8 @@ read_mem {
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/cursor.mem
 }
 read_verilog -library xil_defaultlib {
+  C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/RAM.v
+  C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/ROM.v
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/VGATimingGenerator.v
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/alu.v
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/dffe_ref.v

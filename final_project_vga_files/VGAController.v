@@ -108,7 +108,7 @@ module VGAController(
 	
 	initial begin
 	   sprite_x_ref = 10'd0; 
-	   sprite_y_ref = 9'd0; kilo
+	   sprite_y_ref = 9'd0;
 	end 
 	
 	always @(posedge screenEnd) begin
