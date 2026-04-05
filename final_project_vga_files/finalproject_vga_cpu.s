@@ -224,12 +224,12 @@ do_right:
     addi $t4, $0, 1
 
 do_paint:
+    sw $s0, 0($a3)
+    sw $s1, 0($v0)
     bne $t2, $0, paint_cell
     j loop_wait
 
 paint_cell:
-    sw $s0, 0($a3)
-    sw $s1, 0($v0)
     add $a0, $s4, $s2
     sw $t2, 0($a0)
     j loop_wait
