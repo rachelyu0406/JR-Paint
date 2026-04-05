@@ -10,7 +10,7 @@ main:
     addi $t0, $0, 4099      # BTNR MMIO
     addi $t1, $0, 4100      # frame-toggle MMIO
     addi $a3, $0, 4101      # cursor x MMIO
-    addi $v0, $0, 4102      # cursor y MMIO
+    addi $v0, $0, 0         # frame divider count
     addi $t7, $0, 4103      # BTNC MMIO
     addi $a1, $0, 4104      # switch MMIO
     addi $a2, $0, 4105      # LED17 MMIO
@@ -29,7 +29,7 @@ main:
     addi $sp, $0, 0         # blue stamp
 
     sw $s0, 0($a3)
-    sw $s1, 0($v0)
+    sw $s1, 1($a3)
     sw $t2, 0($a2)
     add $a0, $s4, $s2
     sw $t2, 0($a0)
@@ -43,6 +43,9 @@ frame_ready:
     add $s3, $a0, $0
     lw $a0, 0($t7)
     bne $a0, $0, do_clear
+    addi $v0, $v0, 1
+    blt $v0, $at, skip_frame
+    addi $v0, $0, 0
     addi $t4, $0, 1
     lw $a0, 0($a1)
 
@@ -185,6 +188,9 @@ after_moves:
     bne $t4, $0, do_paint
     j loop_wait
 
+skip_frame:
+    j loop_wait
+
 try_up:
     bne $s1, $0, do_up
     j check_down
@@ -226,7 +232,7 @@ do_right:
 
 do_paint:
     sw $s0, 0($a3)
-    sw $s1, 0($v0)
+    sw $s1, 1($a3)
     bne $t2, $0, paint_cell
     j loop_wait
 
@@ -239,8 +245,9 @@ do_clear:
     addi $s0, $0, 40
     addi $s1, $0, 30
     addi $s2, $0, 2440
+    addi $v0, $0, 0
     sw $s0, 0($a3)
-    sw $s1, 0($v0)
+    sw $s1, 1($a3)
     addi $a0, $0, 0
 
 clear_loop:
