@@ -16,7 +16,7 @@ module FinalProjectVGAProcessor(
     output LED17_R,
     inout ps2_clk,
     inout ps2_data,
-    input [3:0] SW,
+    input [9:0] SW,
     input BTNU,
     input BTNL,
     input BTNR,
@@ -176,25 +176,25 @@ module FinalProjectVGAProcessor(
     );
 
     wire [GRID_ADDR_W-1:0] canvas_addr;
-    wire [2:0] canvas_color;
+    wire [3:0] canvas_color;
     assign canvas_addr = draw_write ? draw_addr : canvas_read_addr;
 
     RAM #(
         .DEPTH(GRID_COUNT),
-        .DATA_WIDTH(3),
+        .DATA_WIDTH(4),
         .ADDRESS_WIDTH(GRID_ADDR_W)
     ) CanvasMem (
         .clk(clk25),
         .wEn(draw_write),
         .addr(canvas_addr),
-        .dataIn(cpu_dmem_data[2:0]),
+        .dataIn(cpu_dmem_data[3:0]),
         .dataOut(canvas_color)
     );
 
     reg frame_toggle;
     reg [6:0] cursor_x;
     reg [5:0] cursor_y;
-    reg [2:0] led_color;
+    reg [3:0] led_color;
     reg active_d;
     reg in_cursor_d;
     reg canvas_read_d;
@@ -245,7 +245,7 @@ module FinalProjectVGAProcessor(
             frame_toggle <= 1'b0;
             cursor_x <= GRID_WIDTH / 2;
             cursor_y <= GRID_HEIGHT / 2;
-            led_color <= 3'd0;
+            led_color <= 4'd0;
             active_d <= 1'b0;
             in_cursor_d <= 1'b0;
             canvas_read_d <= 1'b0;
@@ -266,7 +266,7 @@ module FinalProjectVGAProcessor(
                 cursor_y <= cpu_dmem_data[5:0];
 
             if (led_write)
-                led_color <= cpu_dmem_data[2:0];
+                led_color <= cpu_dmem_data[3:0];
 
             mmio_read_d <= 1'b1;
             case (cpu_dmem_addr)
@@ -278,8 +278,8 @@ module FinalProjectVGAProcessor(
                 MMIO_CURSOR_X_ADDR: mmio_q <= {25'd0, cursor_x};
                 MMIO_CURSOR_Y_ADDR: mmio_q <= {26'd0, cursor_y};
                 MMIO_BTNC_ADDR:     mmio_q <= {31'd0, BTNC};
-                MMIO_SWITCH_ADDR:   mmio_q <= {28'd0, SW};
-                MMIO_LED_ADDR:      mmio_q <= {29'd0, led_color};
+                MMIO_SWITCH_ADDR:   mmio_q <= {22'd0, SW};
+                MMIO_LED_ADDR:      mmio_q <= {28'd0, led_color};
                 default: begin
                     mmio_read_d <= 1'b0;
                     mmio_q <= 32'd0;
@@ -292,12 +292,12 @@ module FinalProjectVGAProcessor(
     wire [11:0] colorOut;
 
     assign draw_color = ~canvas_read_d ? palette[0] : palette[canvas_color];
-    assign colorOut = active_d ? ((in_cursor_d && cursor_bit) ? palette[CURSOR_COLOR_INDEX] : draw_color) : palette[1];
+    assign colorOut = active_d ? ((in_cursor_d && cursor_bit) ? palette[CURSOR_COLOR_INDEX] : draw_color) : palette[10];
 
     assign {VGA_R, VGA_G, VGA_B} = colorOut;
-    assign LED17_R = (led_color == 3'd2);
-    assign LED17_G = (led_color == 3'd3);
-    assign LED17_B = (led_color == 3'd4);
+    assign LED17_R = (led_color != 4'd0) && |palette[led_color][11:8];
+    assign LED17_G = (led_color != 4'd0) && |palette[led_color][7:4];
+    assign LED17_B = (led_color != 4'd0) && |palette[led_color][3:0];
     assign ps2_clk = 1'bz;
     assign ps2_data = 1'bz;
 
