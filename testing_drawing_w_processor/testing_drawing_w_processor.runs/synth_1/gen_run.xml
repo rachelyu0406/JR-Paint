@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1775344342" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/FinalProjectVGAProcessor.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1775352173" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/FinalProjectVGAProcessor.dcp">
   <File Type="PA-TCL" Name="FinalProjectVGAProcessor.tcl"/>
   <File Type="REPORTS-TCL" Name="FinalProjectVGAProcessor_reports.tcl"/>
   <File Type="RDS-RDS" Name="FinalProjectVGAProcessor.vds"/>
@@ -170,7 +170,7 @@
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
     <Filter Type="Constrs"/>
-    <File Path="$PPRDIR/../final_project_vga_files/constrains.xdc">
+    <File Path="$PPRDIR/../final_project_vga_files/constraints.xdc">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>

@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date         : Sat Apr  4 19:22:14 2026
+| Date         : Sat Apr  4 21:27:34 2026
 | Host         : rachelsLaptop running 64-bit major release  (build 9200)
 | Command      : report_methodology -file FinalProjectVGAProcessor_methodology_drc_routed.rpt -pb FinalProjectVGAProcessor_methodology_drc_routed.pb -rpx FinalProjectVGAProcessor_methodology_drc_routed.rpx
 | Design       : FinalProjectVGAProcessor
@@ -53,7 +53,7 @@ Related violations: <none>
 
 LUTAR-1#1 Warning
 LUT drives async reset alert  
-LUT cell CPU/dxInsn/genDFFs[2].ff/q_i_2__311, with 2 or more inputs, drives asynchronous preset/clear pin(s) CPU/MD/divUnit/d0/ff/q_reg/CLR, CPU/MD/divUnit/d1/ff/q_reg/CLR,
+LUT cell CPU/dxInsn/genDFFs[2].ff/q_i_2__314, with 2 or more inputs, drives asynchronous preset/clear pin(s) CPU/MD/divUnit/d0/ff/q_reg/CLR, CPU/MD/divUnit/d1/ff/q_reg/CLR,
 CPU/MD/divUnit/d2/ff/q_reg/CLR, CPU/MD/divUnit/d3/ff/q_reg/CLR,
 CPU/MD/divUnit/d4/ff/q_reg/CLR, CPU/MD/divUnit/d5/ff/q_reg/CLR,
 CPU/MD/divUnit/divisorAbsReg/genDFFs[6].ff/q_reg/CLR,
@@ -67,7 +67,7 @@ Related violations: <none>
 
 LUTAR-1#2 Warning
 LUT drives async reset alert  
-LUT cell CPU/dxInsn/genDFFs[4].ff/q_i_2__300, with 2 or more inputs, drives asynchronous preset/clear pin(s) CPU/MD/multStateReg/genDFFs[53].ff/q_reg/CLR,
+LUT cell CPU/dxInsn/genDFFs[4].ff/q_i_2__304, with 2 or more inputs, drives asynchronous preset/clear pin(s) CPU/MD/multStateReg/genDFFs[53].ff/q_reg/CLR,
 CPU/MD/multStateReg/genDFFs[54].ff/q_reg/CLR,
 CPU/MD/multStateReg/genDFFs[55].ff/q_reg/CLR,
 CPU/MD/multStateReg/genDFFs[56].ff/q_reg/CLR,

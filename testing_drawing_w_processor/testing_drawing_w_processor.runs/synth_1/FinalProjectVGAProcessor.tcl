@@ -110,8 +110,8 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/constrains.xdc
-set_property used_in_implementation false [get_files C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/constrains.xdc]
+read_xdc C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/constraints.xdc
+set_property used_in_implementation false [get_files C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/constraints.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
 

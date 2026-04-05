@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date         : Sat Apr  4 19:18:46 2026
+| Date         : Sat Apr  4 21:25:33 2026
 | Host         : rachelsLaptop running 64-bit major release  (build 9200)
 | Command      : report_utilization -file FinalProjectVGAProcessor_utilization_synth.rpt -pb FinalProjectVGAProcessor_utilization_synth.pb
 | Design       : FinalProjectVGAProcessor
@@ -31,15 +31,15 @@ Table of Contents
 +-------------------------+------+-------+------------+-----------+-------+
 |        Site Type        | Used | Fixed | Prohibited | Available | Util% |
 +-------------------------+------+-------+------------+-----------+-------+
-| Slice LUTs*             | 3432 |     0 |          0 |     63400 |  5.41 |
-|   LUT as Logic          | 3432 |     0 |          0 |     63400 |  5.41 |
+| Slice LUTs*             | 3507 |     0 |          0 |     63400 |  5.53 |
+|   LUT as Logic          | 3507 |     0 |          0 |     63400 |  5.53 |
 |   LUT as Memory         |    0 |     0 |          0 |     19000 |  0.00 |
-| Slice Registers         | 1742 |     0 |          0 |    126800 |  1.37 |
-|   Register as Flip Flop | 1742 |     0 |          0 |    126800 |  1.37 |
+| Slice Registers         | 1753 |     0 |          0 |    126800 |  1.38 |
+|   Register as Flip Flop | 1753 |     0 |          0 |    126800 |  1.38 |
 |   Register as Latch     |    0 |     0 |          0 |    126800 |  0.00 |
 | F7 Muxes                |    2 |     0 |          0 |     31700 | <0.01 |
 | F8 Muxes                |    0 |     0 |          0 |     15850 |  0.00 |
-| Unique Control Sets     |   46 |       |          0 |     15850 |  0.29 |
+| Unique Control Sets     |   47 |       |          0 |     15850 |  0.30 |
 +-------------------------+------+-------+------------+-----------+-------+
 * Warning! The Final LUT count, after physical optimizations and full implementation, is typically lower. Run opt_design after synthesis, if not already completed, for a more realistic count.
 Warning! LUT value is adjusted to account for LUT combining.
@@ -60,7 +60,7 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 | 0     |            _ |       Reset |            - |
 | 0     |          Yes |           - |            - |
 | 6     |          Yes |           - |          Set |
-| 1732  |          Yes |           - |        Reset |
+| 1743  |          Yes |           - |        Reset |
 | 0     |          Yes |         Set |            - |
 | 4     |          Yes |       Reset |            - |
 +-------+--------------+-------------+--------------+
@@ -72,11 +72,11 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +-------------------+------+-------+------------+-----------+-------+
 |     Site Type     | Used | Fixed | Prohibited | Available | Util% |
 +-------------------+------+-------+------------+-----------+-------+
-| Block RAM Tile    |    9 |     0 |          0 |       135 |  6.67 |
-|   RAMB36/FIFO*    |    8 |     0 |          0 |       135 |  5.93 |
-|     RAMB36E1 only |    8 |       |            |           |       |
-|   RAMB18          |    2 |     0 |          0 |       270 |  0.74 |
-|     RAMB18E1 only |    2 |       |            |           |       |
+| Block RAM Tile    |  9.5 |     0 |          0 |       135 |  7.04 |
+|   RAMB36/FIFO*    |    9 |     0 |          0 |       135 |  6.67 |
+|     RAMB36E1 only |    9 |       |            |           |       |
+|   RAMB18          |    1 |     0 |          0 |       270 |  0.37 |
+|     RAMB18E1 only |    1 |       |            |           |       |
 +-------------------+------+-------+------------+-----------+-------+
 * Note: Each Block RAM Tile only has one FIFO logic available and therefore can accommodate only one FIFO36E1 or one FIFO18E1. However, if a FIFO18E1 occupies a Block RAM Tile, that tile can still accommodate a RAMB18E1
 
@@ -97,7 +97,7 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +-----------------------------+------+-------+------------+-----------+-------+
 |          Site Type          | Used | Fixed | Prohibited | Available | Util% |
 +-----------------------------+------+-------+------------+-----------+-------+
-| Bonded IOB                  |   19 |     0 |          0 |       210 |  9.05 |
+| Bonded IOB                  |   32 |     0 |          0 |       210 | 15.24 |
 | Bonded IPADs                |    0 |     0 |          0 |         2 |  0.00 |
 | PHY_CONTROL                 |    0 |     0 |          0 |         6 |  0.00 |
 | PHASER_REF                  |    0 |     0 |          0 |         6 |  0.00 |
@@ -153,21 +153,21 @@ Warning! For any ECO changes, please run place_design if there are unplaced inst
 +----------+------+---------------------+
 | Ref Name | Used | Functional Category |
 +----------+------+---------------------+
-| LUT6     | 1891 |                 LUT |
-| FDCE     | 1732 |        Flop & Latch |
-| LUT5     |  709 |                 LUT |
-| LUT4     |  381 |                 LUT |
-| LUT2     |  341 |                 LUT |
-| LUT3     |  332 |                 LUT |
+| LUT6     | 1968 |                 LUT |
+| FDCE     | 1743 |        Flop & Latch |
+| LUT5     |  683 |                 LUT |
+| LUT4     |  398 |                 LUT |
+| LUT2     |  348 |                 LUT |
+| LUT3     |  335 |                 LUT |
 | CARRY4   |   20 |          CarryLogic |
-| OBUF     |   14 |                  IO |
-| RAMB36E1 |    8 |        Block Memory |
-| LUT1     |    6 |                 LUT |
+| OBUF     |   17 |                  IO |
+| IBUF     |   15 |                  IO |
+| RAMB36E1 |    9 |        Block Memory |
+| LUT1     |    7 |                 LUT |
 | FDPE     |    6 |        Flop & Latch |
-| IBUF     |    5 |                  IO |
 | FDRE     |    4 |        Flop & Latch |
-| RAMB18E1 |    2 |        Block Memory |
 | MUXF7    |    2 |               MuxFx |
+| RAMB18E1 |    1 |        Block Memory |
 | BUFG     |    1 |               Clock |
 +----------+------+---------------------+
 
