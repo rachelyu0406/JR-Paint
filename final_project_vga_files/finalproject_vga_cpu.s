@@ -111,6 +111,7 @@ choose_color:
 
 black_active:
     add $t5, $k0, $0
+    addi $t2, $0, 1
 
 red_check:
     and $t6, $a0, $t9
