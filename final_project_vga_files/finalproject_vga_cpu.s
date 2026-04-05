@@ -14,7 +14,7 @@ main:
     addi $t7, $0, 4103      # BTNC MMIO
     addi $a1, $0, 4104      # switch MMIO
     addi $a2, $0, 4105      # LED17 MMIO
-    addi $t2, $0, 1         # current draw color = black
+    addi $t2, $0, 0         # current draw color = none
     addi $t3, $0, 80        # one canvas row
     addi $t8, $0, 4800      # total canvas cells
     addi $t4, $0, 1         # switch 0 mask
@@ -102,8 +102,7 @@ sw3_on:
     addi $fp, $fp, 1
 
 choose_color:
-    add $v1, $a0, $0
-    addi $t2, $0, 1
+    addi $t2, $0, 0
     addi $t5, $0, 0
 
     and $t6, $a0, $t4
@@ -156,6 +155,15 @@ color_ready:
     addi $t5, $0, 58        # y must stay < 58 to move down
     addi $t6, $0, 78        # x must stay < 78 to move right
     addi $t4, $0, 0         # moved flag
+    bne $v1, $0, store_switches
+    bne $t2, $0, start_draw
+    j store_switches
+
+start_draw:
+    addi $t4, $0, 1
+
+store_switches:
+    add $v1, $a0, $0
 
     lw $a0, 0($s5)
     bne $a0, $0, try_up
@@ -216,6 +224,10 @@ do_right:
     addi $t4, $0, 1
 
 do_paint:
+    bne $t2, $0, paint_cell
+    j loop_wait
+
+paint_cell:
     sw $s0, 0($a3)
     sw $s1, 0($v0)
     add $a0, $s4, $s2

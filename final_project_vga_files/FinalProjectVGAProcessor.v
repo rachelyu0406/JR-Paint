@@ -245,7 +245,7 @@ module FinalProjectVGAProcessor(
             frame_toggle <= 1'b0;
             cursor_x <= GRID_WIDTH / 2;
             cursor_y <= GRID_HEIGHT / 2;
-            led_color <= 3'd1;
+            led_color <= 3'd0;
             active_d <= 1'b0;
             in_cursor_d <= 1'b0;
             canvas_read_d <= 1'b0;
