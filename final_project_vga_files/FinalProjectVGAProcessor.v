@@ -228,7 +228,7 @@ module FinalProjectVGAProcessor(
         (penSize == 3'd1) ? 7'd40 : //0.2
         (penSize == 3'd2) ? 7'd66 : //0.4
         (penSize == 3'd3) ? 7'd92 : //0.6
-        (penSize == 3'd4) ? 7'd116 : 7'd128;
+        (penSize == 3'd4) ? 7'd116 : 7'd127;
     assign cursorLeft = $signed({2'b00, cursorX, 3'b000}) + 12'sd4 - ($signed({5'b0, cursorDrawSize}) >>> 1);
     assign cursorTop = $signed({3'b000, cursorY, 3'b000}) + 12'sd4 - ($signed({5'b0, cursorDrawSize}) >>> 1);
 
