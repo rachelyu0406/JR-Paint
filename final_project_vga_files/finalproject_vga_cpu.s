@@ -276,7 +276,7 @@ row_in_range:
     sub $a1, $a1, $k1
     addi $a2, $s0, 0
     add $a2, $a2, $k1
-    addi $a3, $a0, 0
+    addi $t5, $a0, 0
 
 col_loop:
     blt $a1, $0, skip_cell
@@ -284,12 +284,12 @@ col_loop:
     j skip_cell
 
 write_cell:
-    add $t4, $s4, $a3
+    add $t4, $s4, $t5
     sw $t2, 0($t4)
 
 skip_cell:
     addi $a1, $a1, 1
-    addi $a3, $a3, 1
+    addi $t5, $t5, 1
     blt $a2, $a1, next_row
     j col_loop
 

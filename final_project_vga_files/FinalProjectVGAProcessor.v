@@ -213,6 +213,7 @@ module FinalProjectVGAProcessor(
     reg [5:0] cursor_grid_y;
     reg [3:0] rgb_led_color_code;
     reg [2:0] pen_size_code;
+    reg [15:0] display_refresh_counter;
     reg video_active_q;
     reg cursor_hit_q;
     reg canvas_display_read_q;
@@ -265,6 +266,7 @@ module FinalProjectVGAProcessor(
             cursor_grid_y <= GRID_HEIGHT / 2;
             rgb_led_color_code <= 4'd0;
             pen_size_code <= 3'd1;
+            display_refresh_counter <= 16'd0;
             video_active_q <= 1'b0;
             cursor_hit_q <= 1'b0;
             canvas_display_read_q <= 1'b0;
@@ -274,6 +276,7 @@ module FinalProjectVGAProcessor(
             video_active_q <= video_active;
             cursor_hit_q <= cursor_hit;
             canvas_display_read_q <= ~canvas_mmio_write_en;
+            display_refresh_counter <= display_refresh_counter + 16'd1;
 
             if (frame_end_pulse)
                 frame_toggle_bit <= ~frame_toggle_bit;
@@ -313,24 +316,33 @@ module FinalProjectVGAProcessor(
 
     wire [11:0] canvas_pixel_color;
     wire [11:0] pixel_color;
+    wire display_show_left_digit;
+    wire [6:0] display_left_segments;
+    wire [6:0] display_right_segments;
 
     assign canvas_pixel_color = ~canvas_display_read_q ? color_palette[0] : color_palette[canvas_cell_color];
     assign pixel_color = video_active_q
         ? ((cursor_hit_q && cursor_sprite_pixel) ? color_palette[CURSOR_PALETTE_INDEX] : canvas_pixel_color)
         : color_palette[10];
+    assign display_show_left_digit = display_refresh_counter[15];
+    assign display_left_segments =
+        (pen_size_code == 3'd5) ? 7'b1001111 :
+                                  7'b0000001;
+    assign display_right_segments =
+        (pen_size_code == 3'd1) ? 7'b0010010 :
+        (pen_size_code == 3'd2) ? 7'b1001100 :
+        (pen_size_code == 3'd3) ? 7'b0100000 :
+        (pen_size_code == 3'd4) ? 7'b0000000 :
+                                  7'b0000001;
 
     assign {VGA_R, VGA_G, VGA_B} = pixel_color;
     assign LED17_R = (rgb_led_color_code != 4'd0) && |color_palette[rgb_led_color_code][11:8];
     assign LED17_G = (rgb_led_color_code != 4'd0) && |color_palette[rgb_led_color_code][7:4];
     assign LED17_B = (rgb_led_color_code != 4'd0) && |color_palette[rgb_led_color_code][3:0];
     assign {DISP_SEG_A, DISP_SEG_B, DISP_SEG_C, DISP_SEG_D, DISP_SEG_E, DISP_SEG_F, DISP_SEG_G} =
-        (pen_size_code == 3'd1) ? 7'b0010010 :
-        (pen_size_code == 3'd2) ? 7'b1001100 :
-        (pen_size_code == 3'd3) ? 7'b0100000 :
-        (pen_size_code == 3'd4) ? 7'b0000000 :
-                                  7'b1001111;
-    assign DISP_DP = (pen_size_code == 3'd5);
-    assign DISP_EN = 8'b11111101;
+        display_show_left_digit ? display_left_segments : display_right_segments;
+    assign DISP_DP = display_show_left_digit;
+    assign DISP_EN = display_show_left_digit ? 8'b11111101 : 8'b11111110;
     assign ps2_clk = 1'bz;
     assign ps2_data = 1'bz;
 
