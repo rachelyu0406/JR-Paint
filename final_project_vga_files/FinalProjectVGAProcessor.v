@@ -33,316 +33,297 @@ module FinalProjectVGAProcessor(
     input BTNC
 );
 
-    localparam VIDEO_WIDTH  = 640;
-    localparam VIDEO_HEIGHT = 480;
+    localparam VIDEO_W = 640;
+    localparam VIDEO_H = 480;
 
-    localparam CELL_SIZE       = 8;
-    localparam GRID_WIDTH      = 80;
-    localparam GRID_HEIGHT     = 60;
-    localparam GRID_CELL_COUNT = GRID_WIDTH * GRID_HEIGHT;
-    localparam GRID_ADDR_WIDTH = $clog2(GRID_CELL_COUNT);
+    localparam CELL_SIZE  = 8;
+    localparam GRID_W     = 80;
+    localparam GRID_H     = 60;
+    localparam GRID_COUNT = GRID_W * GRID_H;
+    localparam GRID_AW    = $clog2(GRID_COUNT);
 
-    localparam [31:0] MMIO_UP_BUTTON_ADDR        = 32'd4096;
-    localparam [31:0] MMIO_DOWN_BUTTON_ADDR      = 32'd4097;
-    localparam [31:0] MMIO_LEFT_BUTTON_ADDR      = 32'd4098;
-    localparam [31:0] MMIO_RIGHT_BUTTON_ADDR     = 32'd4099;
-    localparam [31:0] MMIO_FRAME_TOGGLE_ADDR     = 32'd4100;
-    localparam [31:0] MMIO_CURSOR_X_ADDR         = 32'd4101;
-    localparam [31:0] MMIO_CURSOR_Y_ADDR         = 32'd4102;
-    localparam [31:0] MMIO_CENTER_BUTTON_ADDR    = 32'd4103;
-    localparam [31:0] MMIO_SWITCHES_ADDR         = 32'd4104;
-    localparam [31:0] MMIO_RGB_LED_COLOR_ADDR    = 32'd4105;
-    localparam [31:0] MMIO_PEN_SIZE_ADDR         = 32'd4106;
-    localparam [31:0] MMIO_CANVAS_BASE_ADDR      = 32'd8192;
-    localparam [31:0] MMIO_CANVAS_LAST_ADDR      = MMIO_CANVAS_BASE_ADDR + GRID_CELL_COUNT - 1;
+    localparam [31:0] MMIO_BTNU   = 32'd4096;
+    localparam [31:0] MMIO_BTND   = 32'd4097;
+    localparam [31:0] MMIO_BTNL   = 32'd4098;
+    localparam [31:0] MMIO_BTNR   = 32'd4099;
+    localparam [31:0] MMIO_FRAME  = 32'd4100;
+    localparam [31:0] MMIO_CX     = 32'd4101;
+    localparam [31:0] MMIO_CY     = 32'd4102;
+    localparam [31:0] MMIO_BTNC   = 32'd4103;
+    localparam [31:0] MMIO_SW     = 32'd4104;
+    localparam [31:0] MMIO_LED    = 32'd4105;
+    localparam [31:0] MMIO_PEN    = 32'd4106;
+    localparam [31:0] DRAW_BASE   = 32'd8192;
+    localparam [31:0] DRAW_LAST   = DRAW_BASE + GRID_COUNT - 1;
 
-    localparam CURSOR_SPRITE_SIZE       = 50;
-    localparam CURSOR_SPRITE_PIXEL_COUNT = CURSOR_SPRITE_SIZE * CURSOR_SPRITE_SIZE;
-    localparam CURSOR_SPRITE_ADDR_WIDTH = $clog2(CURSOR_SPRITE_PIXEL_COUNT) + 1;
-    localparam signed [11:0] CURSOR_SPRITE_OFFSET = (CELL_SIZE / 2) - (CURSOR_SPRITE_SIZE / 2);
-    localparam PALETTE_MEM_FILE         = "colors.mem";
-    localparam CURSOR_SPRITE_MEM_FILE   = "cursor.mem";
-    localparam INSTRUCTION_MEM_FILE     = "finalproject_vga_cpu.mem";
-    localparam [7:0] CURSOR_PALETTE_INDEX = 8'd94;
+    localparam CURSOR_SIZE   = 50;
+    localparam CURSOR_PIXELS = CURSOR_SIZE * CURSOR_SIZE;
+    localparam CURSOR_AW     = $clog2(CURSOR_PIXELS) + 1;
+    localparam signed [11:0] CURSOR_OFF = (CELL_SIZE / 2) - (CURSOR_SIZE / 2);
+    localparam [7:0] CURSOR_COLOR = 8'd94;
 
-    reg [11:0] color_palette [0:255];
-    initial $readmemh(PALETTE_MEM_FILE, color_palette);
+    reg [11:0] palette[0:255];
+    initial $readmemh("colors.mem", palette);
 
-    wire pixel_clk;
-    wire pll_locked;
+    wire clk25;
+    wire locked;
     wire reset;
-    assign reset = ~pll_locked;
+    assign reset = ~locked;
 
     clk_wiz_0 pll (
-        .clk_out1(pixel_clk),
+        .clk_out1(clk25),
         .reset(1'b0),
-        .locked(pll_locked),
+        .locked(locked),
         .clk_in1(clk)
     );
 
-    wire video_active;
-    wire frame_end_pulse;
-    wire [9:0] pixel_x;
-    wire [8:0] pixel_y;
+    wire active;
+    wire screenEnd;
+    wire [9:0] x;
+    wire [8:0] y;
 
     VGATimingGenerator #(
-        .HEIGHT(VIDEO_HEIGHT),
-        .WIDTH(VIDEO_WIDTH)
-    ) VideoTiming (
-        .clk25(pixel_clk),
+        .HEIGHT(VIDEO_H),
+        .WIDTH(VIDEO_W)
+    ) Display (
+        .clk25(clk25),
         .reset(reset),
-        .screenEnd(frame_end_pulse),
-        .active(video_active),
+        .screenEnd(screenEnd),
+        .active(active),
         .hSync(hSync),
         .vSync(vSync),
-        .x(pixel_x),
-        .y(pixel_y)
+        .x(x),
+        .y(y)
     );
 
-    wire [6:0] grid_x;
-    wire [5:0] grid_y;
-    wire [GRID_ADDR_WIDTH-1:0] canvas_display_addr;
-    assign grid_x = pixel_x[9:3];
-    assign grid_y = pixel_y[8:3];
-    assign canvas_display_addr = grid_y * GRID_WIDTH + grid_x;
+    wire [GRID_AW-1:0] displayAddr;
+    assign displayAddr = y[8:3] * GRID_W + x[9:3];
 
-    wire cpu_reg_write_en;
-    wire cpu_data_write_en;
-    wire [4:0] cpu_reg_write_addr;
-    wire [4:0] cpu_reg_read_addr_a;
-    wire [4:0] cpu_reg_read_addr_b;
-    wire [31:0] cpu_instruction_addr;
-    wire [31:0] cpu_instruction_data;
-    wire [31:0] cpu_data_addr;
-    wire [31:0] cpu_data_write_value;
-    wire [31:0] cpu_data_read_value;
-    wire [31:0] cpu_reg_write_value;
-    wire [31:0] cpu_reg_read_value_a;
-    wire [31:0] cpu_reg_read_value_b;
+    wire regWriteEn;
+    wire memWriteEn;
+    wire [4:0] regWriteAddr;
+    wire [4:0] regReadAddrA;
+    wire [4:0] regReadAddrB;
+    wire [31:0] imemAddr;
+    wire [31:0] imemQ;
+    wire [31:0] dmemAddr;
+    wire [31:0] dmemData;
+    wire [31:0] dmemQ;
+    wire [31:0] regWriteData;
+    wire [31:0] regReadDataA;
+    wire [31:0] regReadDataB;
 
-    processor ProcessorCore (
-        .clock(pixel_clk),
+    processor CPU (
+        .clock(clk25),
         .reset(reset),
-        .address_imem(cpu_instruction_addr),
-        .q_imem(cpu_instruction_data),
-        .address_dmem(cpu_data_addr),
-        .data(cpu_data_write_value),
-        .wren(cpu_data_write_en),
-        .q_dmem(cpu_data_read_value),
-        .ctrl_writeEnable(cpu_reg_write_en),
-        .ctrl_writeReg(cpu_reg_write_addr),
-        .ctrl_readRegA(cpu_reg_read_addr_a),
-        .ctrl_readRegB(cpu_reg_read_addr_b),
-        .data_writeReg(cpu_reg_write_value),
-        .data_readRegA(cpu_reg_read_value_a),
-        .data_readRegB(cpu_reg_read_value_b)
+        .address_imem(imemAddr),
+        .q_imem(imemQ),
+        .address_dmem(dmemAddr),
+        .data(dmemData),
+        .wren(memWriteEn),
+        .q_dmem(dmemQ),
+        .ctrl_writeEnable(regWriteEn),
+        .ctrl_writeReg(regWriteAddr),
+        .ctrl_readRegA(regReadAddrA),
+        .ctrl_readRegB(regReadAddrB),
+        .data_writeReg(regWriteData),
+        .data_readRegA(regReadDataA),
+        .data_readRegB(regReadDataB)
     );
 
     ROM #(
-        .MEMFILE(INSTRUCTION_MEM_FILE)
-    ) InstructionMemory (
-        .clk(pixel_clk),
-        .addr(cpu_instruction_addr[11:0]),
-        .dataOut(cpu_instruction_data)
+        .MEMFILE("finalproject_vga_cpu.mem")
+    ) InstMem (
+        .clk(clk25),
+        .addr(imemAddr[11:0]),
+        .dataOut(imemQ)
     );
 
-    regfile ProcessorRegisterFile (
-        .clock(pixel_clk),
-        .ctrl_writeEnable(cpu_reg_write_en),
+    regfile RegisterFile (
+        .clock(clk25),
+        .ctrl_writeEnable(regWriteEn),
         .ctrl_reset(reset),
-        .ctrl_writeReg(cpu_reg_write_addr),
-        .ctrl_readRegA(cpu_reg_read_addr_a),
-        .ctrl_readRegB(cpu_reg_read_addr_b),
-        .data_writeReg(cpu_reg_write_value),
-        .data_readRegA(cpu_reg_read_value_a),
-        .data_readRegB(cpu_reg_read_value_b)
+        .ctrl_writeReg(regWriteAddr),
+        .ctrl_readRegA(regReadAddrA),
+        .ctrl_readRegB(regReadAddrB),
+        .data_writeReg(regWriteData),
+        .data_readRegA(regReadDataA),
+        .data_readRegB(regReadDataB)
     );
 
-    wire canvas_mmio_write_en;
-    wire cursor_x_mmio_write_en;
-    wire cursor_y_mmio_write_en;
-    wire rgb_led_mmio_write_en;
-    wire pen_size_mmio_write_en;
-    wire cpu_ram_write_en;
-    wire [GRID_ADDR_WIDTH-1:0] canvas_mmio_addr;
-    wire [31:0] cpu_ram_read_value;
+    wire drawWrite;
+    wire cxWrite;
+    wire cyWrite;
+    wire ledWrite;
+    wire penWrite;
+    wire ramWrite;
+    wire [GRID_AW-1:0] drawAddr;
+    wire [31:0] ramQ;
 
-    assign canvas_mmio_write_en = cpu_data_write_en && (cpu_data_addr >= MMIO_CANVAS_BASE_ADDR) && (cpu_data_addr <= MMIO_CANVAS_LAST_ADDR);
-    assign cursor_x_mmio_write_en = cpu_data_write_en && (cpu_data_addr == MMIO_CURSOR_X_ADDR);
-    assign cursor_y_mmio_write_en = cpu_data_write_en && (cpu_data_addr == MMIO_CURSOR_Y_ADDR);
-    assign rgb_led_mmio_write_en = cpu_data_write_en && (cpu_data_addr == MMIO_RGB_LED_COLOR_ADDR);
-    assign pen_size_mmio_write_en = cpu_data_write_en && (cpu_data_addr == MMIO_PEN_SIZE_ADDR);
-    assign cpu_ram_write_en = cpu_data_write_en &&
-                              ~canvas_mmio_write_en &&
-                              ~cursor_x_mmio_write_en &&
-                              ~cursor_y_mmio_write_en &&
-                              ~rgb_led_mmio_write_en &&
-                              ~pen_size_mmio_write_en;
-    assign canvas_mmio_addr = cpu_data_addr - MMIO_CANVAS_BASE_ADDR;
+    assign drawWrite = memWriteEn && (dmemAddr >= DRAW_BASE) && (dmemAddr <= DRAW_LAST);
+    assign cxWrite = memWriteEn && (dmemAddr == MMIO_CX);
+    assign cyWrite = memWriteEn && (dmemAddr == MMIO_CY);
+    assign ledWrite = memWriteEn && (dmemAddr == MMIO_LED);
+    assign penWrite = memWriteEn && (dmemAddr == MMIO_PEN);
+    assign ramWrite = memWriteEn && ~drawWrite && ~cxWrite && ~cyWrite && ~ledWrite && ~penWrite;
+    assign drawAddr = dmemAddr - DRAW_BASE;
 
     RAM #(
         .DATA_WIDTH(32),
         .ADDRESS_WIDTH(12),
         .DEPTH(4096)
-    ) ProcessorDataMemory (
-        .clk(pixel_clk),
-        .wEn(cpu_ram_write_en),
-        .addr(cpu_data_addr[11:0]),
-        .dataIn(cpu_data_write_value),
-        .dataOut(cpu_ram_read_value)
+    ) ProcMem (
+        .clk(clk25),
+        .wEn(ramWrite),
+        .addr(dmemAddr[11:0]),
+        .dataIn(dmemData),
+        .dataOut(ramQ)
     );
 
-    wire [GRID_ADDR_WIDTH-1:0] canvas_ram_addr;
-    wire [3:0] canvas_cell_color;
-    assign canvas_ram_addr = canvas_mmio_write_en ? canvas_mmio_addr : canvas_display_addr;
+    wire [GRID_AW-1:0] canvasAddr;
+    wire [3:0] canvasColor;
+    assign canvasAddr = drawWrite ? drawAddr : displayAddr;
 
     RAM #(
-        .DEPTH(GRID_CELL_COUNT),
+        .DEPTH(GRID_COUNT),
         .DATA_WIDTH(4),
-        .ADDRESS_WIDTH(GRID_ADDR_WIDTH)
+        .ADDRESS_WIDTH(GRID_AW)
     ) CanvasMemory (
-        .clk(pixel_clk),
-        .wEn(canvas_mmio_write_en),
-        .addr(canvas_ram_addr),
-        .dataIn(cpu_data_write_value[3:0]),
-        .dataOut(canvas_cell_color)
+        .clk(clk25),
+        .wEn(drawWrite),
+        .addr(canvasAddr),
+        .dataIn(dmemData[3:0]),
+        .dataOut(canvasColor)
     );
 
-    reg frame_toggle_bit;
-    reg [6:0] cursor_grid_x;
-    reg [5:0] cursor_grid_y;
-    reg [3:0] rgb_led_color_code;
-    reg [2:0] pen_size_code;
-    reg [15:0] display_refresh_counter;
-    reg video_active_q;
-    reg cursor_hit_q;
-    reg canvas_display_read_q;
-    reg mmio_read_valid_q;
-    reg [31:0] mmio_read_data_q;
+    reg frameToggle;
+    reg [6:0] cursorX;
+    reg [5:0] cursorY;
+    reg [3:0] ledColor;
+    reg [2:0] penSize;
+    reg [15:0] dispCount;
+    reg active_q;
+    reg inCursor_q;
+    reg canvasRead_q;
+    reg mmioRead_q;
+    reg [31:0] mmioData;
 
-    assign cpu_data_read_value = mmio_read_valid_q ? mmio_read_data_q : cpu_ram_read_value;
+    assign dmemQ = mmioRead_q ? mmioData : ramQ;
 
-    wire signed [11:0] cursor_sprite_origin_x;
-    wire signed [11:0] cursor_sprite_origin_y;
-    wire signed [11:0] signed_pixel_x;
-    wire signed [11:0] signed_pixel_y;
-    wire cursor_hit;
-    wire [5:0] cursor_sprite_x;
-    wire [5:0] cursor_sprite_y;
-    wire [CURSOR_SPRITE_ADDR_WIDTH-1:0] cursor_sprite_addr;
-    wire cursor_sprite_pixel;
+    wire signed [11:0] sx;
+    wire signed [11:0] sy;
+    wire signed [11:0] cursorLeft;
+    wire signed [11:0] cursorTop;
+    wire inCursor;
+    wire [5:0] cursorLocalX;
+    wire [5:0] cursorLocalY;
+    wire [CURSOR_AW-1:0] cursorAddr;
+    wire cursorPixel;
 
-    assign signed_pixel_x = $signed({2'b00, pixel_x});
-    assign signed_pixel_y = $signed({3'b000, pixel_y});
-    assign cursor_sprite_origin_x = $signed({2'b00, cursor_grid_x, 3'b000}) + CURSOR_SPRITE_OFFSET;
-    assign cursor_sprite_origin_y = $signed({3'b000, cursor_grid_y, 3'b000}) + CURSOR_SPRITE_OFFSET;
+    assign sx = $signed({2'b00, x});
+    assign sy = $signed({3'b000, y});
+    assign cursorLeft = $signed({2'b00, cursorX, 3'b000}) + CURSOR_OFF;
+    assign cursorTop = $signed({3'b000, cursorY, 3'b000}) + CURSOR_OFF;
 
-    assign cursor_hit =
-        video_active &&
-        (signed_pixel_x >= cursor_sprite_origin_x) &&
-        (signed_pixel_x < cursor_sprite_origin_x + CURSOR_SPRITE_SIZE) &&
-        (signed_pixel_y >= cursor_sprite_origin_y) &&
-        (signed_pixel_y < cursor_sprite_origin_y + CURSOR_SPRITE_SIZE);
+    assign inCursor =
+        active &&
+        (sx >= cursorLeft) &&
+        (sx < cursorLeft + CURSOR_SIZE) &&
+        (sy >= cursorTop) &&
+        (sy < cursorTop + CURSOR_SIZE);
 
-    assign cursor_sprite_x = signed_pixel_x - cursor_sprite_origin_x;
-    assign cursor_sprite_y = signed_pixel_y - cursor_sprite_origin_y;
-    assign cursor_sprite_addr = cursor_sprite_y * CURSOR_SPRITE_SIZE + cursor_sprite_x;
+    assign cursorLocalX = sx - cursorLeft;
+    assign cursorLocalY = sy - cursorTop;
+    assign cursorAddr = cursorLocalY * CURSOR_SIZE + cursorLocalX;
 
     ROM #(
         .DATA_WIDTH(1),
-        .ADDRESS_WIDTH(CURSOR_SPRITE_ADDR_WIDTH),
-        .DEPTH(CURSOR_SPRITE_PIXEL_COUNT),
-        .MEMFILE(CURSOR_SPRITE_MEM_FILE)
-    ) CursorSpriteMemory (
-        .clk(pixel_clk),
-        .addr(cursor_sprite_addr),
-        .dataOut(cursor_sprite_pixel)
+        .ADDRESS_WIDTH(CURSOR_AW),
+        .DEPTH(CURSOR_PIXELS),
+        .MEMFILE("cursor.mem")
+    ) CursorSprite (
+        .clk(clk25),
+        .addr(cursorAddr),
+        .dataOut(cursorPixel)
     );
 
-    always @(posedge pixel_clk or posedge reset) begin
+    always @(posedge clk25 or posedge reset) begin
         if (reset) begin
-            frame_toggle_bit <= 1'b0;
-            cursor_grid_x <= GRID_WIDTH / 2;
-            cursor_grid_y <= GRID_HEIGHT / 2;
-            rgb_led_color_code <= 4'd0;
-            pen_size_code <= 3'd1;
-            display_refresh_counter <= 16'd0;
-            video_active_q <= 1'b0;
-            cursor_hit_q <= 1'b0;
-            canvas_display_read_q <= 1'b0;
-            mmio_read_valid_q <= 1'b0;
-            mmio_read_data_q <= 32'd0;
+            frameToggle <= 1'b0;
+            cursorX <= GRID_W / 2;
+            cursorY <= GRID_H / 2;
+            ledColor <= 4'd0;
+            penSize <= 3'd1;
+            dispCount <= 16'd0;
+            active_q <= 1'b0;
+            inCursor_q <= 1'b0;
+            canvasRead_q <= 1'b0;
+            mmioRead_q <= 1'b0;
+            mmioData <= 32'd0;
         end else begin
-            video_active_q <= video_active;
-            cursor_hit_q <= cursor_hit;
-            canvas_display_read_q <= ~canvas_mmio_write_en;
-            display_refresh_counter <= display_refresh_counter + 16'd1;
+            active_q <= active;
+            inCursor_q <= inCursor;
+            canvasRead_q <= ~drawWrite;
+            dispCount <= dispCount + 16'd1;
 
-            if (frame_end_pulse)
-                frame_toggle_bit <= ~frame_toggle_bit;
+            if (screenEnd)
+                frameToggle <= ~frameToggle;
 
-            if (cursor_x_mmio_write_en)
-                cursor_grid_x <= cpu_data_write_value[6:0];
+            if (cxWrite)
+                cursorX <= dmemData[6:0];
 
-            if (cursor_y_mmio_write_en)
-                cursor_grid_y <= cpu_data_write_value[5:0];
+            if (cyWrite)
+                cursorY <= dmemData[5:0];
 
-            if (rgb_led_mmio_write_en)
-                rgb_led_color_code <= cpu_data_write_value[3:0];
+            if (ledWrite)
+                ledColor <= dmemData[3:0];
 
-            if (pen_size_mmio_write_en)
-                pen_size_code <= cpu_data_write_value[2:0];
+            if (penWrite)
+                penSize <= dmemData[2:0];
 
-            mmio_read_valid_q <= 1'b1;
-            case (cpu_data_addr)
-                MMIO_UP_BUTTON_ADDR:      mmio_read_data_q <= {31'd0, BTNU};
-                MMIO_DOWN_BUTTON_ADDR:    mmio_read_data_q <= {31'd0, BTND};
-                MMIO_LEFT_BUTTON_ADDR:    mmio_read_data_q <= {31'd0, BTNL};
-                MMIO_RIGHT_BUTTON_ADDR:   mmio_read_data_q <= {31'd0, BTNR};
-                MMIO_FRAME_TOGGLE_ADDR:   mmio_read_data_q <= {31'd0, frame_toggle_bit};
-                MMIO_CURSOR_X_ADDR:       mmio_read_data_q <= {25'd0, cursor_grid_x};
-                MMIO_CURSOR_Y_ADDR:       mmio_read_data_q <= {26'd0, cursor_grid_y};
-                MMIO_CENTER_BUTTON_ADDR:  mmio_read_data_q <= {31'd0, BTNC};
-                MMIO_SWITCHES_ADDR:       mmio_read_data_q <= {17'd0, SW};
-                MMIO_RGB_LED_COLOR_ADDR:  mmio_read_data_q <= {28'd0, rgb_led_color_code};
-                MMIO_PEN_SIZE_ADDR:       mmio_read_data_q <= {29'd0, pen_size_code};
+            mmioRead_q <= 1'b1;
+            case (dmemAddr)
+                MMIO_BTNU:  mmioData <= {31'd0, BTNU};
+                MMIO_BTND:  mmioData <= {31'd0, BTND};
+                MMIO_BTNL:  mmioData <= {31'd0, BTNL};
+                MMIO_BTNR:  mmioData <= {31'd0, BTNR};
+                MMIO_FRAME: mmioData <= {31'd0, frameToggle};
+                MMIO_CX:    mmioData <= {25'd0, cursorX};
+                MMIO_CY:    mmioData <= {26'd0, cursorY};
+                MMIO_BTNC:  mmioData <= {31'd0, BTNC};
+                MMIO_SW:    mmioData <= {17'd0, SW};
+                MMIO_LED:   mmioData <= {28'd0, ledColor};
+                MMIO_PEN:   mmioData <= {29'd0, penSize};
                 default: begin
-                    mmio_read_valid_q <= 1'b0;
-                    mmio_read_data_q <= 32'd0;
+                    mmioRead_q <= 1'b0;
+                    mmioData <= 32'd0;
                 end
             endcase
         end
     end
 
-    wire [11:0] canvas_pixel_color;
-    wire [11:0] pixel_color;
-    wire display_show_left_digit;
-    wire [6:0] display_left_segments;
-    wire [6:0] display_right_segments;
+    wire [11:0] colorData;
+    assign colorData = active_q
+        ? ((inCursor_q && cursorPixel) ? palette[CURSOR_COLOR]
+                                       : (canvasRead_q ? palette[canvasColor] : palette[0]))
+        : palette[10];
 
-    assign canvas_pixel_color = ~canvas_display_read_q ? color_palette[0] : color_palette[canvas_cell_color];
-    assign pixel_color = video_active_q
-        ? ((cursor_hit_q && cursor_sprite_pixel) ? color_palette[CURSOR_PALETTE_INDEX] : canvas_pixel_color)
-        : color_palette[10];
-    assign display_show_left_digit = display_refresh_counter[15];
-    assign display_left_segments =
-        (pen_size_code == 3'd5) ? 7'b1001111 :
-                                  7'b0000001;
-    assign display_right_segments =
-        (pen_size_code == 3'd1) ? 7'b0010010 :
-        (pen_size_code == 3'd2) ? 7'b1001100 :
-        (pen_size_code == 3'd3) ? 7'b0100000 :
-        (pen_size_code == 3'd4) ? 7'b0000000 :
-                                  7'b0000001;
+    assign {VGA_R, VGA_G, VGA_B} = colorData;
+    assign LED17_R = (ledColor != 4'd0) && |palette[ledColor][11:8];
+    assign LED17_G = (ledColor != 4'd0) && |palette[ledColor][7:4];
+    assign LED17_B = (ledColor != 4'd0) && |palette[ledColor][3:0];
 
-    assign {VGA_R, VGA_G, VGA_B} = pixel_color;
-    assign LED17_R = (rgb_led_color_code != 4'd0) && |color_palette[rgb_led_color_code][11:8];
-    assign LED17_G = (rgb_led_color_code != 4'd0) && |color_palette[rgb_led_color_code][7:4];
-    assign LED17_B = (rgb_led_color_code != 4'd0) && |color_palette[rgb_led_color_code][3:0];
     assign {DISP_SEG_A, DISP_SEG_B, DISP_SEG_C, DISP_SEG_D, DISP_SEG_E, DISP_SEG_F, DISP_SEG_G} =
-        display_show_left_digit ? display_left_segments : display_right_segments;
-    assign DISP_DP = ~display_show_left_digit;
-    assign DISP_EN = display_show_left_digit ? 8'b11111101 : 8'b11111110;
+        dispCount[15]
+            ? ((penSize == 3'd5) ? 7'b1001111 : 7'b0000001)
+            : ((penSize == 3'd1) ? 7'b0010010 :
+               (penSize == 3'd2) ? 7'b1001100 :
+               (penSize == 3'd3) ? 7'b0100000 :
+               (penSize == 3'd4) ? 7'b0000000 :
+                                   7'b0000001);
+    assign DISP_DP = ~dispCount[15];
+    assign DISP_EN = dispCount[15] ? 8'b11111101 : 8'b11111110;
+
     assign ps2_clk = 1'bz;
     assign ps2_data = 1'bz;
 
