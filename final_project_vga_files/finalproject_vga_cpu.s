@@ -39,6 +39,8 @@ frame_ready:
     bne $a0, $0, do_clear
 
     add $t5, $t2, $0
+    addi $a1, $0, 4104
+    addi $a2, $0, 4105
     lw $a0, 0($a1)
     addi $t2, $0, 0
     addi $t4, $0, 0
@@ -306,6 +308,7 @@ do_clear:
     addi $t9, $0, 0
     addi $t2, $0, 0
     addi $k0, $0, 1
+    addi $a2, $0, 4105
     sw $s0, 0($a3)
     sw $s1, 1($a3)
     sw $t2, 0($a2)

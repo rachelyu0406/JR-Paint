@@ -341,7 +341,7 @@ module FinalProjectVGAProcessor(
     assign LED17_B = (rgb_led_color_code != 4'd0) && |color_palette[rgb_led_color_code][3:0];
     assign {DISP_SEG_A, DISP_SEG_B, DISP_SEG_C, DISP_SEG_D, DISP_SEG_E, DISP_SEG_F, DISP_SEG_G} =
         display_show_left_digit ? display_left_segments : display_right_segments;
-    assign DISP_DP = display_show_left_digit;
+    assign DISP_DP = ~display_show_left_digit;
     assign DISP_EN = display_show_left_digit ? 8'b11111101 : 8'b11111110;
     assign ps2_clk = 1'bz;
     assign ps2_data = 1'bz;
