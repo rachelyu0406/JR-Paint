@@ -59,7 +59,6 @@ module FinalProjectVGAProcessor(
     localparam CURSOR_SIZE   = 50;
     localparam CURSOR_PIXELS = CURSOR_SIZE * CURSOR_SIZE;
     localparam CURSOR_AW     = $clog2(CURSOR_PIXELS) + 1;
-    localparam signed [11:0] CURSOR_OFF = (CELL_SIZE / 2) - (CURSOR_SIZE / 2);
     localparam [7:0] CURSOR_COLOR = 8'd94;
 
     reg [11:0] palette[0:255];
@@ -214,27 +213,37 @@ module FinalProjectVGAProcessor(
     wire signed [11:0] sy;
     wire signed [11:0] cursorLeft;
     wire signed [11:0] cursorTop;
+    wire [6:0] cursorDrawSize;
     wire inCursor;
-    wire [5:0] cursorLocalX;
-    wire [5:0] cursorLocalY;
+    wire [6:0] cursorLocalX;
+    wire [6:0] cursorLocalY;
+    wire [5:0] cursorSpriteX;
+    wire [5:0] cursorSpriteY;
     wire [CURSOR_AW-1:0] cursorAddr;
     wire cursorPixel;
 
     assign sx = $signed({2'b00, x});
     assign sy = $signed({3'b000, y});
-    assign cursorLeft = $signed({2'b00, cursorX, 3'b000}) + CURSOR_OFF;
-    assign cursorTop = $signed({3'b000, cursorY, 3'b000}) + CURSOR_OFF;
+    assign cursorDrawSize =
+        (penSize == 3'd1) ? 7'd8  :
+        (penSize == 3'd2) ? 7'd24 :
+        (penSize == 3'd3) ? 7'd40 :
+        (penSize == 3'd4) ? 7'd56 : 7'd72;
+    assign cursorLeft = $signed({2'b00, cursorX, 3'b000}) + 12'sd4 - ($signed({5'b0, cursorDrawSize}) >>> 1);
+    assign cursorTop = $signed({3'b000, cursorY, 3'b000}) + 12'sd4 - ($signed({5'b0, cursorDrawSize}) >>> 1);
 
     assign inCursor =
         active &&
         (sx >= cursorLeft) &&
-        (sx < cursorLeft + CURSOR_SIZE) &&
+        (sx < cursorLeft + $signed({5'b0, cursorDrawSize})) &&
         (sy >= cursorTop) &&
-        (sy < cursorTop + CURSOR_SIZE);
+        (sy < cursorTop + $signed({5'b0, cursorDrawSize}));
 
     assign cursorLocalX = sx - cursorLeft;
     assign cursorLocalY = sy - cursorTop;
-    assign cursorAddr = cursorLocalY * CURSOR_SIZE + cursorLocalX;
+    assign cursorSpriteX = inCursor ? ((cursorLocalX * CURSOR_SIZE) / cursorDrawSize) : 6'd0;
+    assign cursorSpriteY = inCursor ? ((cursorLocalY * CURSOR_SIZE) / cursorDrawSize) : 6'd0;
+    assign cursorAddr = cursorSpriteY * CURSOR_SIZE + cursorSpriteX;
 
     ROM #(
         .DATA_WIDTH(1),
