@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date             : Sat Apr  4 21:27:39 2026
+| Date             : Sun Apr  5 23:49:11 2026
 | Host             : rachelsLaptop running 64-bit major release  (build 9200)
 | Command          : report_power -file FinalProjectVGAProcessor_power_routed.rpt -pb FinalProjectVGAProcessor_power_summary_routed.pb -rpx FinalProjectVGAProcessor_power_routed.rpx
 | Design           : FinalProjectVGAProcessor
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.215        |
+| Total On-Chip Power (W)  | 0.217        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.117        |
+| Dynamic (W)              | 0.119        |
 | Device Static (W)        | 0.098        |
 | Effective TJA (C/W)      | 4.6          |
 | Max Ambient (C)          | 84.0         |
@@ -53,18 +53,18 @@ Table of Contents
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
 | Clocks         |     0.003 |        8 |       --- |             --- |
-| Slice Logic    |     0.004 |     5881 |       --- |             --- |
-|   LUT as Logic |     0.004 |     3307 |     63400 |            5.22 |
-|   Register     |    <0.001 |     1753 |    126800 |            1.38 |
-|   CARRY4       |    <0.001 |       20 |     15850 |            0.13 |
+| Slice Logic    |     0.004 |     6312 |       --- |             --- |
+|   LUT as Logic |     0.004 |     3568 |     63400 |            5.63 |
+|   CARRY4       |    <0.001 |      114 |     15850 |            0.72 |
+|   Register     |    <0.001 |     1780 |    126800 |            1.40 |
 |   F7/F8 Muxes  |    <0.001 |        2 |     63400 |           <0.01 |
 |   Others       |     0.000 |      368 |       --- |             --- |
-| Signals        |     0.005 |     5076 |       --- |             --- |
+| Signals        |     0.005 |     5399 |       --- |             --- |
 | Block RAM      |     0.005 |      9.5 |       135 |            7.04 |
 | PLL            |     0.098 |        1 |         6 |           16.67 |
-| I/O            |     0.003 |       33 |       210 |           15.71 |
+| I/O            |     0.004 |       54 |       210 |           25.71 |
 | Static Power   |     0.098 |          |           |                 |
-| Total          |     0.215 |          |           |                 |
+| Total          |     0.217 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,7 +74,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.040 |       0.025 |      0.016 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.041 |       0.025 |      0.016 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.068 |       0.049 |      0.018 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.005 |       0.001 |      0.004 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -148,16 +148,16 @@ Table of Contents
 +--------------------------+-----------+
 | Name                     | Power (W) |
 +--------------------------+-----------+
-| FinalProjectVGAProcessor |     0.117 |
+| FinalProjectVGAProcessor |     0.119 |
 |   CPU                    |     0.009 |
 |     MD                   |     0.002 |
-|       multStateReg       |     0.001 |
 |     dxInsn               |     0.003 |
-|       genDFFs[30].ff     |     0.002 |
+|       genDFFs[30].ff     |     0.001 |
 |     fdInsn               |     0.001 |
+|   Display                |     0.001 |
 |   InstMem                |     0.002 |
 |   ProcMem                |     0.002 |
-|   RegisterFile           |     0.002 |
+|   RegisterFile           |     0.001 |
 |   pll                    |     0.098 |
 |     inst                 |     0.098 |
 +--------------------------+-----------+

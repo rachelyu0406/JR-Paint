@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date         : Sat Apr  4 21:26:44 2026
+| Date         : Sun Apr  5 23:48:13 2026
 | Host         : rachelsLaptop running 64-bit major release  (build 9200)
 | Command      : report_control_sets -verbose -file FinalProjectVGAProcessor_control_sets_placed.rpt
 | Design       : FinalProjectVGAProcessor
@@ -27,7 +27,7 @@ Table of Contents
 |    Minimum number of control sets                        |    47 |
 |    Addition due to synthesis replication                 |     0 |
 |    Addition due to physical synthesis replication        |     0 |
-| Unused register locations in slices containing registers |    55 |
+| Unused register locations in slices containing registers |    52 |
 +----------------------------------------------------------+-------+
 * Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
 ** Run report_qor_suggestions for automated merging and remapping suggestions
@@ -58,11 +58,11 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |               4 |            4 |
-| No           | No                    | Yes                    |             369 |          198 |
+| No           | No                    | No                     |               4 |            3 |
+| No           | No                    | Yes                    |             396 |          210 |
 | No           | Yes                   | No                     |               0 |            0 |
 | Yes          | No                    | No                     |               0 |            0 |
-| Yes          | No                    | Yes                    |            1380 |          601 |
+| Yes          | No                    | Yes                    |            1380 |          593 |
 | Yes          | Yes                   | No                     |               0 |            0 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
@@ -74,52 +74,52 @@ Table of Contents
 |    Clock Signal    |            Enable Signal            |                         Set/Reset Signal                         | Slice Load Count | Bel Load Count | Bels / Slice |
 +--------------------+-------------------------------------+------------------------------------------------------------------+------------------+----------------+--------------+
 |  clock0            |                                     |                                                                  |                1 |              1 |         1.00 |
-|  pll/inst/clk_out1 |                                     |                                                                  |                3 |              3 |         1.00 |
-|  pll/inst/clk_out1 | CPU/xmRes/genDFFs[28].ff/E[0]       | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                1 |              4 |         4.00 |
-|  pll/inst/clk_out1 | CPU/xmRes/genDFFs[28].ff/q_reg_0[0] | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                1 |              6 |         6.00 |
-|  pll/inst/clk_out1 | CPU/xmRes/genDFFs[12].ff/q_reg_3[0] | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                5 |              7 |         1.40 |
-|  clock0            | CPU/dxInsn/genDFFs[3].ff/p_2_in3_in | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                2 |              7 |         3.50 |
-|  pll/inst/clk_out1 | Display/vPos[9]_i_1_n_0             | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                5 |             10 |         2.00 |
-|  pll/inst/clk_out1 |                                     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               14 |             25 |         1.79 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__8_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                8 |             32 |         4.00 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__5_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               20 |             32 |         1.60 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__3_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__14_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               10 |             32 |         3.20 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__13_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               19 |             32 |         1.68 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__6_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             32 |         4.57 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__9_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__11_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               12 |             32 |         2.67 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_19    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                8 |             32 |         4.00 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_14    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               30 |             32 |         1.07 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_15    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                8 |             32 |         4.00 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_11    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               10 |             32 |         3.20 |
+|  pll/inst/clk_out1 |                                     |                                                                  |                2 |              3 |         1.50 |
+|  pll/inst/clk_out1 | CPU/xmRes/genDFFs[2].ff/q_reg_1[0]  | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                1 |              4 |         4.00 |
+|  pll/inst/clk_out1 | CPU/xmRes/genDFFs[30].ff/q_reg_0[0] | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                6 |              6 |         1.00 |
+|  clock0            | CPU/dxInsn/genDFFs[3].ff/p_2_in3_in | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                3 |              7 |         2.33 |
+|  pll/inst/clk_out1 | CPU/xmRes/genDFFs[30].ff/E[0]       | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                5 |              7 |         1.40 |
+|  pll/inst/clk_out1 | Display/\\Display/vPos [0]          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             10 |         1.43 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1_n_0              | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               18 |             32 |         1.78 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_10    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_12    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               21 |             32 |         1.52 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_14    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               27 |             32 |         1.19 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_16    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               10 |             32 |         3.20 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_17    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               14 |             32 |         2.29 |
 |  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_13    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               11 |             32 |         2.91 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_10    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               13 |             32 |         2.46 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_12    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               23 |             32 |         1.39 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_16    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                8 |             32 |         4.00 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_17    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               16 |             32 |         2.00 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_18    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               12 |             32 |         2.67 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_6     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               26 |             32 |         1.23 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_5     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               13 |             32 |         2.46 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_8     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_7     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               10 |             32 |         3.20 |
-|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_9     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               16 |             32 |         2.00 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1_n_0              | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               19 |             32 |         1.68 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__2_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               13 |             32 |         2.46 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__4_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             32 |         4.57 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__7_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               20 |             32 |         1.60 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__12_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                5 |             32 |         6.40 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__0_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             32 |         4.57 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__10_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               13 |             32 |         2.46 |
-|  pll/inst/clk_out1 | RegisterFile/q_i_1__1_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               15 |             32 |         2.13 |
-|  clock0            | CPU/MD/m4/ff/q_reg_0                | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               17 |             33 |         1.94 |
-|  pll/inst/clk_out1 | CPU/MD/divUnit/d3/ff/q_reg_3        | CPU/dxInsn/genDFFs[2].ff/reset0                                  |               13 |             33 |         2.54 |
-|  pll/inst/clk_out1 |                                     | CPU/dxInsn/genDFFs[4].ff/q_reg_2                                 |               34 |             63 |         1.85 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_15    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             32 |         4.57 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_11    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             32 |         4.57 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_19    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_18    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             32 |         4.57 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_5     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               11 |             32 |         2.91 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_6     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               28 |             32 |         1.14 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_7     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               11 |             32 |         2.91 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_8     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               13 |             32 |         2.46 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_9     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               15 |             32 |         2.13 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__10_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               14 |             32 |         2.29 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__14_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__1_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             32 |         4.57 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__5_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               18 |             32 |         1.78 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__13_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               22 |             32 |         1.45 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__2_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               16 |             32 |         2.00 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__8_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             32 |         4.57 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__9_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             32 |         4.57 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__0_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                6 |             32 |         5.33 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__12_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               10 |             32 |         3.20 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__4_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                8 |             32 |         4.00 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__6_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__3_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                8 |             32 |         4.00 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__7_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               16 |             32 |         2.00 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__11_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | CPU/MD/divUnit/d3/ff/q_reg_3        | CPU/dxInsn/genDFFs[2].ff/reset0                                  |               14 |             33 |         2.36 |
+|  clock0            | CPU/MD/m4/ff/q_reg_0                | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               18 |             33 |         1.83 |
+|  pll/inst/clk_out1 |                                     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               23 |             52 |         2.26 |
+|  pll/inst/clk_out1 |                                     | CPU/dxInsn/genDFFs[4].ff/q_reg_2                                 |               35 |             63 |         1.80 |
 |  pll/inst/clk_out1 | CPU/dxInsn/genDFFs[2].ff/md_start   | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               20 |             64 |         3.20 |
-|  pll/inst/clk_out1 |                                     | CPU/dxInsn/genDFFs[2].ff/reset0                                  |               45 |             77 |         1.71 |
-|  clock0            | CPU/MD/m4/ff/fd_en                  | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               44 |             96 |         2.18 |
-|  clock0            | CPU/MD/m4/ff/dx_en                  | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               87 |            128 |         1.47 |
-|  clock0            |                                     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |              105 |            204 |         1.94 |
+|  pll/inst/clk_out1 |                                     | CPU/dxInsn/genDFFs[2].ff/reset0                                  |               51 |             77 |         1.51 |
+|  clock0            | CPU/MD/m4/ff/fd_en                  | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               47 |             96 |         2.04 |
+|  clock0            | CPU/MD/m4/ff/dx_en                  | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               88 |            128 |         1.45 |
+|  clock0            |                                     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |              101 |            204 |         2.02 |
 +--------------------+-------------------------------------+------------------------------------------------------------------+------------------+----------------+--------------+
 
 
