@@ -4,9 +4,9 @@ main:
     addi $s2, $0, 2440      # cell index = 30*80 + 40
     addi $s3, $0, 0         # last frame toggle
     addi $s4, $0, 8192      # canvas MMIO base
-    addi $s5, $0, 4096      # mouse dx MMIO
-    addi $s6, $0, 4097      # mouse dy MMIO
-    addi $s7, $0, 4098      # mouse buttons MMIO
+    addi $s5, $0, 0         # mouse x remainder
+    addi $s6, $0, 0         # mouse y remainder
+    addi $s7, $0, 0         # current mouse buttons
     addi $t0, $0, 4099      # mouse packet ready / ack MMIO
     addi $t1, $0, 4100      # frame-toggle MMIO
     addi $a3, $0, 4101      # cursor x MMIO
@@ -171,16 +171,17 @@ pen_ready:
     sw $t2, 0($a2)
     sw $k0, 0($ra)
 
-    lw $t9, 0($s7)
+    addi $a0, $0, 4098
+    lw $s7, 0($a0)
     addi $v0, $0, 4
-    and $v1, $t9, $v0
+    and $v1, $s7, $v0
     bne $v1, $0, do_clear
 
     addi $t4, $0, 0         # cursor update needed
     addi $t5, $0, 0         # paint enabled
 
     addi $v0, $0, 1
-    and $v1, $t9, $v0
+    and $v1, $s7, $v0
     bne $v1, $0, maybe_draw
     j read_mouse
 
@@ -200,13 +201,19 @@ read_mouse:
     j move_up_check
 
 have_mouse:
-    lw $v0, 0($s5)
-    lw $v1, 0($s6)
+    addi $a0, $0, 4096
+    lw $v0, 0($a0)
+    add $s5, $s5, $v0
+    addi $a0, $0, 4097
+    lw $v1, 0($a0)
+    add $s6, $s6, $v1
+    addi $a0, $0, 4098
+    lw $s7, 0($a0)
     sw $0, 0($t0)
 
 move_up_check:
     addi $a0, $0, 7
-    blt $a0, $v1, try_up
+    blt $a0, $s6, try_up
     j move_down_check
 
 try_up:
@@ -216,13 +223,13 @@ try_up:
 do_up:
     addi $s1, $s1, -1
     sub $s2, $s2, $t3
-    addi $v1, $v1, -8
+    addi $s6, $s6, -8
     addi $t4, $0, 1
     j move_up_check
 
 move_down_check:
     addi $a0, $0, -7
-    blt $v1, $a0, try_down
+    blt $s6, $a0, try_down
     j move_right_check
 
 try_down:
@@ -232,13 +239,13 @@ try_down:
 do_down:
     addi $s1, $s1, 1
     add $s2, $s2, $t3
-    addi $v1, $v1, 8
+    addi $s6, $s6, 8
     addi $t4, $0, 1
     j move_down_check
 
 move_right_check:
     addi $a0, $0, 7
-    blt $a0, $v0, try_right
+    blt $a0, $s5, try_right
     j move_left_check
 
 try_right:
@@ -248,13 +255,13 @@ try_right:
 do_right:
     addi $s0, $s0, 1
     addi $s2, $s2, 1
-    addi $v0, $v0, -8
+    addi $s5, $s5, -8
     addi $t4, $0, 1
     j move_right_check
 
 move_left_check:
     addi $a0, $0, -7
-    blt $v0, $a0, try_left
+    blt $s5, $a0, try_left
     j after_moves
 
 try_left:
@@ -264,7 +271,7 @@ try_left:
 do_left:
     addi $s0, $s0, -1
     addi $s2, $s2, -1
-    addi $v0, $v0, 8
+    addi $s5, $s5, 8
     addi $t4, $0, 1
     j move_left_check
 
@@ -335,6 +342,9 @@ do_clear:
     addi $s0, $0, 40
     addi $s1, $0, 30
     addi $s2, $0, 2440
+    addi $s5, $0, 0
+    addi $s6, $0, 0
+    addi $s7, $0, 0
     addi $t2, $0, 0
     addi $k0, $0, 1
     addi $a2, $0, 4105

@@ -471,11 +471,13 @@ module MousePacketDecoder(
                             currentLeft <= byte0[0];
                             currentRight <= byte0[1];
                             currentMiddle <= byte0[2];
-                            left <= left | byte0[0];
-                            right <= right | byte0[1];
+                            left <= byte0[0];
+                            right <= byte0[1];
                             middle <= middle | byte0[2];
-                            dx <= dx + $signed({{4{byte1[7]}}, byte1});
-                            dy <= dy + $signed({{4{rxData[7]}}, rxData});
+                            if (~byte0[6])
+                                dx <= dx + $signed({{3{byte0[4]}}, byte0[4], byte1});
+                            if (~byte0[7])
+                                dy <= dy + $signed({{3{byte0[5]}}, byte0[5], rxData});
                             packetReady <= 1'b1;
                             byteCount <= 2'd0;
                         end
