@@ -160,7 +160,7 @@ module FinalProjectBAW(
     Ps2Interface MouseInterface (
         .ps2_clk(ps2_clk),
         .ps2_data(ps2_data),
-        .clk(clk),
+        .clk(clk25),
         .rst(reset),
         .tx_data(ps2TxData),
         .write_data(ps2WriteData),
@@ -473,7 +473,7 @@ module MousePacketDecoder(
                             currentMiddle <= byte0[2];
                             left <= byte0[0];
                             right <= byte0[1];
-                            middle <= middle | byte0[2];
+                            middle <= byte0[2];
                             if (~byte0[6])
                                 dx <= dx + $signed({{3{byte0[4]}}, byte0[4], byte1});
                             if (~byte0[7])
