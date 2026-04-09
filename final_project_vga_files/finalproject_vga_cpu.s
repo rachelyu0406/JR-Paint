@@ -212,7 +212,7 @@ have_mouse:
     sw $0, 0($t0)
 
 move_up_check:
-    addi $a0, $0, 7
+    addi $a0, $0, 15
     blt $a0, $s6, try_up
     j move_down_check
 
@@ -223,12 +223,12 @@ try_up:
 do_up:
     addi $s1, $s1, -1
     sub $s2, $s2, $t3
-    addi $s6, $s6, -8
+    addi $s6, $s6, -16
     addi $t4, $0, 1
     j move_up_check
 
 move_down_check:
-    addi $a0, $0, -7
+    addi $a0, $0, -15
     blt $s6, $a0, try_down
     j move_right_check
 
@@ -239,12 +239,12 @@ try_down:
 do_down:
     addi $s1, $s1, 1
     add $s2, $s2, $t3
-    addi $s6, $s6, 8
+    addi $s6, $s6, 16
     addi $t4, $0, 1
     j move_down_check
 
 move_right_check:
-    addi $a0, $0, 7
+    addi $a0, $0, 15
     blt $a0, $s5, try_right
     j move_left_check
 
@@ -255,12 +255,12 @@ try_right:
 do_right:
     addi $s0, $s0, 1
     addi $s2, $s2, 1
-    addi $s5, $s5, -8
+    addi $s5, $s5, -16
     addi $t4, $0, 1
     j move_right_check
 
 move_left_check:
-    addi $a0, $0, -7
+    addi $a0, $0, -15
     blt $s5, $a0, try_left
     j after_moves
 
@@ -271,7 +271,7 @@ try_left:
 do_left:
     addi $s0, $s0, -1
     addi $s2, $s2, -1
-    addi $s5, $s5, 8
+    addi $s5, $s5, 16
     addi $t4, $0, 1
     j move_left_check
 
