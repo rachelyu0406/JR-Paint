@@ -42,10 +42,10 @@ module FinalProjectBAW(
     localparam GRID_COUNT = GRID_W * GRID_H;
     localparam GRID_AW    = $clog2(GRID_COUNT);
 
-    localparam [31:0] MMIO_BTNU   = 32'd4096;
-    localparam [31:0] MMIO_BTND   = 32'd4097;
-    localparam [31:0] MMIO_BTNL   = 32'd4098;
-    localparam [31:0] MMIO_BTNR   = 32'd4099;
+    localparam [31:0] MMIO_MOUSE_DX      = 32'd4096;
+    localparam [31:0] MMIO_MOUSE_DY      = 32'd4097;
+    localparam [31:0] MMIO_MOUSE_BUTTONS = 32'd4098;
+    localparam [31:0] MMIO_MOUSE_PACKET  = 32'd4099;
     localparam [31:0] MMIO_FRAME  = 32'd4100;
     localparam [31:0] MMIO_CX     = 32'd4101;
     localparam [31:0] MMIO_CY     = 32'd4102;
@@ -150,11 +150,39 @@ module FinalProjectBAW(
         .data_readRegB(regReadDataB)
     );
 
+    wire [7:0] ps2RxData;
+    wire ps2ReadData;
+    wire ps2Busy;
+    wire ps2Err;
+    wire [7:0] ps2TxData;
+    wire ps2WriteData;
+
+    Ps2Interface MouseInterface (
+        .ps2_clk(ps2_clk),
+        .ps2_data(ps2_data),
+        .clk(clk),
+        .rst(reset),
+        .tx_data(ps2TxData),
+        .write_data(ps2WriteData),
+        .rx_data(ps2RxData),
+        .read_data(ps2ReadData),
+        .busy(ps2Busy),
+        .err(ps2Err)
+    );
+
+    wire signed [11:0] mouseDx;
+    wire signed [11:0] mouseDy;
+    wire mouseLeft;
+    wire mouseRight;
+    wire mouseMiddle;
+    wire mousePacketReady;
+
     wire drawWrite;
     wire cxWrite;
     wire cyWrite;
     wire ledWrite;
     wire penWrite;
+    wire mouseAckWrite;
     wire ramWrite;
     wire [GRID_AW-1:0] drawAddr;
     wire [31:0] ramQ;
@@ -164,8 +192,26 @@ module FinalProjectBAW(
     assign cyWrite = memWriteEn && (dmemAddr == MMIO_CY);
     assign ledWrite = memWriteEn && (dmemAddr == MMIO_LED);
     assign penWrite = memWriteEn && (dmemAddr == MMIO_PEN);
-    assign ramWrite = memWriteEn && ~drawWrite && ~cxWrite && ~cyWrite && ~ledWrite && ~penWrite;
+    assign mouseAckWrite = memWriteEn && (dmemAddr == MMIO_MOUSE_PACKET);
+    assign ramWrite = memWriteEn && ~drawWrite && ~cxWrite && ~cyWrite && ~ledWrite && ~penWrite && ~mouseAckWrite;
     assign drawAddr = dmemAddr - DRAW_BASE;
+
+    MousePacketDecoder MouseDecoder (
+        .clk(clk25),
+        .reset(reset),
+        .rxData(ps2RxData),
+        .rxValid(ps2ReadData),
+        .busy(ps2Busy),
+        .clearPacket(mouseAckWrite),
+        .txData(ps2TxData),
+        .txWrite(ps2WriteData),
+        .dx(mouseDx),
+        .dy(mouseDy),
+        .left(mouseLeft),
+        .right(mouseRight),
+        .middle(mouseMiddle),
+        .packetReady(mousePacketReady)
+    );
 
     RAM #(
         .DATA_WIDTH(32),
@@ -292,10 +338,10 @@ module FinalProjectBAW(
 
             mmioRead_q <= 1'b1;
             case (dmemAddr)
-                MMIO_BTNU:  mmioData <= {31'd0, BTNU};
-                MMIO_BTND:  mmioData <= {31'd0, BTND};
-                MMIO_BTNL:  mmioData <= {31'd0, BTNL};
-                MMIO_BTNR:  mmioData <= {31'd0, BTNR};
+                MMIO_MOUSE_DX:      mmioData <= {{20{mouseDx[11]}}, mouseDx};
+                MMIO_MOUSE_DY:      mmioData <= {{20{mouseDy[11]}}, mouseDy};
+                MMIO_MOUSE_BUTTONS: mmioData <= {29'd0, mouseMiddle, mouseRight, mouseLeft};
+                MMIO_MOUSE_PACKET:  mmioData <= {31'd0, mousePacketReady};
                 MMIO_FRAME: mmioData <= {31'd0, frameToggle};
                 MMIO_CX:    mmioData <= {25'd0, cursorX};
                 MMIO_CY:    mmioData <= {26'd0, cursorY};
@@ -333,7 +379,109 @@ module FinalProjectBAW(
     assign DISP_DP = ~dispCount[15];
     assign DISP_EN = dispCount[15] ? 8'b11111101 : 8'b11111110;
 
-    assign ps2_clk = 1'bz;
-    assign ps2_data = 1'bz;
+endmodule
 
+module MousePacketDecoder(
+    input clk,
+    input reset,
+    input [7:0] rxData,
+    input rxValid,
+    input busy,
+    input clearPacket,
+    output reg [7:0] txData,
+    output reg txWrite,
+    output reg signed [11:0] dx,
+    output reg signed [11:0] dy,
+    output reg left,
+    output reg right,
+    output reg middle,
+    output reg packetReady
+);
+
+    reg sawSelfTest;
+    reg enablePending;
+    reg enabled;
+    reg [1:0] byteCount;
+    reg [7:0] byte0;
+    reg [7:0] byte1;
+    reg currentLeft;
+    reg currentRight;
+    reg currentMiddle;
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            txData <= 8'h00;
+            txWrite <= 1'b0;
+            dx <= 12'sd0;
+            dy <= 12'sd0;
+            left <= 1'b0;
+            right <= 1'b0;
+            middle <= 1'b0;
+            packetReady <= 1'b0;
+            sawSelfTest <= 1'b0;
+            enablePending <= 1'b0;
+            enabled <= 1'b0;
+            byteCount <= 2'd0;
+            byte0 <= 8'h00;
+            byte1 <= 8'h00;
+            currentLeft <= 1'b0;
+            currentRight <= 1'b0;
+            currentMiddle <= 1'b0;
+        end else begin
+            txWrite <= 1'b0;
+
+            if (clearPacket) begin
+                dx <= 12'sd0;
+                dy <= 12'sd0;
+                packetReady <= 1'b0;
+                left <= currentLeft;
+                right <= currentRight;
+                middle <= currentMiddle;
+            end
+
+            if (enablePending && ~busy) begin
+                txData <= 8'hF4;
+                txWrite <= 1'b1;
+                enablePending <= 1'b0;
+            end
+
+            if (rxValid) begin
+                if (~enabled) begin
+                    if (rxData == 8'hAA) begin
+                        sawSelfTest <= 1'b1;
+                    end else if (sawSelfTest && (rxData == 8'h00)) begin
+                        enablePending <= 1'b1;
+                    end else if (rxData == 8'hFA) begin
+                        enabled <= 1'b1;
+                        sawSelfTest <= 1'b0;
+                    end
+                end else begin
+                    case (byteCount)
+                        2'd0: begin
+                            if (rxData[3]) begin
+                                byte0 <= rxData;
+                                byteCount <= 2'd1;
+                            end
+                        end
+                        2'd1: begin
+                            byte1 <= rxData;
+                            byteCount <= 2'd2;
+                        end
+                        default: begin
+                            currentLeft <= byte0[0];
+                            currentRight <= byte0[1];
+                            currentMiddle <= byte0[2];
+                            left <= left | byte0[0];
+                            right <= right | byte0[1];
+                            middle <= middle | byte0[2];
+                            dx <= dx + $signed({{4{byte1[7]}}, byte1});
+                            dy <= dy + $signed({{4{rxData[7]}}, rxData});
+                            packetReady <= 1'b1;
+                            byteCount <= 2'd0;
+                        end
+                    endcase
+                end
+            end
+        end
+    end
 endmodule
