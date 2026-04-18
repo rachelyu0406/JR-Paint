@@ -342,6 +342,17 @@ pen_ready:
 
     addi $t4, $0, 0
     addi $t5, $0, 0
+    addi $a1, $0, 0
+    addi $t7, $0, 0
+    addi $v0, $0, -32768
+    and $v1, $a0, $v0
+    bne $v1, $0, fill_mode_on
+    j fill_mode_ready
+
+fill_mode_on:
+    addi $t7, $0, 1
+
+fill_mode_ready:
 
     lw $a0, 0($t0)
     bne $a0, $0, have_mouse
@@ -389,6 +400,7 @@ left_with_button:
     j move_up_check
 
 left_with_color:
+    bne $t7, $0, left_fill_mode
     addi $t5, $0, 1
     and $a0, $t9, $v0
     bne $a0, $0, move_up_check
@@ -402,6 +414,12 @@ start_stroke_ok:
     sw $a0, 0($fp)
     addi $fp, $fp, 1
     addi $t4, $0, 1
+    j move_up_check
+
+left_fill_mode:
+    and $a0, $t9, $v0
+    bne $a0, $0, move_up_check
+    addi $a1, $0, 1
 
 move_up_check:
     addi $a0, $0, 19
@@ -469,6 +487,7 @@ do_left:
 
 after_moves:
     add $t9, $s7, $0
+    bne $a1, $0, do_fill
     bne $t4, $0, do_paint
     j loop_wait
 
@@ -609,6 +628,222 @@ next_row:
     add $a0, $a0, $t3
     blt $v1, $v0, loop_wait
     j row_loop
+
+do_fill:
+    sw $s0, 0($a3)
+    sw $s1, 1($a3)
+
+    addi $t6, $s2, 0
+    addi $gp, $0, 3
+    and $gp, $t6, $gp
+    sra $sp, $t6, 2
+    addi $v0, $0, 64
+    add $sp, $sp, $v0
+    lw $v0, 0($sp)
+    bne $gp, $0, fill_target_shift1
+    add $k1, $v0, $0
+    j fill_target_have
+
+fill_target_shift1:
+    addi $v1, $0, 1
+    bne $gp, $v1, fill_target_shift2
+    sra $k1, $v0, 8
+    j fill_target_have
+
+fill_target_shift2:
+    addi $v1, $0, 2
+    bne $gp, $v1, fill_target_shift3
+    sra $k1, $v0, 16
+    j fill_target_have
+
+fill_target_shift3:
+    sra $k1, $v0, 24
+
+fill_target_have:
+    addi $v1, $0, 255
+    and $k1, $k1, $v1
+    bne $k1, $t2, fill_can_start
+    j loop_wait
+
+fill_can_start:
+    addi $v0, $0, 4096
+    blt $fp, $v0, fill_marker_ok
+    j loop_wait
+
+fill_marker_ok:
+    addi $v0, $0, -1
+    sw $v0, 0($fp)
+    addi $fp, $fp, 1
+
+    addi $a0, $0, 4096
+    addi $v0, $a0, -1
+    blt $fp, $v0, fill_push_start
+    j loop_wait
+
+fill_push_start:
+    addi $a0, $a0, -1
+    sll $v0, $s0, 13
+    add $v0, $v0, $s2
+    sw $v0, 0($a0)
+
+fill_loop_check:
+    addi $v0, $0, 4096
+    blt $a0, $v0, fill_pop
+    j loop_wait
+
+fill_pop:
+    lw $v0, 0($a0)
+    addi $a0, $a0, 1
+    sra $a2, $v0, 13
+    sll $v1, $a2, 13
+    sub $a1, $v0, $v1
+
+    addi $t6, $0, 3
+    and $t6, $a1, $t6
+    sra $sp, $a1, 2
+    addi $gp, $0, 64
+    add $sp, $sp, $gp
+    lw $gp, 0($sp)
+    bne $t6, $0, fill_cur_shift1
+    add $v1, $gp, $0
+    j fill_cur_have
+
+fill_cur_shift1:
+    addi $v0, $0, 1
+    bne $t6, $v0, fill_cur_shift2
+    sra $v1, $gp, 8
+    j fill_cur_have
+
+fill_cur_shift2:
+    addi $v0, $0, 2
+    bne $t6, $v0, fill_cur_shift3
+    sra $v1, $gp, 16
+    j fill_cur_have
+
+fill_cur_shift3:
+    sra $v1, $gp, 24
+
+fill_cur_have:
+    addi $v0, $0, 255
+    and $v1, $v1, $v0
+    bne $v1, $k1, fill_loop_check
+
+    addi $v0, $0, 4096
+    blt $fp, $v0, fill_log_ok
+    j loop_wait
+
+fill_log_ok:
+    sll $v0, $v1, 13
+    add $v0, $v0, $a1
+    sw $v0, 0($fp)
+    addi $fp, $fp, 1
+
+    bne $t6, $0, fill_store1
+    sub $gp, $gp, $v1
+    add $gp, $gp, $t2
+    sw $gp, 0($sp)
+    add $v0, $s4, $a1
+    sw $t2, 0($v0)
+    j fill_push_neighbors
+
+fill_store1:
+    addi $v0, $0, 1
+    bne $t6, $v0, fill_store2
+    sll $v0, $v1, 8
+    sub $gp, $gp, $v0
+    sll $v0, $t2, 8
+    add $gp, $gp, $v0
+    sw $gp, 0($sp)
+    add $v0, $s4, $a1
+    sw $t2, 0($v0)
+    j fill_push_neighbors
+
+fill_store2:
+    addi $v0, $0, 2
+    bne $t6, $v0, fill_store3
+    sll $v0, $v1, 16
+    sub $gp, $gp, $v0
+    sll $v0, $t2, 16
+    add $gp, $gp, $v0
+    sw $gp, 0($sp)
+    add $v0, $s4, $a1
+    sw $t2, 0($v0)
+    j fill_push_neighbors
+
+fill_store3:
+    sll $v0, $v1, 24
+    sub $gp, $gp, $v0
+    sll $v0, $t2, 24
+    add $gp, $gp, $v0
+    sw $gp, 0($sp)
+    add $v0, $s4, $a1
+    sw $t2, 0($v0)
+
+fill_push_neighbors:
+    bne $a2, $0, fill_try_left
+    j fill_check_right
+
+fill_try_left:
+    addi $v0, $a0, -1
+    blt $fp, $v0, fill_push_left
+    j fill_check_right
+
+fill_push_left:
+    addi $a0, $a0, -1
+    addi $v0, $a2, -1
+    sll $v0, $v0, 13
+    addi $v1, $a1, -1
+    add $v0, $v0, $v1
+    sw $v0, 0($a0)
+
+fill_check_right:
+    addi $v0, $0, 79
+    blt $a2, $v0, fill_try_right
+    j fill_check_up
+
+fill_try_right:
+    addi $v0, $a0, -1
+    blt $fp, $v0, fill_push_right
+    j fill_check_up
+
+fill_push_right:
+    addi $a0, $a0, -1
+    addi $v0, $a2, 1
+    sll $v0, $v0, 13
+    addi $v1, $a1, 1
+    add $v0, $v0, $v1
+    sw $v0, 0($a0)
+
+fill_check_up:
+    blt $a1, $t3, fill_check_down
+    addi $v0, $a0, -1
+    blt $fp, $v0, fill_push_up
+    j fill_check_down
+
+fill_push_up:
+    addi $a0, $a0, -1
+    sll $v0, $a2, 13
+    sub $v1, $a1, $t3
+    add $v0, $v0, $v1
+    sw $v0, 0($a0)
+
+fill_check_down:
+    addi $v0, $0, 4720
+    blt $a1, $v0, fill_try_down
+    j fill_loop_check
+
+fill_try_down:
+    addi $v0, $a0, -1
+    blt $fp, $v0, fill_push_down
+    j fill_loop_check
+
+fill_push_down:
+    addi $a0, $a0, -1
+    sll $v0, $a2, 13
+    add $v1, $a1, $t3
+    add $v0, $v0, $v1
+    sw $v0, 0($a0)
+    j fill_loop_check
 
 do_undo:
     addi $a0, $0, 1264

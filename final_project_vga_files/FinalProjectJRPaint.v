@@ -25,7 +25,7 @@ module FinalProjectJRPaint(
     output [7:0] DISP_EN,
     inout ps2_clk,
     inout ps2_data,
-    input [14:0] SW,
+    input [15:0] SW,
     input BTNU,
     input BTNL,
     input BTNR,
@@ -346,7 +346,7 @@ module FinalProjectJRPaint(
                 MMIO_CX:    mmioData <= {25'd0, cursorX};
                 MMIO_CY:    mmioData <= {26'd0, cursorY};
                 MMIO_BTNC:  mmioData <= {31'd0, BTNC};
-                MMIO_SW:    mmioData <= {17'd0, SW};
+                MMIO_SW:    mmioData <= {16'd0, SW};
                 MMIO_LED:   mmioData <= {28'd0, ledColor};
                 MMIO_PEN:   mmioData <= {29'd0, penSize};
                 default: begin
