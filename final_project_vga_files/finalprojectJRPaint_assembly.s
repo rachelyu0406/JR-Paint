@@ -666,6 +666,53 @@ fill_target_have:
     j loop_wait
 
 fill_can_start:
+    add $a2, $k1, $0
+    sll $v0, $k1, 8
+    add $a2, $a2, $v0
+    sll $v0, $a2, 16
+    add $a2, $a2, $v0
+    addi $a0, $0, 64
+    addi $a1, $0, 1264
+
+fill_full_scan:
+    lw $v0, 0($a0)
+    bne $v0, $a2, fill_stack_start
+    addi $a0, $a0, 1
+    blt $a0, $a1, fill_full_scan
+
+    addi $v0, $0, 4096
+    blt $fp, $v0, fill_full_log_ok
+    j loop_wait
+
+fill_full_log_ok:
+    addi $v0, $0, -2
+    sub $v0, $v0, $k1
+    sw $v0, 0($fp)
+    addi $fp, $fp, 1
+
+    add $a2, $t2, $0
+    sll $v0, $t2, 8
+    add $a2, $a2, $v0
+    sll $v0, $a2, 16
+    add $a2, $a2, $v0
+    addi $a0, $0, 64
+    addi $a1, $0, 1264
+
+fill_full_shadow:
+    sw $a2, 0($a0)
+    addi $a0, $a0, 1
+    blt $a0, $a1, fill_full_shadow
+
+    addi $a0, $0, 0
+
+fill_full_canvas:
+    add $v0, $s4, $a0
+    sw $t2, 0($v0)
+    addi $a0, $a0, 1
+    blt $a0, $t8, fill_full_canvas
+    j loop_wait
+
+fill_stack_start:
     addi $v0, $0, 4096
     blt $fp, $v0, fill_marker_ok
     j loop_wait
@@ -860,6 +907,8 @@ undo_pop:
     j loop_wait
 
 undo_entry:
+    addi $v0, $0, -1
+    blt $a0, $v0, undo_full_screen
     sra $t4, $a0, 13
     sll $t5, $t4, 13
     sub $t6, $a0, $t5
@@ -932,6 +981,32 @@ undo_store3:
     add $v1, $s4, $t6
     sw $t4, 0($v1)
     j undo_pop
+
+undo_full_screen:
+    addi $t4, $0, -2
+    sub $t4, $t4, $a0
+    add $a2, $t4, $0
+    sll $v0, $t4, 8
+    add $a2, $a2, $v0
+    sll $v0, $a2, 16
+    add $a2, $a2, $v0
+    addi $a0, $0, 64
+    addi $a1, $0, 1264
+
+undo_full_shadow:
+    sw $a2, 0($a0)
+    addi $a0, $a0, 1
+    blt $a0, $a1, undo_full_shadow
+
+    addi $a0, $0, 0
+
+undo_full_canvas:
+    add $v0, $s4, $a0
+    sw $t4, 0($v0)
+    addi $a0, $a0, 1
+    blt $a0, $t8, undo_full_canvas
+    add $t9, $s7, $0
+    j loop_wait
 
 do_clear:
     addi $s0, $0, 40
