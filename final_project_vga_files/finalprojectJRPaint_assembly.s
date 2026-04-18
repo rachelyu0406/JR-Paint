@@ -1,32 +1,30 @@
 main:
-    addi $s0, $0, 40        # x position
-    addi $s1, $0, 30        # y position
-    addi $s2, $0, 2440      # cell index = 30*80 + 40
+    addi $s0, $0, 40        # cursor x
+    addi $s1, $0, 30        # cursor y
+    addi $s2, $0, 2440      # cell index
     addi $s3, $0, 0         # last frame toggle
     addi $s4, $0, 8192      # canvas MMIO base
     addi $s5, $0, 0         # mouse x remainder
     addi $s6, $0, 0         # mouse y remainder
     addi $s7, $0, 0         # current mouse buttons
-    addi $t0, $0, 4099      # mouse packet ready / ack MMIO
-    addi $t1, $0, 4100      # frame-toggle MMIO
-    addi $a3, $0, 4101      # cursor x MMIO
-    addi $t7, $0, 4103      # BTNC MMIO
-    addi $a1, $0, 4104      # switch MMIO
-    addi $a2, $0, 4105      # LED17 MMIO
+    addi $t0, $0, 4099      # mouse packet MMIO
+    addi $t1, $0, 4100      # frame toggle MMIO
+    addi $t2, $0, 0         # current draw color
+    addi $t3, $0, 80        # row stride
+    addi $t8, $0, 4800      # total cells
+    addi $t9, $0, 0         # previous mouse buttons
+    addi $a3, $0, 4101      # cursor x MMIO, y is 1($a3)
     addi $ra, $0, 4106      # pen size MMIO
-    addi $t2, $0, 0         # current draw color = none
-    addi $k0, $0, 1         # current pen size = 0.2
-    addi $t3, $0, 80        # one canvas row
-    addi $t8, $0, 4800      # total canvas cells
+    addi $k0, $0, 1         # current pen size
     addi $gp, $0, 58        # y must stay < 58 to move down
     addi $sp, $0, 78        # x must stay < 78 to move right
+    addi $fp, $0, 1264      # undo stack top
 
     sw $s0, 0($a3)
     sw $s1, 1($a3)
-    sw $t2, 0($a2)
+    addi $a0, $0, 4105
+    sw $t2, 0($a0)
     sw $k0, 0($ra)
-    sw $0, 0($0)
-    sw $0, 1($0)
 
 loop_wait:
     lw $a0, 0($t0)
@@ -38,6 +36,7 @@ loop_wait:
 frame_ready:
     lw $a0, 0($t1)
     add $s3, $a0, $0
+    addi $t7, $0, 4103
     lw $a0, 0($t7)
     bne $a0, $0, do_clear
 
@@ -339,34 +338,14 @@ pen_ready:
     sw $t2, 0($a2)
     sw $k0, 0($ra)
 
-    addi $a0, $0, 4098
-    lw $s7, 0($a0)
-    addi $v0, $0, 4
-    and $v1, $s7, $v0
-    bne $v1, $0, do_clear
+    addi $t4, $0, 0
+    addi $t5, $0, 0
 
-    addi $t4, $0, 0         # cursor update needed
-    addi $t5, $0, 0         # paint enabled
-
-    addi $v0, $0, 1
-    and $v1, $s7, $v0
-    bne $v1, $0, maybe_draw
-    j read_mouse
-
-maybe_draw:
-    bne $t2, $0, enable_draw
-    j read_mouse
-
-enable_draw:
-    addi $t4, $0, 1
-    addi $t5, $0, 1
-
-read_mouse:
     lw $a0, 0($t0)
     bne $a0, $0, have_mouse
-    addi $v0, $0, 0
-    addi $v1, $0, 0
-    j move_up_check
+    addi $a0, $0, 4098
+    lw $s7, 0($a0)
+    j post_mouse
 
 have_mouse:
     addi $a0, $0, 4096
@@ -378,6 +357,49 @@ have_mouse:
     addi $a0, $0, 4098
     lw $s7, 0($a0)
     sw $0, 0($t0)
+
+post_mouse:
+    addi $v0, $0, 4
+    and $v1, $s7, $v0
+    bne $v1, $0, do_clear
+
+    addi $v0, $0, 2
+    and $v1, $s7, $v0
+    bne $v1, $0, maybe_undo
+    j maybe_left
+
+maybe_undo:
+    and $a0, $t9, $v0
+    bne $a0, $0, maybe_left
+    addi $a0, $0, 1
+    and $a0, $s7, $a0
+    bne $a0, $0, maybe_left
+    j do_undo
+
+maybe_left:
+    addi $v0, $0, 1
+    and $v1, $s7, $v0
+    bne $v1, $0, left_with_button
+    j move_up_check
+
+left_with_button:
+    bne $t2, $0, left_with_color
+    j move_up_check
+
+left_with_color:
+    addi $t5, $0, 1
+    and $a0, $t9, $v0
+    bne $a0, $0, move_up_check
+    addi $a0, $0, 4096
+    blt $fp, $a0, start_stroke_ok
+    addi $t5, $0, 0
+    j move_up_check
+
+start_stroke_ok:
+    addi $a0, $0, -1
+    sw $a0, 0($fp)
+    addi $fp, $fp, 1
+    addi $t4, $0, 1
 
 move_up_check:
     addi $a0, $0, 19
@@ -444,6 +466,7 @@ do_left:
     j move_left_check
 
 after_moves:
+    add $t9, $s7, $0
     bne $t4, $0, do_paint
     j loop_wait
 
@@ -491,6 +514,85 @@ col_loop:
     j skip_cell
 
 write_cell:
+    addi $t4, $0, 3
+    and $t4, $t6, $t4
+    sra $t5, $t6, 2
+    addi $t7, $0, 64
+    add $t5, $t5, $t7
+    lw $k1, 0($t5)
+    bne $t4, $0, paint_shift1
+    add $t7, $k1, $0
+    j paint_have_old
+
+paint_shift1:
+    addi $k0, $0, 1
+    bne $t4, $k0, paint_shift2
+    sra $t7, $k1, 8
+    j paint_have_old
+
+paint_shift2:
+    addi $k0, $0, 2
+    bne $t4, $k0, paint_shift3
+    sra $t7, $k1, 16
+    j paint_have_old
+
+paint_shift3:
+    sra $t7, $k1, 24
+
+paint_have_old:
+    addi $k0, $0, 255
+    and $t7, $t7, $k0
+    bne $t7, $t2, paint_maybe_log
+    j skip_cell
+
+paint_maybe_log:
+    addi $k0, $0, 4096
+    blt $fp, $k0, paint_log_ok
+    j skip_cell
+
+paint_log_ok:
+    sll $k0, $t7, 13
+    add $k0, $k0, $t6
+    sw $k0, 0($fp)
+    addi $fp, $fp, 1
+    bne $t4, $0, paint_store1
+    sub $k1, $k1, $t7
+    add $k1, $k1, $t2
+    sw $k1, 0($t5)
+    add $t4, $s4, $t6
+    sw $t2, 0($t4)
+    j skip_cell
+
+paint_store1:
+    addi $k0, $0, 1
+    bne $t4, $k0, paint_store2
+    sll $k0, $t7, 8
+    sub $k1, $k1, $k0
+    sll $k0, $t2, 8
+    add $k1, $k1, $k0
+    sw $k1, 0($t5)
+    add $t4, $s4, $t6
+    sw $t2, 0($t4)
+    j skip_cell
+
+paint_store2:
+    addi $k0, $0, 2
+    bne $t4, $k0, paint_store3
+    sll $k0, $t7, 16
+    sub $k1, $k1, $k0
+    sll $k0, $t2, 16
+    add $k1, $k1, $k0
+    sw $k1, 0($t5)
+    add $t4, $s4, $t6
+    sw $t2, 0($t4)
+    j skip_cell
+
+paint_store3:
+    sll $k0, $t7, 24
+    sub $k1, $k1, $k0
+    sll $k0, $t2, 24
+    add $k1, $k1, $k0
+    sw $k1, 0($t5)
     add $t4, $s4, $t6
     sw $t2, 0($t4)
 
@@ -506,6 +608,94 @@ next_row:
     blt $v1, $v0, loop_wait
     j row_loop
 
+do_undo:
+    addi $a0, $0, 1264
+    blt $a0, $fp, undo_pop
+    add $t9, $s7, $0
+    j loop_wait
+
+undo_pop:
+    addi $fp, $fp, -1
+    lw $a0, 0($fp)
+    addi $v0, $0, -1
+    bne $a0, $v0, undo_entry
+    add $t9, $s7, $0
+    j loop_wait
+
+undo_entry:
+    sra $t4, $a0, 13
+    sll $t5, $t4, 13
+    sub $t6, $a0, $t5
+    addi $t5, $0, 3
+    and $t5, $t6, $t5
+    sra $t7, $t6, 2
+    addi $v0, $0, 64
+    add $t7, $t7, $v0
+    lw $k1, 0($t7)
+    bne $t5, $0, undo_shift1
+    add $v0, $k1, $0
+    j undo_have_cur
+
+undo_shift1:
+    addi $v1, $0, 1
+    bne $t5, $v1, undo_shift2
+    sra $v0, $k1, 8
+    j undo_have_cur
+
+undo_shift2:
+    addi $v1, $0, 2
+    bne $t5, $v1, undo_shift3
+    sra $v0, $k1, 16
+    j undo_have_cur
+
+undo_shift3:
+    sra $v0, $k1, 24
+
+undo_have_cur:
+    addi $v1, $0, 255
+    and $v0, $v0, $v1
+    bne $t5, $0, undo_store1
+    sub $k1, $k1, $v0
+    add $k1, $k1, $t4
+    sw $k1, 0($t7)
+    add $v1, $s4, $t6
+    sw $t4, 0($v1)
+    j undo_pop
+
+undo_store1:
+    addi $v1, $0, 1
+    bne $t5, $v1, undo_store2
+    sll $v1, $v0, 8
+    sub $k1, $k1, $v1
+    sll $v1, $t4, 8
+    add $k1, $k1, $v1
+    sw $k1, 0($t7)
+    add $v1, $s4, $t6
+    sw $t4, 0($v1)
+    j undo_pop
+
+undo_store2:
+    addi $v1, $0, 2
+    bne $t5, $v1, undo_store3
+    sll $v1, $v0, 16
+    sub $k1, $k1, $v1
+    sll $v1, $t4, 16
+    add $k1, $k1, $v1
+    sw $k1, 0($t7)
+    add $v1, $s4, $t6
+    sw $t4, 0($v1)
+    j undo_pop
+
+undo_store3:
+    sll $v1, $v0, 24
+    sub $k1, $k1, $v1
+    sll $v1, $t4, 24
+    add $k1, $k1, $v1
+    sw $k1, 0($t7)
+    add $v1, $s4, $t6
+    sw $t4, 0($v1)
+    j undo_pop
+
 do_clear:
     addi $s0, $0, 40
     addi $s1, $0, 30
@@ -514,7 +704,10 @@ do_clear:
     addi $s6, $0, 0
     addi $s7, $0, 0
     addi $t2, $0, 0
+    addi $t9, $0, 0
     addi $k0, $0, 1
+    addi $fp, $0, 1264
+    addi $t7, $0, 4103
     addi $a2, $0, 4105
     sw $s0, 0($a3)
     sw $s1, 1($a3)
@@ -529,21 +722,20 @@ clear_loop:
     addi $a0, $a0, 1
     blt $a0, $t8, clear_loop
 
+    addi $a0, $0, 64
+    addi $a1, $0, 1264
+
+clear_shadow_loop:
+    sw $0, 0($a0)
+    addi $a0, $a0, 1
+    blt $a0, $a1, clear_shadow_loop
+
 clear_wait:
     lw $a0, 0($t7)
     bne $a0, $0, clear_wait
+    addi $a0, $0, 4098
+    lw $a1, 0($a0)
+    addi $v0, $0, 4
+    and $a1, $a1, $v0
+    bne $a1, $0, clear_wait
     j loop_wait
-
-# MMIO map used by the top file:
-# 4096: accumulated mouse dx
-# 4097: accumulated mouse dy
-# 4098: mouse buttons {middle,right,left}
-# 4099: packet ready, write any value to clear dx/dy + ready
-# 4100: frame toggle, flips once per screen refresh
-# 4101: live cursor x position in grid cells
-# 4102: live cursor y position in grid cells
-# 4103: BTNC, clears the canvas and recenters the cursor
-# 4104: SW[14:0], color + pen size select
-# 4105: LD17 RGB color code
-# 4106: current pen size code for DISP1
-# 8192 + n: canvas cell n, 0 <= n < 4800
