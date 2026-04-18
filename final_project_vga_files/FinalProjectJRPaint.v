@@ -131,7 +131,7 @@ module FinalProjectJRPaint(
     );
 
     ROM #(
-        .MEMFILE("finalproject_vga_cpu.mem")
+        .MEMFILE("finalprojectJRPaint_assembly.mem")
     ) InstMem (
         .clk(clk25),
         .addr(imemAddr[11:0]),

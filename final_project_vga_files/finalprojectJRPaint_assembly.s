@@ -25,6 +25,8 @@ main:
     sw $s1, 1($a3)
     sw $t2, 0($a2)
     sw $k0, 0($ra)
+    sw $0, 0($0)
+    sw $0, 1($0)
 
 loop_wait:
     lw $a0, 0($t0)
@@ -42,86 +44,252 @@ frame_ready:
     addi $a1, $0, 4104
     addi $a2, $0, 4105
     lw $a0, 0($a1)
-    addi $t2, $0, 0
-
-    addi $v0, $0, 512
-    and $v1, $a0, $v0
-    bne $v1, $0, set_black
-
-    addi $v0, $0, 256
-    and $v1, $a0, $v0
-    bne $v1, $0, set_brown
-
-    addi $v0, $0, 128
-    and $v1, $a0, $v0
-    bne $v1, $0, set_purple
-
-    addi $v0, $0, 64
-    and $v1, $a0, $v0
-    bne $v1, $0, set_blue
-
-    addi $v0, $0, 32
-    and $v1, $a0, $v0
-    bne $v1, $0, set_green
-
-    addi $v0, $0, 16
-    and $v1, $a0, $v0
-    bne $v1, $0, set_yellow
-
-    addi $v0, $0, 8
-    and $v1, $a0, $v0
-    bne $v1, $0, set_orange
-
-    addi $v0, $0, 4
-    and $v1, $a0, $v0
-    bne $v1, $0, set_red
-
-    addi $v0, $0, 2
-    and $v1, $a0, $v0
-    bne $v1, $0, set_pink
+    addi $v0, $0, 1023
+    and $t6, $a0, $v0
+    lw $t4, 0($0)
+    lw $t5, 1($0)
 
     addi $v0, $0, 1
-    and $v1, $a0, $v0
-    bne $v1, $0, set_white
-    j color_ready
+    and $v1, $t6, $v0
+    bne $v1, $0, white_rise_prev
+    j pink_rise
+white_rise_prev:
+    and $k1, $t4, $v0
+    bne $k1, $0, pink_rise
+    addi $t5, $t5, 1
+    sw $t5, 2($0)
 
-set_white:
+pink_rise:
+    addi $v0, $0, 2
+    and $v1, $t6, $v0
+    bne $v1, $0, pink_rise_prev
+    j red_rise
+pink_rise_prev:
+    and $k1, $t4, $v0
+    bne $k1, $0, red_rise
+    addi $t5, $t5, 1
+    sw $t5, 3($0)
+
+red_rise:
+    addi $v0, $0, 4
+    and $v1, $t6, $v0
+    bne $v1, $0, red_rise_prev
+    j orange_rise
+red_rise_prev:
+    and $k1, $t4, $v0
+    bne $k1, $0, orange_rise
+    addi $t5, $t5, 1
+    sw $t5, 4($0)
+
+orange_rise:
+    addi $v0, $0, 8
+    and $v1, $t6, $v0
+    bne $v1, $0, orange_rise_prev
+    j yellow_rise
+orange_rise_prev:
+    and $k1, $t4, $v0
+    bne $k1, $0, yellow_rise
+    addi $t5, $t5, 1
+    sw $t5, 5($0)
+
+yellow_rise:
+    addi $v0, $0, 16
+    and $v1, $t6, $v0
+    bne $v1, $0, yellow_rise_prev
+    j green_rise
+yellow_rise_prev:
+    and $k1, $t4, $v0
+    bne $k1, $0, green_rise
+    addi $t5, $t5, 1
+    sw $t5, 6($0)
+
+green_rise:
+    addi $v0, $0, 32
+    and $v1, $t6, $v0
+    bne $v1, $0, green_rise_prev
+    j blue_rise
+green_rise_prev:
+    and $k1, $t4, $v0
+    bne $k1, $0, blue_rise
+    addi $t5, $t5, 1
+    sw $t5, 7($0)
+
+blue_rise:
+    addi $v0, $0, 64
+    and $v1, $t6, $v0
+    bne $v1, $0, blue_rise_prev
+    j purple_rise
+blue_rise_prev:
+    and $k1, $t4, $v0
+    bne $k1, $0, purple_rise
+    addi $t5, $t5, 1
+    sw $t5, 8($0)
+
+purple_rise:
+    addi $v0, $0, 128
+    and $v1, $t6, $v0
+    bne $v1, $0, purple_rise_prev
+    j brown_rise
+purple_rise_prev:
+    and $k1, $t4, $v0
+    bne $k1, $0, brown_rise
+    addi $t5, $t5, 1
+    sw $t5, 9($0)
+
+brown_rise:
+    addi $v0, $0, 256
+    and $v1, $t6, $v0
+    bne $v1, $0, brown_rise_prev
+    j black_rise
+brown_rise_prev:
+    and $k1, $t4, $v0
+    bne $k1, $0, black_rise
+    addi $t5, $t5, 1
+    sw $t5, 10($0)
+
+black_rise:
+    addi $v0, $0, 512
+    and $v1, $t6, $v0
+    bne $v1, $0, black_rise_prev
+    j choose_color
+black_rise_prev:
+    and $k1, $t4, $v0
+    bne $k1, $0, choose_color
+    addi $t5, $t5, 1
+    sw $t5, 11($0)
+
+choose_color:
+    sw $t6, 0($0)
+    sw $t5, 1($0)
+    addi $t2, $0, 0
+    addi $k1, $0, 0
+
+    addi $v0, $0, 1
+    and $v1, $t6, $v0
+    bne $v1, $0, white_pick_check
+    j pink_pick
+white_pick_check:
+    lw $v0, 2($0)
+    blt $k1, $v0, white_pick_set
+    j pink_pick
+white_pick_set:
+    add $k1, $v0, $0
     addi $t2, $0, 1
-    j color_ready
 
-set_pink:
+pink_pick:
+    addi $v0, $0, 2
+    and $v1, $t6, $v0
+    bne $v1, $0, pink_pick_check
+    j red_pick
+pink_pick_check:
+    lw $v0, 3($0)
+    blt $k1, $v0, pink_pick_set
+    j red_pick
+pink_pick_set:
+    add $k1, $v0, $0
     addi $t2, $0, 2
-    j color_ready
 
-set_red:
+red_pick:
+    addi $v0, $0, 4
+    and $v1, $t6, $v0
+    bne $v1, $0, red_pick_check
+    j orange_pick
+red_pick_check:
+    lw $v0, 4($0)
+    blt $k1, $v0, red_pick_set
+    j orange_pick
+red_pick_set:
+    add $k1, $v0, $0
     addi $t2, $0, 3
-    j color_ready
 
-set_orange:
+orange_pick:
+    addi $v0, $0, 8
+    and $v1, $t6, $v0
+    bne $v1, $0, orange_pick_check
+    j yellow_pick
+orange_pick_check:
+    lw $v0, 5($0)
+    blt $k1, $v0, orange_pick_set
+    j yellow_pick
+orange_pick_set:
+    add $k1, $v0, $0
     addi $t2, $0, 4
-    j color_ready
 
-set_yellow:
+yellow_pick:
+    addi $v0, $0, 16
+    and $v1, $t6, $v0
+    bne $v1, $0, yellow_pick_check
+    j green_pick
+yellow_pick_check:
+    lw $v0, 6($0)
+    blt $k1, $v0, yellow_pick_set
+    j green_pick
+yellow_pick_set:
+    add $k1, $v0, $0
     addi $t2, $0, 5
-    j color_ready
 
-set_green:
+green_pick:
+    addi $v0, $0, 32
+    and $v1, $t6, $v0
+    bne $v1, $0, green_pick_check
+    j blue_pick
+green_pick_check:
+    lw $v0, 7($0)
+    blt $k1, $v0, green_pick_set
+    j blue_pick
+green_pick_set:
+    add $k1, $v0, $0
     addi $t2, $0, 6
-    j color_ready
 
-set_blue:
+blue_pick:
+    addi $v0, $0, 64
+    and $v1, $t6, $v0
+    bne $v1, $0, blue_pick_check
+    j purple_pick
+blue_pick_check:
+    lw $v0, 8($0)
+    blt $k1, $v0, blue_pick_set
+    j purple_pick
+blue_pick_set:
+    add $k1, $v0, $0
     addi $t2, $0, 7
-    j color_ready
 
-set_purple:
+purple_pick:
+    addi $v0, $0, 128
+    and $v1, $t6, $v0
+    bne $v1, $0, purple_pick_check
+    j brown_pick
+purple_pick_check:
+    lw $v0, 9($0)
+    blt $k1, $v0, purple_pick_set
+    j brown_pick
+purple_pick_set:
+    add $k1, $v0, $0
     addi $t2, $0, 8
-    j color_ready
 
-set_brown:
+brown_pick:
+    addi $v0, $0, 256
+    and $v1, $t6, $v0
+    bne $v1, $0, brown_pick_check
+    j black_pick
+brown_pick_check:
+    lw $v0, 10($0)
+    blt $k1, $v0, brown_pick_set
+    j black_pick
+brown_pick_set:
+    add $k1, $v0, $0
     addi $t2, $0, 9
-    j color_ready
 
-set_black:
+black_pick:
+    addi $v0, $0, 512
+    and $v1, $t6, $v0
+    bne $v1, $0, black_pick_check
+    j color_ready
+black_pick_check:
+    lw $v0, 11($0)
+    blt $k1, $v0, black_pick_set
+    j color_ready
+black_pick_set:
     addi $t2, $0, 10
 
 color_ready:
