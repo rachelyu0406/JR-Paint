@@ -36,6 +36,8 @@ loop_wait:
 frame_ready:
     lw $a0, 0($t1)
     add $s3, $a0, $0
+    addi $gp, $0, 58
+    addi $sp, $0, 78
     addi $t7, $0, 4103
     lw $a0, 0($t7)
     bne $a0, $0, do_clear
@@ -519,80 +521,80 @@ write_cell:
     sra $t5, $t6, 2
     addi $t7, $0, 64
     add $t5, $t5, $t7
-    lw $k1, 0($t5)
+    lw $gp, 0($t5)
     bne $t4, $0, paint_shift1
-    add $t7, $k1, $0
+    add $t7, $gp, $0
     j paint_have_old
 
 paint_shift1:
-    addi $k0, $0, 1
-    bne $t4, $k0, paint_shift2
-    sra $t7, $k1, 8
+    addi $sp, $0, 1
+    bne $t4, $sp, paint_shift2
+    sra $t7, $gp, 8
     j paint_have_old
 
 paint_shift2:
-    addi $k0, $0, 2
-    bne $t4, $k0, paint_shift3
-    sra $t7, $k1, 16
+    addi $sp, $0, 2
+    bne $t4, $sp, paint_shift3
+    sra $t7, $gp, 16
     j paint_have_old
 
 paint_shift3:
-    sra $t7, $k1, 24
+    sra $t7, $gp, 24
 
 paint_have_old:
-    addi $k0, $0, 255
-    and $t7, $t7, $k0
+    addi $sp, $0, 255
+    and $t7, $t7, $sp
     bne $t7, $t2, paint_maybe_log
     j skip_cell
 
 paint_maybe_log:
-    addi $k0, $0, 4096
-    blt $fp, $k0, paint_log_ok
+    addi $sp, $0, 4096
+    blt $fp, $sp, paint_log_ok
     j skip_cell
 
 paint_log_ok:
-    sll $k0, $t7, 13
-    add $k0, $k0, $t6
-    sw $k0, 0($fp)
+    sll $sp, $t7, 13
+    add $sp, $sp, $t6
+    sw $sp, 0($fp)
     addi $fp, $fp, 1
     bne $t4, $0, paint_store1
-    sub $k1, $k1, $t7
-    add $k1, $k1, $t2
-    sw $k1, 0($t5)
+    sub $gp, $gp, $t7
+    add $gp, $gp, $t2
+    sw $gp, 0($t5)
     add $t4, $s4, $t6
     sw $t2, 0($t4)
     j skip_cell
 
 paint_store1:
-    addi $k0, $0, 1
-    bne $t4, $k0, paint_store2
-    sll $k0, $t7, 8
-    sub $k1, $k1, $k0
-    sll $k0, $t2, 8
-    add $k1, $k1, $k0
-    sw $k1, 0($t5)
+    addi $sp, $0, 1
+    bne $t4, $sp, paint_store2
+    sll $sp, $t7, 8
+    sub $gp, $gp, $sp
+    sll $sp, $t2, 8
+    add $gp, $gp, $sp
+    sw $gp, 0($t5)
     add $t4, $s4, $t6
     sw $t2, 0($t4)
     j skip_cell
 
 paint_store2:
-    addi $k0, $0, 2
-    bne $t4, $k0, paint_store3
-    sll $k0, $t7, 16
-    sub $k1, $k1, $k0
-    sll $k0, $t2, 16
-    add $k1, $k1, $k0
-    sw $k1, 0($t5)
+    addi $sp, $0, 2
+    bne $t4, $sp, paint_store3
+    sll $sp, $t7, 16
+    sub $gp, $gp, $sp
+    sll $sp, $t2, 16
+    add $gp, $gp, $sp
+    sw $gp, 0($t5)
     add $t4, $s4, $t6
     sw $t2, 0($t4)
     j skip_cell
 
 paint_store3:
-    sll $k0, $t7, 24
-    sub $k1, $k1, $k0
-    sll $k0, $t2, 24
-    add $k1, $k1, $k0
-    sw $k1, 0($t5)
+    sll $sp, $t7, 24
+    sub $gp, $gp, $sp
+    sll $sp, $t2, 24
+    add $gp, $gp, $sp
+    sw $gp, 0($t5)
     add $t4, $s4, $t6
     sw $t2, 0($t4)
 
@@ -631,33 +633,33 @@ undo_entry:
     sra $t7, $t6, 2
     addi $v0, $0, 64
     add $t7, $t7, $v0
-    lw $k1, 0($t7)
+    lw $gp, 0($t7)
     bne $t5, $0, undo_shift1
-    add $v0, $k1, $0
+    add $v0, $gp, $0
     j undo_have_cur
 
 undo_shift1:
     addi $v1, $0, 1
     bne $t5, $v1, undo_shift2
-    sra $v0, $k1, 8
+    sra $v0, $gp, 8
     j undo_have_cur
 
 undo_shift2:
     addi $v1, $0, 2
     bne $t5, $v1, undo_shift3
-    sra $v0, $k1, 16
+    sra $v0, $gp, 16
     j undo_have_cur
 
 undo_shift3:
-    sra $v0, $k1, 24
+    sra $v0, $gp, 24
 
 undo_have_cur:
     addi $v1, $0, 255
     and $v0, $v0, $v1
     bne $t5, $0, undo_store1
-    sub $k1, $k1, $v0
-    add $k1, $k1, $t4
-    sw $k1, 0($t7)
+    sub $gp, $gp, $v0
+    add $gp, $gp, $t4
+    sw $gp, 0($t7)
     add $v1, $s4, $t6
     sw $t4, 0($v1)
     j undo_pop
@@ -666,10 +668,10 @@ undo_store1:
     addi $v1, $0, 1
     bne $t5, $v1, undo_store2
     sll $v1, $v0, 8
-    sub $k1, $k1, $v1
+    sub $gp, $gp, $v1
     sll $v1, $t4, 8
-    add $k1, $k1, $v1
-    sw $k1, 0($t7)
+    add $gp, $gp, $v1
+    sw $gp, 0($t7)
     add $v1, $s4, $t6
     sw $t4, 0($v1)
     j undo_pop
@@ -678,20 +680,20 @@ undo_store2:
     addi $v1, $0, 2
     bne $t5, $v1, undo_store3
     sll $v1, $v0, 16
-    sub $k1, $k1, $v1
+    sub $gp, $gp, $v1
     sll $v1, $t4, 16
-    add $k1, $k1, $v1
-    sw $k1, 0($t7)
+    add $gp, $gp, $v1
+    sw $gp, 0($t7)
     add $v1, $s4, $t6
     sw $t4, 0($v1)
     j undo_pop
 
 undo_store3:
     sll $v1, $v0, 24
-    sub $k1, $k1, $v1
+    sub $gp, $gp, $v1
     sll $v1, $t4, 24
-    add $k1, $k1, $v1
-    sw $k1, 0($t7)
+    add $gp, $gp, $v1
+    sw $gp, 0($t7)
     add $v1, $s4, $t6
     sw $t4, 0($v1)
     j undo_pop
