@@ -713,14 +713,21 @@ fill_full_canvas:
     j loop_wait
 
 fill_stack_start:
-    addi $v0, $0, 4096
-    blt $fp, $v0, fill_marker_ok
+    addi $v0, $0, 4094
+    blt $fp, $v0, fill_record_ok
     j loop_wait
 
-fill_marker_ok:
-    addi $v0, $0, -1
+fill_record_ok:
+    sll $v0, $s0, 13
+    add $v0, $v0, $s2
     sw $v0, 0($fp)
-    addi $fp, $fp, 1
+    sll $gp, $k1, 4
+    addi $sp, $0, 1024
+    add $gp, $gp, $sp
+    add $gp, $gp, $t2
+    sub $gp, $0, $gp
+    sw $gp, 1($fp)
+    addi $fp, $fp, 2
 
     addi $a0, $0, 4096
     addi $v0, $a0, -1
@@ -731,6 +738,7 @@ fill_push_start:
     addi $a0, $a0, -1
     sll $v0, $s0, 13
     add $v0, $v0, $s2
+fill_seed_ready:
     sw $v0, 0($a0)
 
 fill_loop_check:
@@ -774,16 +782,6 @@ fill_cur_have:
     addi $v0, $0, 255
     and $v1, $v1, $v0
     bne $v1, $k1, fill_loop_check
-
-    addi $v0, $0, 4096
-    blt $fp, $v0, fill_log_ok
-    j loop_wait
-
-fill_log_ok:
-    sll $v0, $v1, 13
-    add $v0, $v0, $a1
-    sw $v0, 0($fp)
-    addi $fp, $fp, 1
 
     bne $t6, $0, fill_store1
     sub $gp, $gp, $v1
@@ -901,10 +899,31 @@ do_undo:
 undo_pop:
     addi $fp, $fp, -1
     lw $a0, 0($fp)
+    addi $v0, $0, -257
+    blt $a0, $v0, undo_fill_tag
     addi $v0, $0, -1
     bne $a0, $v0, undo_entry
     add $t9, $s7, $0
     j loop_wait
+
+undo_fill_tag:
+    add $t9, $s7, $0
+    sub $v0, $0, $a0
+    addi $v1, $0, 1024
+    sub $v0, $v0, $v1
+    sra $t2, $v0, 4
+    sll $v1, $t2, 4
+    sub $k1, $v0, $v1
+    addi $fp, $fp, -1
+    lw $v0, 0($fp)
+    addi $a0, $0, 4096
+    addi $v1, $a0, -1
+    blt $fp, $v1, undo_fill_push
+    j loop_wait
+
+undo_fill_push:
+    addi $a0, $a0, -1
+    j fill_seed_ready
 
 undo_entry:
     addi $v0, $0, -1
