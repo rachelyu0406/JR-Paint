@@ -949,10 +949,12 @@ undo_fill_tag:
     sub $k1, $v0, $v1
     addi $fp, $fp, -1
     lw $t5, 0($fp)
+    sw $t5, 12($0)
     addi $a2, $0, 1
     j undo_fill_loop_check
 
 undo_fill_loop_check:
+    lw $t5, 12($0)
     bne $t5, $0, undo_fill_next_word
     addi $a2, $0, 0
     j loop_wait
@@ -983,6 +985,7 @@ undo_fill_resume:
     addi $v0, $0, 1
     bne $a2, $v0, undo_fill_pair_check
     addi $t5, $t5, -1
+    sw $t5, 12($0)
     j undo_fill_loop_check
 
 undo_fill_pair_check:
@@ -996,6 +999,7 @@ undo_fill_pair_check:
 undo_fill_pair_done:
     addi $t5, $t5, -2
     addi $a2, $0, 1
+    sw $t5, 12($0)
     j undo_fill_loop_check
 
 undo_entry:
