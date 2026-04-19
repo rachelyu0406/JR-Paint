@@ -718,8 +718,16 @@ fill_stack_start:
     j loop_wait
 
 fill_record_ok:
-    addi $t4, $0, 0
-    addi $t5, $0, 0
+    sll $v0, $s0, 13
+    add $v0, $v0, $s2
+    sw $v0, 0($fp)
+    sll $gp, $k1, 4
+    addi $sp, $0, 1024
+    add $gp, $gp, $sp
+    add $gp, $gp, $t2
+    sub $gp, $0, $gp
+    sw $gp, 1($fp)
+    addi $fp, $fp, 2
 
     addi $a0, $0, 4096
     addi $v0, $a0, -1
@@ -736,31 +744,6 @@ fill_seed_ready:
 fill_loop_check:
     addi $v0, $0, 4096
     blt $a0, $v0, fill_pop
-    bne $t5, $0, fill_flush_pending
-    j fill_write_record
-
-fill_flush_pending:
-    blt $fp, $v0, fill_flush_ok
-    j loop_wait
-
-fill_flush_ok:
-    sw $t7, 0($fp)
-    addi $fp, $fp, 1
-    addi $t5, $0, 0
-
-fill_write_record:
-    addi $v0, $0, 4094
-    blt $fp, $v0, fill_write_record_ok
-    j loop_wait
-
-fill_write_record_ok:
-    sw $t4, 0($fp)
-    addi $fp, $fp, 1
-    addi $v0, $0, 2048
-    add $v0, $v0, $k1
-    sub $v0, $0, $v0
-    sw $v0, 0($fp)
-    addi $fp, $fp, 1
     j loop_wait
 
 fill_pop:
@@ -799,25 +782,7 @@ fill_cur_have:
     addi $v0, $0, 255
     and $v1, $v1, $v0
     bne $v1, $k1, fill_loop_check
-    bne $t5, $0, fill_log_pair
-    add $t7, $a1, $0
-    addi $t5, $0, 1
-    addi $t4, $t4, 1
-    j fill_store_dispatch
 
-fill_log_pair:
-    blt $fp, $a0, fill_log_pair_ok
-    j loop_wait
-
-fill_log_pair_ok:
-    sll $v0, $a1, 13
-    add $v0, $v0, $t7
-    sw $v0, 0($fp)
-    addi $fp, $fp, 1
-    addi $t5, $0, 0
-    addi $t4, $t4, 1
-
-fill_store_dispatch:
     bne $t6, $0, fill_store1
     sub $gp, $gp, $v1
     add $gp, $gp, $t2
@@ -934,9 +899,8 @@ do_undo:
 undo_pop:
     addi $fp, $fp, -1
     lw $a0, 0($fp)
-    addi $v0, $0, -2047
+    addi $v0, $0, -257
     blt $a0, $v0, undo_fill_tag
-    addi $a2, $0, 0
     addi $v0, $0, -1
     bne $a0, $v0, undo_entry
     add $t9, $s7, $0
@@ -945,62 +909,21 @@ undo_pop:
 undo_fill_tag:
     add $t9, $s7, $0
     sub $v0, $0, $a0
-    addi $v1, $0, 2048
+    addi $v1, $0, 1024
+    sub $v0, $v0, $v1
+    sra $t2, $v0, 4
+    sll $v1, $t2, 4
     sub $k1, $v0, $v1
     addi $fp, $fp, -1
-    lw $t5, 0($fp)
-    sw $t5, 12($0)
-    addi $a2, $0, 1
-    j undo_fill_loop_check
-
-undo_fill_loop_check:
-    lw $t5, 12($0)
-    bne $t5, $0, undo_fill_next_word
-    addi $a2, $0, 0
+    lw $v0, 0($fp)
+    addi $a0, $0, 4096
+    addi $v1, $a0, -1
+    blt $fp, $v1, undo_fill_push
     j loop_wait
 
-undo_fill_next_word:
-    addi $fp, $fp, -1
-    lw $v0, 0($fp)
-    addi $v1, $0, 1
-    and $v1, $t5, $v1
-    bne $v1, $0, undo_fill_single
-    addi $v1, $0, 8191
-    and $t6, $v0, $v1
-    sra $a1, $v0, 13
-    addi $a2, $0, 2
-    sll $a0, $k1, 13
-    add $a0, $a0, $t6
-    j undo_entry
-
-undo_fill_single:
-    addi $v1, $0, 8191
-    and $t6, $v0, $v1
-    addi $a2, $0, 1
-    sll $a0, $k1, 13
-    add $a0, $a0, $t6
-    j undo_entry
-
-undo_fill_resume:
-    addi $v0, $0, 1
-    bne $a2, $v0, undo_fill_pair_check
-    addi $t5, $t5, -1
-    sw $t5, 12($0)
-    j undo_fill_loop_check
-
-undo_fill_pair_check:
-    addi $v0, $0, 2
-    bne $a2, $v0, undo_fill_pair_done
-    addi $a2, $0, 3
-    sll $a0, $k1, 13
-    add $a0, $a0, $a1
-    j undo_entry
-
-undo_fill_pair_done:
-    addi $t5, $t5, -2
-    addi $a2, $0, 1
-    sw $t5, 12($0)
-    j undo_fill_loop_check
+undo_fill_push:
+    addi $a0, $a0, -1
+    j fill_seed_ready
 
 undo_entry:
     addi $v0, $0, -1
@@ -1042,7 +965,6 @@ undo_have_cur:
     sw $gp, 0($t7)
     add $v1, $s4, $t6
     sw $t4, 0($v1)
-    bne $a2, $0, undo_fill_resume
     j undo_pop
 
 undo_store1:
@@ -1055,7 +977,6 @@ undo_store1:
     sw $gp, 0($t7)
     add $v1, $s4, $t6
     sw $t4, 0($v1)
-    bne $a2, $0, undo_fill_resume
     j undo_pop
 
 undo_store2:
@@ -1068,7 +989,6 @@ undo_store2:
     sw $gp, 0($t7)
     add $v1, $s4, $t6
     sw $t4, 0($v1)
-    bne $a2, $0, undo_fill_resume
     j undo_pop
 
 undo_store3:
@@ -1079,7 +999,6 @@ undo_store3:
     sw $gp, 0($t7)
     add $v1, $s4, $t6
     sw $t4, 0($v1)
-    bne $a2, $0, undo_fill_resume
     j undo_pop
 
 undo_full_screen:
