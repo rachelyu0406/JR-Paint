@@ -561,7 +561,7 @@ paint_shift3:
     sra $t7, $gp, 24
 
 paint_have_old:
-    addi $sp, $0, 255
+    addi $sp, $0, 15
     and $t7, $t7, $sp
     bne $t7, $t2, paint_maybe_log
     j skip_cell
@@ -660,7 +660,7 @@ fill_target_shift3:
     sra $k1, $v0, 24
 
 fill_target_have:
-    addi $v1, $0, 255
+    addi $v1, $0, 15
     and $k1, $k1, $v1
     bne $k1, $t2, fill_can_start
     j loop_wait
@@ -781,45 +781,64 @@ fill_cur_shift3:
 fill_cur_have:
     addi $v0, $0, 255
     and $v1, $v1, $v0
+    addi $v0, $0, 15
+    blt $v0, $k1, fill_check_tagged
+    addi $v0, $0, 15
+    and $v1, $v1, $v0
     bne $v1, $k1, fill_loop_check
+    j fill_store_pick
+
+fill_check_tagged:
+    bne $v1, $k1, fill_loop_check
+
+fill_store_pick:
+    addi $v0, $0, 15
+    blt $v0, $k1, fill_store_plain
+    addi $v0, $t2, 16
+    j fill_store_have_color
+
+fill_store_plain:
+    addi $v0, $t2, 0
+
+fill_store_have_color:
 
     bne $t6, $0, fill_store1
     sub $gp, $gp, $v1
-    add $gp, $gp, $t2
+    add $gp, $gp, $v0
     sw $gp, 0($sp)
     add $v0, $s4, $a1
     sw $t2, 0($v0)
     j fill_push_neighbors
 
 fill_store1:
-    addi $v0, $0, 1
-    bne $t6, $v0, fill_store2
-    sll $v0, $v1, 8
-    sub $gp, $gp, $v0
-    sll $v0, $t2, 8
-    add $gp, $gp, $v0
+    addi $t7, $0, 1
+    bne $t6, $t7, fill_store2
+    sll $t7, $v1, 8
+    sub $gp, $gp, $t7
+    sll $t7, $v0, 8
+    add $gp, $gp, $t7
     sw $gp, 0($sp)
     add $v0, $s4, $a1
     sw $t2, 0($v0)
     j fill_push_neighbors
 
 fill_store2:
-    addi $v0, $0, 2
-    bne $t6, $v0, fill_store3
-    sll $v0, $v1, 16
-    sub $gp, $gp, $v0
-    sll $v0, $t2, 16
-    add $gp, $gp, $v0
+    addi $t7, $0, 2
+    bne $t6, $t7, fill_store3
+    sll $t7, $v1, 16
+    sub $gp, $gp, $t7
+    sll $t7, $v0, 16
+    add $gp, $gp, $t7
     sw $gp, 0($sp)
     add $v0, $s4, $a1
     sw $t2, 0($v0)
     j fill_push_neighbors
 
 fill_store3:
-    sll $v0, $v1, 24
-    sub $gp, $gp, $v0
-    sll $v0, $t2, 24
-    add $gp, $gp, $v0
+    sll $t7, $v1, 24
+    sub $gp, $gp, $t7
+    sll $t7, $v0, 24
+    add $gp, $gp, $t7
     sw $gp, 0($sp)
     add $v0, $s4, $a1
     sw $t2, 0($v0)
@@ -914,6 +933,8 @@ undo_fill_tag:
     sra $t2, $v0, 4
     sll $v1, $t2, 4
     sub $k1, $v0, $v1
+    addi $v1, $0, 16
+    add $k1, $k1, $v1
     addi $fp, $fp, -1
     lw $v0, 0($fp)
     sw $0, 0($fp)
