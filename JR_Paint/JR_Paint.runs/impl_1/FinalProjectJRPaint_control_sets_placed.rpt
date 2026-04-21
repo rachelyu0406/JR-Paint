@@ -1,0 +1,143 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
+| Date         : Tue Apr 21 18:49:39 2026
+| Host         : rachelsLaptop running 64-bit major release  (build 9200)
+| Command      : report_control_sets -verbose -file FinalProjectJRPaint_control_sets_placed.rpt
+| Design       : FinalProjectJRPaint
+| Device       : xc7a100t
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Histogram
+3. Flip-Flop Distribution
+4. Detailed Control Set Information
+
+1. Summary
+----------
+
++----------------------------------------------------------+-------+
+|                          Status                          | Count |
++----------------------------------------------------------+-------+
+| Total control sets                                       |    65 |
+|    Minimum number of control sets                        |    65 |
+|    Addition due to synthesis replication                 |     0 |
+|    Addition due to physical synthesis replication        |     0 |
+| Unused register locations in slices containing registers |   101 |
++----------------------------------------------------------+-------+
+* Control sets can be merged at opt_design using control_set_merge or merge_equivalent_drivers
+** Run report_qor_suggestions for automated merging and remapping suggestions
+
+
+2. Histogram
+------------
+
++--------------------+-------+
+|       Fanout       | Count |
++--------------------+-------+
+| Total control sets |    65 |
+| >= 0 to < 4        |     1 |
+| >= 4 to < 6        |    10 |
+| >= 6 to < 8        |     7 |
+| >= 8 to < 10       |     3 |
+| >= 10 to < 12      |     1 |
+| >= 12 to < 14      |     2 |
+| >= 14 to < 16      |     1 |
+| >= 16              |    40 |
++--------------------+-------+
+* Control sets can be remapped at either synth_design or opt_design
+
+
+3. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |              16 |            7 |
+| No           | No                    | Yes                    |             424 |          226 |
+| No           | Yes                   | No                     |              40 |           15 |
+| Yes          | No                    | No                     |              19 |            3 |
+| Yes          | No                    | Yes                    |            1424 |          623 |
+| Yes          | Yes                   | No                     |               8 |            4 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+4. Detailed Control Set Information
+-----------------------------------
+
++--------------------+-------------------------------------+------------------------------------------------------------------+------------------+----------------+--------------+
+|    Clock Signal    |            Enable Signal            |                         Set/Reset Signal                         | Slice Load Count | Bel Load Count | Bels / Slice |
++--------------------+-------------------------------------+------------------------------------------------------------------+------------------+----------------+--------------+
+|  clock0            |                                     |                                                                  |                1 |              1 |         1.00 |
+|  pll/inst/clk_out1 | MouseDecoder/left_i_1_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                3 |              4 |         1.33 |
+|  pll/inst/clk_out1 |                                     | MouseInterface/clk_inter0                                        |                1 |              4 |         4.00 |
+|  pll/inst/clk_out1 |                                     | MouseInterface/data_inter0                                       |                1 |              4 |         4.00 |
+|  pll/inst/clk_out1 | MouseInterface/frame[9]_i_1_n_0     | MouseInterface/load_tx_data_reg_n_0                              |                2 |              4 |         2.00 |
+|  pll/inst/clk_out1 | MouseInterface/shift_frame          | MouseInterface/FSM_onehot_state_reg[0]_0[0]                      |                2 |              4 |         2.00 |
+|  pll/inst/clk_out1 | CPU/xmRes/genDFFs[27].ff/q_reg_4[0] | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                1 |              4 |         4.00 |
+|  pll/inst/clk_out1 |                                     | MouseInterface/delay_20us_count[5]_i_1_n_0                       |                1 |              5 |         5.00 |
+|  pll/inst/clk_out1 |                                     | MouseInterface/delay_100us_count[13]_i_1_n_0                     |                3 |              5 |         1.67 |
+|  pll/inst/clk_out1 |                                     | CPU/dxInsn/genDFFs[2].ff/reset0                                  |                2 |              5 |         2.50 |
+|  pll/inst/clk_out1 | pll/inst/locked                     |                                                                  |                1 |              5 |         5.00 |
+|  pll/inst/clk_out1 |                                     | MouseInterface/delay_20us_count[10]_i_1_n_0                      |                3 |              6 |         2.00 |
+|  pll/inst/clk_out1 | CPU/xmRes/genDFFs[27].ff/q_reg_2[0] | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                4 |              6 |         1.50 |
+|  pll/inst/clk_out1 | MouseInterface/frame[9]_i_1_n_0     |                                                                  |                1 |              6 |         6.00 |
+|  pll/inst/clk_out1 |                                     | MouseInterface/delay_63clk_count[6]_i_1_n_0                      |                2 |              7 |         3.50 |
+|  pll/inst/clk_out1 | CPU/xmRes/genDFFs[27].ff/E[0]       | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                4 |              7 |         1.75 |
+|  pll/inst/clk_out1 | MouseInterface/E[0]                 | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                3 |              7 |         2.33 |
+|  clock0            | CPU/dxInsn/genDFFs[3].ff/p_2_in3_in | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                3 |              7 |         2.33 |
+|  pll/inst/clk_out1 | MouseDecoder/byte1[7]_i_1_n_0       | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                2 |              8 |         4.00 |
+|  pll/inst/clk_out1 | MouseInterface/load_rx_data_reg_n_0 |                                                                  |                1 |              8 |         8.00 |
+|  pll/inst/clk_out1 |                                     | MouseInterface/delay_100us_count[12]_i_1_n_0                     |                4 |              9 |         2.25 |
+|  pll/inst/clk_out1 | Display/\\Display/vPos [0]          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             10 |         1.43 |
+|  pll/inst/clk_out1 | MouseDecoder/dx[11]_i_1_n_0         | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                4 |             12 |         3.00 |
+|  pll/inst/clk_out1 | MouseDecoder/dy[11]_i_1_n_0         | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                5 |             12 |         2.40 |
+|  pll/inst/clk_out1 |                                     |                                                                  |                6 |             15 |         2.50 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_13    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                7 |             32 |         4.57 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_7     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                5 |             32 |         6.40 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_17    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               15 |             32 |         2.13 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_12    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               23 |             32 |         1.39 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_15    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_19    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                8 |             32 |         4.00 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_14    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               26 |             32 |         1.23 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_11    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_6     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               26 |             32 |         1.23 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_16    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               10 |             32 |         3.20 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_9     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               15 |             32 |         2.13 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_10    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               10 |             32 |         3.20 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_5     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                8 |             32 |         4.00 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_18    | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               11 |             32 |         2.91 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__8_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__9_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                9 |             32 |         3.56 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__6_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               11 |             32 |         2.91 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__5_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               19 |             32 |         1.68 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__1_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                5 |             32 |         6.40 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__11_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                5 |             32 |         6.40 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__0_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               10 |             32 |         3.20 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__13_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               21 |             32 |         1.52 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__2_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               15 |             32 |         2.13 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__4_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                5 |             32 |         6.40 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__10_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               17 |             32 |         1.88 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__12_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               10 |             32 |         3.20 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__7_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               18 |             32 |         1.78 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__14_n_0          | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               10 |             32 |         3.20 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1__3_n_0           | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |                8 |             32 |         4.00 |
+|  pll/inst/clk_out1 | RegisterFile/q_i_1_n_0              | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               17 |             32 |         1.88 |
+|  pll/inst/clk_out1 | CPU/pwExc/genDFFs[0].ff/q_reg_8     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               15 |             32 |         2.13 |
+|  clock0            | CPU/MD/m4/ff/q_reg_0                | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               17 |             33 |         1.94 |
+|  pll/inst/clk_out1 | CPU/MD/divUnit/d2/ff/q_reg_2        | CPU/dxInsn/genDFFs[2].ff/resetAll                                |               18 |             34 |         1.89 |
+|  pll/inst/clk_out1 |                                     | CPU/dxInsn/genDFFs[4].ff/q_reg_2                                 |               39 |             63 |         1.62 |
+|  pll/inst/clk_out1 | CPU/dxInsn/genDFFs[2].ff/resetAll   | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               21 |             64 |         3.05 |
+|  pll/inst/clk_out1 |                                     | CPU/dxInsn/genDFFs[2].ff/resetAll                                |               43 |             71 |         1.65 |
+|  pll/inst/clk_out1 |                                     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               32 |             81 |         2.53 |
+|  clock0            | CPU/MD/m4/ff/fd_en                  | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               49 |             96 |         1.96 |
+|  clock0            | CPU/MD/m4/ff/dx_en                  | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |               96 |            128 |         1.33 |
+|  clock0            |                                     | RegisterFile/REG_AND_READS[31].regN/genDFFs[31].ff/bbstub_locked |              110 |            204 |         1.85 |
++--------------------+-------------------------------------+------------------------------------------------------------------+------------------+----------------+--------------+
+
+

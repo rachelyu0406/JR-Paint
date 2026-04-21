@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1775446994" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/FinalProjectVGAProcessor.dcp">
-  <File Type="PA-TCL" Name="FinalProjectVGAProcessor.tcl"/>
-  <File Type="REPORTS-TCL" Name="FinalProjectVGAProcessor_reports.tcl"/>
-  <File Type="RDS-RDS" Name="FinalProjectVGAProcessor.vds"/>
-  <File Type="RDS-PROPCONSTRS" Name="FinalProjectVGAProcessor_drc_synth.rpt"/>
-  <File Type="RDS-UTIL" Name="FinalProjectVGAProcessor_utilization_synth.rpt"/>
-  <File Type="RDS-UTIL-PB" Name="FinalProjectVGAProcessor_utilization_synth.pb"/>
-  <File Type="RDS-DCP" Name="FinalProjectVGAProcessor.dcp"/>
-  <File Type="VDS-TIMINGSUMMARY" Name="FinalProjectVGAProcessor_timing_summary_synth.rpt"/>
-  <File Type="VDS-TIMING-PB" Name="FinalProjectVGAProcessor_timing_summary_synth.pb"/>
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1775709671" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/FinalProjectVGAProcessor.dcp">
+  <File Type="PA-TCL" Name="FinalProjectBAW.tcl"/>
+  <File Type="REPORTS-TCL" Name="FinalProjectBAW_reports.tcl"/>
+  <File Type="RDS-RDS" Name="FinalProjectBAW.vds"/>
+  <File Type="RDS-PROPCONSTRS" Name="FinalProjectBAW_drc_synth.rpt"/>
+  <File Type="RDS-UTIL" Name="FinalProjectBAW_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="FinalProjectBAW_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="FinalProjectBAW.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="FinalProjectBAW_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="FinalProjectBAW_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PPRDIR/../final_project_vga_files/ascii.mem">
@@ -49,26 +49,11 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../final_project_vga_files/FinalProjectVGABehavioral.v">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PPRDIR/../rachel_processor/proc/Wrapper.v">
       <FileInfo>
         <Attr Name="AutoDisabled" Val="1"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PPRDIR/../final_project_vga_files/Ps2Interface.vhd">
-      <FileInfo>
-        <Attr Name="AutoDisabled" Val="1"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
@@ -83,6 +68,14 @@
     <File Path="$PPRDIR/../final_project_vga_files/cursor.mem">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/FinalProjectVGAProcessor.v">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
@@ -156,7 +149,13 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PPRDIR/../final_project_vga_files/FinalProjectVGAProcessor.v">
+    <File Path="$PPRDIR/../final_project_vga_files/Ps2Interface.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/FinalProjectBAW.v">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
@@ -165,7 +164,7 @@
     </File>
     <Config>
       <Option Name="DesignMode" Val="RTL"/>
-      <Option Name="TopModule" Val="FinalProjectVGAProcessor"/>
+      <Option Name="TopModule" Val="FinalProjectBAW"/>
     </Config>
   </FileSet>
   <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">

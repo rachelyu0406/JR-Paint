@@ -7,4 +7,4 @@ REM Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
 REM Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 REM
 
-vivado -log FinalProjectVGAProcessor.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source FinalProjectVGAProcessor.tcl -notrace
+vivado -log FinalProjectBAW.vdi -applog -m64 -product Vivado -messageDb vivado.pb -mode batch -source FinalProjectBAW.tcl -notrace

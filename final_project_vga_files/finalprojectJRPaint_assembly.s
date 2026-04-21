@@ -916,6 +916,7 @@ undo_fill_tag:
     sub $k1, $v0, $v1
     addi $fp, $fp, -1
     lw $v0, 0($fp)
+    sw $0, 0($fp)
     addi $a0, $0, 4096
     addi $v1, $a0, -1
     blt $fp, $v1, undo_fill_push
@@ -929,6 +930,8 @@ undo_entry:
     addi $v0, $0, -1
     blt $a0, $v0, undo_full_screen
     sra $t4, $a0, 13
+    addi $v0, $0, 15
+    blt $v0, $t4, undo_pop
     sll $t5, $t4, 13
     sub $t6, $a0, $t5
     addi $t5, $0, 3
