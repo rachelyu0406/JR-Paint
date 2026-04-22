@@ -404,41 +404,17 @@ module ColorAudioController(
 
     localparam integer SAMPLE_RATE = 8000;
     localparam integer SAMPLE_DIVIDER = 100_000_000 / SAMPLE_RATE;
-    localparam integer AUDIO_DEPTH = 122881;
-    localparam integer AUDIO_AW = 17;
 
     assign chSel = 1'b0;
     assign audioEn = 1'b1;
-
-    localparam [AUDIO_AW-1:0] WHITE_START  = 17'd0;
-    localparam [AUDIO_AW-1:0] PINK_START   = 17'd13824;
-    localparam [AUDIO_AW-1:0] RED_START    = 17'd25600;
-    localparam [AUDIO_AW-1:0] ORANGE_START = 17'd39083;
-    localparam [AUDIO_AW-1:0] YELLOW_START = 17'd52054;
-    localparam [AUDIO_AW-1:0] GREEN_START  = 17'd63489;
-    localparam [AUDIO_AW-1:0] BLUE_START   = 17'd74241;
-    localparam [AUDIO_AW-1:0] PURPLE_START = 17'd86017;
-    localparam [AUDIO_AW-1:0] BROWN_START  = 17'd97110;
-    localparam [AUDIO_AW-1:0] BLACK_START  = 17'd106497;
-
-    localparam [AUDIO_AW-1:0] WHITE_LEN  = 17'd13824;
-    localparam [AUDIO_AW-1:0] PINK_LEN   = 17'd11776;
-    localparam [AUDIO_AW-1:0] RED_LEN    = 17'd13483;
-    localparam [AUDIO_AW-1:0] ORANGE_LEN = 17'd12971;
-    localparam [AUDIO_AW-1:0] YELLOW_LEN = 17'd11435;
-    localparam [AUDIO_AW-1:0] GREEN_LEN  = 17'd10752;
-    localparam [AUDIO_AW-1:0] BLUE_LEN   = 17'd11776;
-    localparam [AUDIO_AW-1:0] PURPLE_LEN = 17'd11093;
-    localparam [AUDIO_AW-1:0] BROWN_LEN  = 17'd9387;
-    localparam [AUDIO_AW-1:0] BLACK_LEN  = 17'd16384;
+`include "color_audio_table.vh"
 
     reg [AUDIO_AW-1:0] sample_addr;
     reg [AUDIO_AW-1:0] samples_left;
     reg [13:0] sample_divider;
     reg [9:0] pwm_level;
     reg playback_active;
-    reg playback_armed;
-    reg played_once;
+    reg [3:0] color_q;
     wire [7:0] sample_q;
 
     AudioSampleROM #(
@@ -469,21 +445,73 @@ module ColorAudioController(
             sample_divider <= 14'd0;
             pwm_level <= 10'd512;
             playback_active <= 1'b0;
-            playback_armed <= 1'b0;
-            played_once <= 1'b0;
+            color_q <= 4'd0;
         end else begin
-            if (~played_once) begin
-                sample_addr <= WHITE_START;
-                samples_left <= WHITE_LEN;
-                sample_divider <= SAMPLE_DIVIDER - 1;
+            color_q <= color;
+
+            if (color != color_q) begin
+                sample_divider <= 14'd0;
                 pwm_level <= 10'd512;
-                playback_active <= 1'b1;
-                playback_armed <= 1'b1;
-                played_once <= 1'b1;
+
+                case (color)
+                    4'd1: begin
+                        sample_addr <= WHITE_START;
+                        samples_left <= WHITE_LEN;
+                        playback_active <= 1'b1;
+                    end
+                    4'd2: begin
+                        sample_addr <= PINK_START;
+                        samples_left <= PINK_LEN;
+                        playback_active <= 1'b1;
+                    end
+                    4'd3: begin
+                        sample_addr <= RED_START;
+                        samples_left <= RED_LEN;
+                        playback_active <= 1'b1;
+                    end
+                    4'd4: begin
+                        sample_addr <= ORANGE_START;
+                        samples_left <= ORANGE_LEN;
+                        playback_active <= 1'b1;
+                    end
+                    4'd5: begin
+                        sample_addr <= YELLOW_START;
+                        samples_left <= YELLOW_LEN;
+                        playback_active <= 1'b1;
+                    end
+                    4'd6: begin
+                        sample_addr <= GREEN_START;
+                        samples_left <= GREEN_LEN;
+                        playback_active <= 1'b1;
+                    end
+                    4'd7: begin
+                        sample_addr <= BLUE_START;
+                        samples_left <= BLUE_LEN;
+                        playback_active <= 1'b1;
+                    end
+                    4'd8: begin
+                        sample_addr <= PURPLE_START;
+                        samples_left <= PURPLE_LEN;
+                        playback_active <= 1'b1;
+                    end
+                    4'd9: begin
+                        sample_addr <= BROWN_START;
+                        samples_left <= BROWN_LEN;
+                        playback_active <= 1'b1;
+                    end
+                    4'd10: begin
+                        sample_addr <= BLACK_START;
+                        samples_left <= BLACK_LEN;
+                        playback_active <= 1'b1;
+                    end
+                    default: begin
+                        sample_addr <= {AUDIO_AW{1'b0}};
+                        samples_left <= {AUDIO_AW{1'b0}};
+                        playback_active <= 1'b0;
+                    end
+                endcase
             end else if (playback_active) begin
-                if (playback_armed) begin
-                    playback_armed <= 1'b0;
-                end else if (sample_divider == SAMPLE_DIVIDER - 1) begin
+                if (sample_divider == SAMPLE_DIVIDER - 1) begin
                     sample_divider <= 14'd0;
                     pwm_level <= {sample_q, 2'b00};
                     if (samples_left == {{(AUDIO_AW-1){1'b0}}, 1'b1}) begin
@@ -516,12 +544,8 @@ module AudioSampleROM #(
 );
 
     (* rom_style = "block" *) reg [DATA_WIDTH-1:0] memoryArray [0:DEPTH-1];
-    integer i;
 
     initial begin
-        for (i = 0; i < DEPTH; i = i + 1) begin
-            memoryArray[i] = {DATA_WIDTH{1'b0}};
-        end
         if (MEMFILE != "") begin
             $readmemh(MEMFILE, memoryArray);
         end
