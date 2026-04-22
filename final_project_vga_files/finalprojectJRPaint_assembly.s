@@ -16,8 +16,8 @@ main:
     addi $a3, $0, 4101      # cursor x MMIO, y is 1($a3)
     addi $ra, $0, 4106      # pen size MMIO
     addi $k0, $0, 1         # current pen size
-    addi $gp, $0, 58        # y must stay < 58 to move down
-    addi $sp, $0, 78        # x must stay < 78 to move right
+    addi $gp, $0, 59        # y must stay < 59 to move down
+    addi $sp, $0, 79        # x must stay < 79 to move right
     addi $fp, $0, 1264      # undo stack top
 
     sw $s0, 0($a3)
@@ -36,8 +36,8 @@ loop_wait:
 frame_ready:
     lw $a0, 0($t1)
     add $s3, $a0, $0
-    addi $gp, $0, 58
-    addi $sp, $0, 78
+    addi $gp, $0, 59
+    addi $sp, $0, 79
     addi $t7, $0, 4103
     lw $a0, 0($t7)
     bne $a0, $0, do_clear
