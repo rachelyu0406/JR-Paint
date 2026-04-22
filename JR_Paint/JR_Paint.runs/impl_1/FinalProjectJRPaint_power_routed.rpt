@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date             : Tue Apr 21 19:05:38 2026
+| Date             : Tue Apr 21 21:09:55 2026
 | Host             : rachelsLaptop running 64-bit major release  (build 9200)
 | Command          : report_power -file FinalProjectJRPaint_power_routed.rpt -pb FinalProjectJRPaint_power_summary_routed.pb -rpx FinalProjectJRPaint_power_routed.rpx
 | Design           : FinalProjectJRPaint
@@ -30,10 +30,10 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.217        |
+| Total On-Chip Power (W)  | 0.222        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.119        |
+| Dynamic (W)              | 0.124        |
 | Device Static (W)        | 0.098        |
 | Effective TJA (C/W)      | 4.6          |
 | Max Ambient (C)          | 84.0         |
@@ -52,19 +52,20 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.003 |        8 |       --- |             --- |
-| Slice Logic    |     0.004 |     6687 |       --- |             --- |
-|   LUT as Logic |     0.004 |     3724 |     63400 |            5.87 |
-|   CARRY4       |    <0.001 |      124 |     15850 |            0.78 |
-|   Register     |    <0.001 |     1931 |    126800 |            1.52 |
+| Clocks         |     0.005 |        6 |       --- |             --- |
+| Slice Logic    |     0.005 |     6891 |       --- |             --- |
+|   LUT as Logic |     0.005 |     3809 |     63400 |            6.01 |
+|   CARRY4       |    <0.001 |      138 |     15850 |            0.87 |
+|   Register     |    <0.001 |     1997 |    126800 |            1.57 |
 |   F7/F8 Muxes  |    <0.001 |        3 |     63400 |           <0.01 |
-|   Others       |     0.000 |      371 |       --- |             --- |
-| Signals        |     0.005 |     5680 |       --- |             --- |
-| Block RAM      |     0.005 |      9.5 |       135 |            7.04 |
+|   Others       |     0.000 |      381 |       --- |             --- |
+| Signals        |     0.005 |     5815 |       --- |             --- |
+| Block RAM      |     0.007 |     11.5 |       135 |            8.52 |
 | PLL            |     0.098 |        1 |         6 |           16.67 |
-| I/O            |     0.004 |       53 |       210 |           25.24 |
+| DSPs           |     0.000 |        1 |       240 |            0.42 |
+| I/O            |     0.004 |       56 |       210 |           26.67 |
 | Static Power   |     0.098 |          |           |                 |
-| Total          |     0.217 |          |           |                 |
+| Total          |     0.222 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,7 +75,7 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.041 |       0.026 |      0.016 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.046 |       0.030 |      0.016 |       NA    | Unspecified | NA         |
 | Vccaux    |       1.800 |     0.068 |       0.049 |      0.018 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.005 |       0.001 |      0.004 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -83,7 +84,7 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.001 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.001 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
@@ -127,16 +128,14 @@ Table of Contents
 2.2 Clock Constraints
 ---------------------
 
-+----------------------+-----------------------------+-----------------+
-| Clock                | Domain                      | Constraint (ns) |
-+----------------------+-----------------------------+-----------------+
-| clk                  | clk                         |            10.0 |
-| clk_out1_clk_wiz_0   | pll/inst/clk_out1_clk_wiz_0 |            40.0 |
-| clk_out1_clk_wiz_0_1 | pll/inst/clk_out1_clk_wiz_0 |            40.0 |
-| clkfbout_clk_wiz_0   | pll/inst/clkfbout_clk_wiz_0 |            40.0 |
-| clkfbout_clk_wiz_0_1 | pll/inst/clkfbout_clk_wiz_0 |            40.0 |
-| sys_clk_pin          | clk                         |            10.0 |
-+----------------------+-----------------------------+-----------------+
++--------------------+-----------------------------+-----------------+
+| Clock              | Domain                      | Constraint (ns) |
++--------------------+-----------------------------+-----------------+
+| clk_out1_clk_wiz_0 | pll/inst/clk_out1_clk_wiz_0 |            40.0 |
+| clkfbout_clk_wiz_0 | pll/inst/clkfbout_clk_wiz_0 |            40.0 |
+| sys_clk_pin        | clk                         |            10.0 |
+| sys_clk_pin        | clk_IBUF_BUFG               |            10.0 |
++--------------------+-----------------------------+-----------------+
 
 
 3. Detailed Reports
@@ -148,13 +147,15 @@ Table of Contents
 +----------------------+-----------+
 | Name                 | Power (W) |
 +----------------------+-----------+
-| FinalProjectJRPaint  |     0.119 |
-|   CPU                |     0.009 |
+| FinalProjectJRPaint  |     0.124 |
+|   AudioCue           |     0.004 |
+|     AudioSamples     |     0.002 |
+|   CPU                |     0.010 |
 |     MD               |     0.002 |
 |       multStateReg   |     0.001 |
 |     dxInsn           |     0.003 |
 |       genDFFs[30].ff |     0.001 |
-|     fdInsn           |     0.001 |
+|     fdInsn           |     0.002 |
 |   InstMem            |     0.002 |
 |   ProcMem            |     0.002 |
 |   RegisterFile       |     0.002 |

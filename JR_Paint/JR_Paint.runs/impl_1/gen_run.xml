@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1776812608">
+<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1776819919">
   <File Type="PA-TCL" Name="FinalProjectJRPaint.tcl"/>
   <File Type="REPORTS-TCL" Name="FinalProjectJRPaint_reports.tcl"/>
   <File Type="INIT-TIMING" Name="FinalProjectJRPaint_timing_summary_init.rpt"/>
@@ -172,6 +172,19 @@
     <File Path="$PPRDIR/../final_project_vga_files/finalprojectJRPaint_assembly.mem">
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/color_audio.mem">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../lab9_kit/PWMSerializer.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>

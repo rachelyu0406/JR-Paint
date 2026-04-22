@@ -56,14 +56,9 @@ if {$::dispatch::connected} {
 }
 
 OPTRACE "synth_1" START { ROLLUP_AUTO }
-set_param checkpoint.writeSynthRtdsInDcp 1
 set_param general.usePosixSpawnForFork 1
 set_param chipscope.maxJobs 3
-set_param synth.incrementalSynthesisCache C:/Users/rache/AppData/Roaming/Xilinx/Vivado/.Xil/Vivado-16388-rachelsLaptop/incrSyn
 set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
-set_msg_config -id {Synth 8-256} -limit 10000
-set_msg_config -id {Synth 8-638} -limit 10000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-1
 
@@ -87,8 +82,10 @@ read_mem {
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/colors.mem
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/cursor.mem
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/finalprojectJRPaint_assembly.mem
+  C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/color_audio.mem
 }
 read_verilog -library xil_defaultlib {
+  C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/lab9_kit/PWMSerializer.v
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/RAM.v
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/rachel_processor/proc/ROM.v
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/VGATimingGenerator.v

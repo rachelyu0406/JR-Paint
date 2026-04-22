@@ -23,6 +23,9 @@ module FinalProjectJRPaint(
     output DISP_SEG_G,
     output DISP_DP,
     output [7:0] DISP_EN,
+    output audioOut,
+    output audioEn,
+    output chSel,
     inout ps2_clk,
     inout ps2_data,
     input [15:0] SW,
@@ -379,6 +382,154 @@ module FinalProjectJRPaint(
     assign DISP_DP = ~dispCount[15];
     assign DISP_EN = dispCount[15] ? 8'b11111101 : 8'b11111110;
 
+    ColorAudioController AudioCue (
+        .clk(clk),
+        .reset(reset),
+        .color(ledColor),
+        .audioOut(audioOut),
+        .audioEn(audioEn),
+        .chSel(chSel)
+    );
+
+endmodule
+
+module ColorAudioController(
+    input clk,
+    input reset,
+    input [3:0] color,
+    output audioOut,
+    output audioEn,
+    output chSel
+);
+
+    localparam integer SAMPLE_RATE = 8000;
+    localparam integer SAMPLE_DIVIDER = 100_000_000 / SAMPLE_RATE;
+    localparam integer AUDIO_DEPTH = 122881;
+    localparam integer AUDIO_AW = 17;
+
+    assign chSel = 1'b0;
+    assign audioEn = 1'b1;
+
+    localparam [AUDIO_AW-1:0] WHITE_START  = 17'd0;
+    localparam [AUDIO_AW-1:0] PINK_START   = 17'd13824;
+    localparam [AUDIO_AW-1:0] RED_START    = 17'd25600;
+    localparam [AUDIO_AW-1:0] ORANGE_START = 17'd39083;
+    localparam [AUDIO_AW-1:0] YELLOW_START = 17'd52054;
+    localparam [AUDIO_AW-1:0] GREEN_START  = 17'd63489;
+    localparam [AUDIO_AW-1:0] BLUE_START   = 17'd74241;
+    localparam [AUDIO_AW-1:0] PURPLE_START = 17'd86017;
+    localparam [AUDIO_AW-1:0] BROWN_START  = 17'd97110;
+    localparam [AUDIO_AW-1:0] BLACK_START  = 17'd106497;
+
+    localparam [AUDIO_AW-1:0] WHITE_LEN  = 17'd13824;
+    localparam [AUDIO_AW-1:0] PINK_LEN   = 17'd11776;
+    localparam [AUDIO_AW-1:0] RED_LEN    = 17'd13483;
+    localparam [AUDIO_AW-1:0] ORANGE_LEN = 17'd12971;
+    localparam [AUDIO_AW-1:0] YELLOW_LEN = 17'd11435;
+    localparam [AUDIO_AW-1:0] GREEN_LEN  = 17'd10752;
+    localparam [AUDIO_AW-1:0] BLUE_LEN   = 17'd11776;
+    localparam [AUDIO_AW-1:0] PURPLE_LEN = 17'd11093;
+    localparam [AUDIO_AW-1:0] BROWN_LEN  = 17'd9387;
+    localparam [AUDIO_AW-1:0] BLACK_LEN  = 17'd16384;
+
+    reg [AUDIO_AW-1:0] sample_addr;
+    reg [AUDIO_AW-1:0] samples_left;
+    reg [13:0] sample_divider;
+    reg [9:0] pwm_level;
+    reg playback_active;
+    reg playback_armed;
+    reg played_once;
+    wire [7:0] sample_q;
+
+    AudioSampleROM #(
+        .DATA_WIDTH(8),
+        .ADDRESS_WIDTH(AUDIO_AW),
+        .DEPTH(AUDIO_DEPTH),
+        .MEMFILE("color_audio.mem")
+    ) AudioSamples (
+        .clk(clk),
+        .addr(sample_addr),
+        .dataOut(sample_q)
+    );
+
+    PWMSerializer #(
+        .PERIOD_WIDTH_NS(20000),
+        .SYS_FREQ_MHZ(100)
+    ) AudioPwm (
+        .clk(clk),
+        .reset(reset),
+        .duty_cycle(playback_active ? pwm_level : 10'd512),
+        .signal(audioOut)
+    );
+
+    always @(posedge clk or posedge reset) begin
+        if (reset) begin
+            sample_addr <= {AUDIO_AW{1'b0}};
+            samples_left <= {AUDIO_AW{1'b0}};
+            sample_divider <= 14'd0;
+            pwm_level <= 10'd512;
+            playback_active <= 1'b0;
+            playback_armed <= 1'b0;
+            played_once <= 1'b0;
+        end else begin
+            if (~played_once) begin
+                sample_addr <= WHITE_START;
+                samples_left <= WHITE_LEN;
+                sample_divider <= SAMPLE_DIVIDER - 1;
+                pwm_level <= 10'd512;
+                playback_active <= 1'b1;
+                playback_armed <= 1'b1;
+                played_once <= 1'b1;
+            end else if (playback_active) begin
+                if (playback_armed) begin
+                    playback_armed <= 1'b0;
+                end else if (sample_divider == SAMPLE_DIVIDER - 1) begin
+                    sample_divider <= 14'd0;
+                    pwm_level <= {sample_q, 2'b00};
+                    if (samples_left == {{(AUDIO_AW-1){1'b0}}, 1'b1}) begin
+                        playback_active <= 1'b0;
+                        samples_left <= {AUDIO_AW{1'b0}};
+                    end else begin
+                        sample_addr <= sample_addr + {{(AUDIO_AW-1){1'b0}}, 1'b1};
+                        samples_left <= samples_left - {{(AUDIO_AW-1){1'b0}}, 1'b1};
+                    end
+                end else begin
+                    sample_divider <= sample_divider + 14'd1;
+                end
+            end else begin
+                sample_divider <= 14'd0;
+                pwm_level <= 10'd512;
+            end
+        end
+    end
+endmodule
+
+module AudioSampleROM #(
+    parameter DATA_WIDTH = 8,
+    parameter ADDRESS_WIDTH = 8,
+    parameter DEPTH = 256,
+    parameter MEMFILE = ""
+)(
+    input wire clk,
+    input wire [ADDRESS_WIDTH-1:0] addr,
+    output reg [DATA_WIDTH-1:0] dataOut = 0
+);
+
+    (* rom_style = "block" *) reg [DATA_WIDTH-1:0] memoryArray [0:DEPTH-1];
+    integer i;
+
+    initial begin
+        for (i = 0; i < DEPTH; i = i + 1) begin
+            memoryArray[i] = {DATA_WIDTH{1'b0}};
+        end
+        if (MEMFILE != "") begin
+            $readmemh(MEMFILE, memoryArray);
+        end
+    end
+
+    always @(posedge clk) begin
+        dataOut <= memoryArray[addr];
+    end
 endmodule
 
 module MousePacketDecoder(
