@@ -238,6 +238,13 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PPRDIR/../final_project_vga_files/color_audio_table.vh">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+          <Attr Name="IsVisible" Val="1"/>
+        </FileInfo>
+      </File>
       <File Path="$PPRDIR/../final_project_vga_files/FinalProjectJRPaint.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>

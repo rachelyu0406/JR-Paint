@@ -1,100 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1776819919">
-  <File Type="PA-TCL" Name="FinalProjectJRPaint.tcl"/>
+<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1776825724">
   <File Type="REPORTS-TCL" Name="FinalProjectJRPaint_reports.tcl"/>
-  <File Type="INIT-TIMING" Name="FinalProjectJRPaint_timing_summary_init.rpt"/>
-  <File Type="OPT-DCP" Name="FinalProjectJRPaint_opt.dcp"/>
+  <File Type="ROUTE-PWR-SUM" Name="FinalProjectJRPaint_power_summary_routed.pb"/>
+  <File Type="BITSTR-MMI" Name="FinalProjectJRPaint.mmi"/>
   <File Type="OPT-DRC" Name="FinalProjectJRPaint_drc_opted.rpt"/>
-  <File Type="OPT-UTIL" Name="FinalProjectJRPaint_utilization_opted.rpt"/>
-  <File Type="OPT-UTIL-PB" Name="FinalProjectJRPaint_utilization_opted.pb"/>
-  <File Type="OPT-METHODOLOGY-DRC" Name="FinalProjectJRPaint_methodology_drc_opted.rpt"/>
-  <File Type="OPT-HWDEF" Name="FinalProjectJRPaint.hwdef"/>
-  <File Type="OPT-TIMING" Name="FinalProjectJRPaint_timing_summary_opted.rpt"/>
-  <File Type="OPT-RQA-PB" Name="FinalProjectJRPaint_rqa_opted.pb"/>
-  <File Type="PWROPT-DCP" Name="FinalProjectJRPaint_pwropt.dcp"/>
-  <File Type="PWROPT-DRC" Name="FinalProjectJRPaint_drc_pwropted.rpt"/>
-  <File Type="PWROPT-TIMING" Name="FinalProjectJRPaint_timing_summary_pwropted.rpt"/>
-  <File Type="PLACE-DCP" Name="FinalProjectJRPaint_placed.dcp"/>
-  <File Type="PLACE-IO" Name="FinalProjectJRPaint_io_placed.rpt"/>
-  <File Type="PLACE-CLK" Name="FinalProjectJRPaint_clock_utilization_placed.rpt"/>
+  <File Type="BG-DRC" Name="FinalProjectJRPaint.drc"/>
+  <File Type="ROUTE-STATUS-PB" Name="FinalProjectJRPaint_route_status.pb"/>
+  <File Type="BG-BGN" Name="FinalProjectJRPaint.bgn"/>
   <File Type="PLACE-UTIL" Name="FinalProjectJRPaint_utilization_placed.rpt"/>
   <File Type="PLACE-UTIL-PB" Name="FinalProjectJRPaint_utilization_placed.pb"/>
-  <File Type="PLACE-CTRL" Name="FinalProjectJRPaint_control_sets_placed.rpt"/>
-  <File Type="PLACE-SIMILARITY" Name="FinalProjectJRPaint_incremental_reuse_placed.rpt"/>
-  <File Type="PLACE-PRE-SIMILARITY" Name="FinalProjectJRPaint_incremental_reuse_pre_placed.rpt"/>
-  <File Type="PLACE-TIMING" Name="FinalProjectJRPaint_timing_summary_placed.rpt"/>
-  <File Type="PLACE-RQA-PB" Name="FinalProjectJRPaint_rqa_placed.pb"/>
-  <File Type="POSTPLACE-PWROPT-DCP" Name="FinalProjectJRPaint_postplace_pwropt.dcp"/>
-  <File Type="POSTPLACE-PWROPT-TIMING" Name="FinalProjectJRPaint_timing_summary_postplace_pwropted.rpt"/>
-  <File Type="PHYSOPT-DCP" Name="FinalProjectJRPaint_physopt.dcp"/>
-  <File Type="PHYSOPT-DRC" Name="FinalProjectJRPaint_drc_physopted.rpt"/>
-  <File Type="PHYSOPT-TIMING" Name="FinalProjectJRPaint_timing_summary_physopted.rpt"/>
-  <File Type="ROUTE-ERROR-DCP" Name="FinalProjectJRPaint_routed_error.dcp"/>
-  <File Type="ROUTE-DCP" Name="FinalProjectJRPaint_routed.dcp"/>
-  <File Type="ROUTE-BLACKBOX-DCP" Name="FinalProjectJRPaint_routed_bb.dcp"/>
-  <File Type="ROUTE-UTIL" Name="FinalProjectJRPaint_utilization_routed.rpt"/>
-  <File Type="ROUTE-UTIL-PB" Name="FinalProjectJRPaint_utilization_routed.pb"/>
-  <File Type="ROUTE-DRC" Name="FinalProjectJRPaint_drc_routed.rpt"/>
-  <File Type="ROUTE-DRC-PB" Name="FinalProjectJRPaint_drc_routed.pb"/>
-  <File Type="ROUTE-DRC-RPX" Name="FinalProjectJRPaint_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC" Name="FinalProjectJRPaint_methodology_drc_routed.rpt"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="FinalProjectJRPaint_methodology_drc_routed.rpx"/>
-  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="FinalProjectJRPaint_methodology_drc_routed.pb"/>
-  <File Type="ROUTE-PWR" Name="FinalProjectJRPaint_power_routed.rpt"/>
-  <File Type="ROUTE-PWR-SUM" Name="FinalProjectJRPaint_power_summary_routed.pb"/>
-  <File Type="ROUTE-PWR-RPX" Name="FinalProjectJRPaint_power_routed.rpx"/>
-  <File Type="ROUTE-STATUS" Name="FinalProjectJRPaint_route_status.rpt"/>
-  <File Type="ROUTE-STATUS-PB" Name="FinalProjectJRPaint_route_status.pb"/>
-  <File Type="ROUTE-TIMINGSUMMARY" Name="FinalProjectJRPaint_timing_summary_routed.rpt"/>
-  <File Type="ROUTE-TIMING-PB" Name="FinalProjectJRPaint_timing_summary_routed.pb"/>
-  <File Type="ROUTE-TIMING-RPX" Name="FinalProjectJRPaint_timing_summary_routed.rpx"/>
-  <File Type="ROUTE-SIMILARITY" Name="FinalProjectJRPaint_incremental_reuse_routed.rpt"/>
-  <File Type="ROUTE-CLK" Name="FinalProjectJRPaint_clock_utilization_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW" Name="FinalProjectJRPaint_bus_skew_routed.rpt"/>
-  <File Type="ROUTE-BUS-SKEW-PB" Name="FinalProjectJRPaint_bus_skew_routed.pb"/>
-  <File Type="ROUTE-BUS-SKEW-RPX" Name="FinalProjectJRPaint_bus_skew_routed.rpx"/>
-  <File Type="ROUTE-RQS-PB" Name="FinalProjectJRPaint_rqs_routed.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-DCP" Name="FinalProjectJRPaint_postroute_physopt.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="FinalProjectJRPaint_postroute_physopt_bb.dcp"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="FinalProjectJRPaint_timing_summary_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="FinalProjectJRPaint_timing_summary_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="FinalProjectJRPaint_timing_summary_postroute_physopted.rpx"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="FinalProjectJRPaint_bus_skew_postroute_physopted.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="FinalProjectJRPaint_bus_skew_postroute_physopted.pb"/>
-  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="FinalProjectJRPaint_bus_skew_postroute_physopted.rpx"/>
-  <File Type="NOC_TRAFFIC_SPEC_FILE" Name="FinalProjectJRPaint.nts"/>
-  <File Type="NOC_SOLUTION_FILE" Name="FinalProjectJRPaint.ncr"/>
-  <File Type="BG-BIT" Name="FinalProjectJRPaint.bit"/>
+  <File Type="PLACE-IO" Name="FinalProjectJRPaint_io_placed.rpt"/>
   <File Type="BG-BIN" Name="FinalProjectJRPaint.bin"/>
+  <File Type="PLACE-CTRL" Name="FinalProjectJRPaint_control_sets_placed.rpt"/>
+  <File Type="ROUTE-PWR-RPX" Name="FinalProjectJRPaint_power_routed.rpx"/>
   <File Type="BITSTR-MSK" Name="FinalProjectJRPaint.msk"/>
   <File Type="BITSTR-RBT" Name="FinalProjectJRPaint.rbt"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="FinalProjectJRPaint_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-RPX" Name="FinalProjectJRPaint_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="FinalProjectJRPaint_route_status.rpt"/>
+  <File Type="PA-TCL" Name="FinalProjectJRPaint.tcl"/>
+  <File Type="ROUTE-PWR" Name="FinalProjectJRPaint_power_routed.rpt"/>
+  <File Type="ROUTE-DRC" Name="FinalProjectJRPaint_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-RPX" Name="FinalProjectJRPaint_drc_routed.rpx"/>
+  <File Type="ROUTE-DRC-PB" Name="FinalProjectJRPaint_drc_routed.pb"/>
+  <File Type="BITSTR-SYSDEF" Name="FinalProjectJRPaint.sysdef"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="FinalProjectJRPaint_methodology_drc_routed.rpt"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="FinalProjectJRPaint_methodology_drc_routed.rpx"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="FinalProjectJRPaint.ltx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="FinalProjectJRPaint_methodology_drc_routed.pb"/>
+  <File Type="ROUTE-SIMILARITY" Name="FinalProjectJRPaint_incremental_reuse_routed.rpt"/>
+  <File Type="RDI-RDI" Name="FinalProjectJRPaint.vdi"/>
+  <File Type="ROUTE-CLK" Name="FinalProjectJRPaint_clock_utilization_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="FinalProjectJRPaint_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="FinalProjectJRPaint_bus_skew_routed.rpx"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="FinalProjectJRPaint_bus_skew_routed.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="FinalProjectJRPaint_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="FinalProjectJRPaint_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="FinalProjectJRPaint_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="FinalProjectJRPaint_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="FinalProjectJRPaint_bus_skew_postroute_physopted.rpx"/>
+  <File Type="BG-BIT" Name="FinalProjectJRPaint.bit"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="FinalProjectJRPaint_bus_skew_postroute_physopted.pb"/>
   <File Type="BITSTR-NKY" Name="FinalProjectJRPaint.nky"/>
   <File Type="BITSTR-BMM" Name="FinalProjectJRPaint_bd.bmm"/>
-  <File Type="BITSTR-MMI" Name="FinalProjectJRPaint.mmi"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="OPT-HWDEF" Name="FinalProjectJRPaint.hwdef"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="FinalProjectJRPaint_incremental_reuse_pre_placed.rpt"/>
+  <File Type="ROUTE-DCP" Name="FinalProjectJRPaint_routed.dcp"/>
+  <File Type="ROUTE-ERROR-DCP" Name="FinalProjectJRPaint_routed_error.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="FinalProjectJRPaint_routed_bb.dcp"/>
+  <File Type="ROUTE-TIMING-PB" Name="FinalProjectJRPaint_timing_summary_routed.pb"/>
+  <File Type="OPT-DCP" Name="FinalProjectJRPaint_opt.dcp"/>
+  <File Type="PLACE-DCP" Name="FinalProjectJRPaint_placed.dcp"/>
+  <File Type="PWROPT-DCP" Name="FinalProjectJRPaint_pwropt.dcp"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="FinalProjectJRPaint_postplace_pwropt.dcp"/>
+  <File Type="PHYSOPT-DCP" Name="FinalProjectJRPaint_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="FinalProjectJRPaint_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="FinalProjectJRPaint_postroute_physopt_bb.dcp"/>
   <File Type="PDI-FILE" Name="FinalProjectJRPaint.pdi"/>
   <File Type="BOOT-PDI-FILE" Name="FinalProjectJRPaint_boot.pdi"/>
   <File Type="PL-PDI-FILE" Name="FinalProjectJRPaint_pld.pdi"/>
   <File Type="RCFI_FILE" Name="FinalProjectJRPaint.rcfi"/>
   <File Type="CFI_FILE" Name="FinalProjectJRPaint.cfi"/>
   <File Type="RNPI_FILE" Name="FinalProjectJRPaint.rnpi"/>
-  <File Type="RCDO-FILE" Name="FinalProjectJRPaint.rcdo"/>
-  <File Type="MARKER-RNPI-FILE" Name="FinalProjectJRPaint_markers.rnpi"/>
-  <File Type="MARKER-RCDO-FILE" Name="FinalProjectJRPaint_markers.rcdo"/>
-  <File Type="BOOT_RNPI_FILE" Name="FinalProjectJRPaint_boot.rnpi"/>
-  <File Type="BOOT_MARKER_RNPI_FILE" Name="FinalProjectJRPaint_boot_markers.rnpi"/>
-  <File Type="PL_RNPI_FILE" Name="FinalProjectJRPaint_pld.rnpi"/>
-  <File Type="PL_MARKER_RNPI_FILE" Name="FinalProjectJRPaint_pld_markers.rnpi"/>
-  <File Type="PL_MASK_RNPI_FILE" Name="FinalProjectJRPaint_pld_mask.rnpi"/>
-  <File Type="PL_SHUTDOWN_RNPI_FILE" Name="FinalProjectJRPaint_pld_shutdown.rnpi"/>
-  <File Type="PL_UNMASK_RNPI_FILE" Name="FinalProjectJRPaint_pld_unmask.rnpi"/>
-  <File Type="PL-RCDO-FILE" Name="FinalProjectJRPaint_pld.rcdo"/>
-  <File Type="PL-CLEAR-RCDO-FILE" Name="FinalProjectJRPaint_pld_clear.rcdo"/>
-  <File Type="PL_MARKER_RCDO_FILE" Name="FinalProjectJRPaint_pld_markers.rcdo"/>
-  <File Type="PL_MASK_RCDO_FILE" Name="FinalProjectJRPaint_pld_mask.rcdo"/>
-  <File Type="PL_UNMASK_MARKER_RCDO_FILE" Name="FinalProjectJRPaint_pld_unmask_markers.rcdo"/>
-  <File Type="PL_UNMASK_RCDO_FILE" Name="FinalProjectJRPaint_pld_unmask.rcdo"/>
   <File Type="NPI_FILE" Name="FinalProjectJRPaint.npi"/>
   <File Type="RBD_FILE" Name="FinalProjectJRPaint.rbd"/>
+  <File Type="ROUTE-RQS" Name="FinalProjectJRPaint_routed.rqs"/>
+  <File Type="POSTROUTE-PHYSOPT-RQS" Name="FinalProjectJRPaint_postroute_physopted.rqs"/>
+  <File Type="ROUTE-RQS-RPT" Name="route_report_qor_suggestions_0.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-RQS-RPT" Name="postroute_physopt_report_qor_suggestions_0.rpt"/>
   <File Type="MMI-FILE" Name="FinalProjectJRPaint.mmi"/>
   <File Type="BIF-FILE" Name="FinalProjectJRPaint.bif"/>
   <File Type="BOOT-BIF-FILE" Name="FinalProjectJRPaint_boot.bif"/>
@@ -102,17 +77,24 @@
   <File Type="LTX-FILE" Name="FinalProjectJRPaint.ltx"/>
   <File Type="BOOT-LTX-FILE" Name="FinalProjectJRPaint_boot.ltx"/>
   <File Type="PL-LTX-FILE" Name="FinalProjectJRPaint_pld.ltx"/>
-  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
-  <File Type="BITSTR-LTX" Name="FinalProjectJRPaint.ltx"/>
-  <File Type="BITSTR-SYSDEF" Name="FinalProjectJRPaint.sysdef"/>
-  <File Type="BG-BGN" Name="FinalProjectJRPaint.bgn"/>
-  <File Type="BG-DRC" Name="FinalProjectJRPaint.drc"/>
-  <File Type="RDI-RDI" Name="FinalProjectJRPaint.vdi"/>
-  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
-  <File Type="ROUTE-RQS" Name="FinalProjectJRPaint_routed.rqs"/>
-  <File Type="POSTROUTE-PHYSOPT-RQS" Name="FinalProjectJRPaint_postroute_physopted.rqs"/>
-  <File Type="ROUTE-RQS-RPT" Name="route_report_qor_suggestions_0.rpt"/>
-  <File Type="POSTROUTE-PHYSOPT-RQS-RPT" Name="postroute_physopt_report_qor_suggestions_0.rpt"/>
+  <File Type="RCDO-FILE" Name="FinalProjectJRPaint.rcdo"/>
+  <File Type="MARKER-RCDO-FILE" Name="FinalProjectJRPaint_markers.rcdo"/>
+  <File Type="PL-RCDO-FILE" Name="FinalProjectJRPaint_pld.rcdo"/>
+  <File Type="MARKER-RNPI-FILE" Name="FinalProjectJRPaint_markers.rnpi"/>
+  <File Type="BOOT_RNPI_FILE" Name="FinalProjectJRPaint_boot.rnpi"/>
+  <File Type="PL_RNPI_FILE" Name="FinalProjectJRPaint_pld.rnpi"/>
+  <File Type="BOOT_MARKER_RNPI_FILE" Name="FinalProjectJRPaint_boot_markers.rnpi"/>
+  <File Type="PL_MARKER_RNPI_FILE" Name="FinalProjectJRPaint_pld_markers.rnpi"/>
+  <File Type="PL_MASK_RNPI_FILE" Name="FinalProjectJRPaint_pld_mask.rnpi"/>
+  <File Type="PL_SHUTDOWN_RNPI_FILE" Name="FinalProjectJRPaint_pld_shutdown.rnpi"/>
+  <File Type="PL_UNMASK_RNPI_FILE" Name="FinalProjectJRPaint_pld_unmask.rnpi"/>
+  <File Type="PL-CLEAR-RCDO-FILE" Name="FinalProjectJRPaint_pld_clear.rcdo"/>
+  <File Type="PL_MARKER_RCDO_FILE" Name="FinalProjectJRPaint_pld_markers.rcdo"/>
+  <File Type="PL_MASK_RCDO_FILE" Name="FinalProjectJRPaint_pld_mask.rcdo"/>
+  <File Type="PL_UNMASK_MARKER_RCDO_FILE" Name="FinalProjectJRPaint_pld_unmask_markers.rcdo"/>
+  <File Type="PL_UNMASK_RCDO_FILE" Name="FinalProjectJRPaint_pld_unmask.rcdo"/>
+  <File Type="NOC_TRAFFIC_SPEC_FILE" Name="FinalProjectJRPaint.nts"/>
+  <File Type="NOC_SOLUTION_FILE" Name="FinalProjectJRPaint.ncr"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PPRDIR/../final_project_vga_files/ascii.mem">
@@ -262,6 +244,13 @@
       <FileInfo>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../final_project_vga_files/color_audio_table.vh">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+        <Attr Name="IsVisible" Val="1"/>
       </FileInfo>
     </File>
     <File Path="$PPRDIR/../final_project_vga_files/FinalProjectJRPaint.v">

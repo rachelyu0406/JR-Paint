@@ -1,7 +1,7 @@
 Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2025 Advanced Micro Devices, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2025.2 (win64) Build 6299465 Fri Nov 14 19:35:11 GMT 2025
-| Date             : Tue Apr 21 21:09:55 2026
+| Date             : Tue Apr 21 22:44:42 2026
 | Host             : rachelsLaptop running 64-bit major release  (build 9200)
 | Command          : report_power -file FinalProjectJRPaint_power_routed.rpt -pb FinalProjectJRPaint_power_summary_routed.pb -rpx FinalProjectJRPaint_power_routed.rpx
 | Design           : FinalProjectJRPaint
@@ -30,14 +30,14 @@ Table of Contents
 ----------
 
 +--------------------------+--------------+
-| Total On-Chip Power (W)  | 0.222        |
+| Total On-Chip Power (W)  | 0.240        |
 | Design Power Budget (W)  | Unspecified* |
 | Power Budget Margin (W)  | NA           |
-| Dynamic (W)              | 0.124        |
-| Device Static (W)        | 0.098        |
+| Dynamic (W)              | 0.140        |
+| Device Static (W)        | 0.099        |
 | Effective TJA (C/W)      | 4.6          |
-| Max Ambient (C)          | 84.0         |
-| Junction Temperature (C) | 26.0         |
+| Max Ambient (C)          | 83.9         |
+| Junction Temperature (C) | 26.1         |
 | Confidence Level         | Low          |
 | Setting File             | ---          |
 | Simulation Activity File | ---          |
@@ -52,20 +52,20 @@ Table of Contents
 +----------------+-----------+----------+-----------+-----------------+
 | On-Chip        | Power (W) | Used     | Available | Utilization (%) |
 +----------------+-----------+----------+-----------+-----------------+
-| Clocks         |     0.005 |        6 |       --- |             --- |
-| Slice Logic    |     0.005 |     6891 |       --- |             --- |
-|   LUT as Logic |     0.005 |     3809 |     63400 |            6.01 |
-|   CARRY4       |    <0.001 |      138 |     15850 |            0.87 |
-|   Register     |    <0.001 |     1997 |    126800 |            1.57 |
+| Clocks         |     0.006 |        6 |       --- |             --- |
+| Slice Logic    |     0.005 |     6980 |       --- |             --- |
+|   LUT as Logic |     0.004 |     3853 |     63400 |            6.08 |
+|   CARRY4       |    <0.001 |      139 |     15850 |            0.88 |
+|   Register     |    <0.001 |     2025 |    126800 |            1.60 |
 |   F7/F8 Muxes  |    <0.001 |        3 |     63400 |           <0.01 |
 |   Others       |     0.000 |      381 |       --- |             --- |
-| Signals        |     0.005 |     5815 |       --- |             --- |
-| Block RAM      |     0.007 |     11.5 |       135 |            8.52 |
+| Signals        |     0.006 |     5950 |       --- |             --- |
+| Block RAM      |     0.021 |     41.5 |       135 |           30.74 |
 | PLL            |     0.098 |        1 |         6 |           16.67 |
-| DSPs           |     0.000 |        1 |       240 |            0.42 |
-| I/O            |     0.004 |       56 |       210 |           26.67 |
-| Static Power   |     0.098 |          |           |                 |
-| Total          |     0.222 |          |           |                 |
+| DSPs           |    <0.001 |        1 |       240 |            0.42 |
+| I/O            |     0.005 |       56 |       210 |           26.67 |
+| Static Power   |     0.099 |          |           |                 |
+| Total          |     0.240 |          |           |                 |
 +----------------+-----------+----------+-----------+-----------------+
 
 
@@ -75,8 +75,8 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) | Powerup (A) | Budget (A)  | Margin (A) |
 +-----------+-------------+-----------+-------------+------------+-------------+-------------+------------+
-| Vccint    |       1.000 |     0.046 |       0.030 |      0.016 |       NA    | Unspecified | NA         |
-| Vccaux    |       1.800 |     0.068 |       0.049 |      0.018 |       NA    | Unspecified | NA         |
+| Vccint    |       1.000 |     0.061 |       0.045 |      0.016 |       NA    | Unspecified | NA         |
+| Vccaux    |       1.800 |     0.068 |       0.050 |      0.018 |       NA    | Unspecified | NA         |
 | Vcco33    |       3.300 |     0.005 |       0.001 |      0.004 |       NA    | Unspecified | NA         |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco18    |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
@@ -84,7 +84,7 @@ Table of Contents
 | Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
-| Vccbram   |       1.000 |     0.001 |       0.001 |      0.001 |       NA    | Unspecified | NA         |
+| Vccbram   |       1.000 |     0.003 |       0.002 |      0.001 |       NA    | Unspecified | NA         |
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |       NA    | Unspecified | NA         |
 | Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |       NA    | Unspecified | NA         |
@@ -147,15 +147,15 @@ Table of Contents
 +----------------------+-----------+
 | Name                 | Power (W) |
 +----------------------+-----------+
-| FinalProjectJRPaint  |     0.124 |
-|   AudioCue           |     0.004 |
-|     AudioSamples     |     0.002 |
-|   CPU                |     0.010 |
+| FinalProjectJRPaint  |     0.140 |
+|   AudioCue           |     0.020 |
+|     AudioSamples     |     0.017 |
+|   CPU                |     0.009 |
 |     MD               |     0.002 |
 |       multStateReg   |     0.001 |
 |     dxInsn           |     0.003 |
 |       genDFFs[30].ff |     0.001 |
-|     fdInsn           |     0.002 |
+|     fdInsn           |     0.001 |
 |   InstMem            |     0.002 |
 |   ProcMem            |     0.002 |
 |   RegisterFile       |     0.002 |

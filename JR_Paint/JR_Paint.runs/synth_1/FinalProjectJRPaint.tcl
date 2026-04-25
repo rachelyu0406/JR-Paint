@@ -59,6 +59,7 @@ OPTRACE "synth_1" START { ROLLUP_AUTO }
 set_param general.usePosixSpawnForFork 1
 set_param chipscope.maxJobs 3
 set_param xicom.use_bs_reader 1
+set_msg_config -id {Common 17-41} -limit 10000000
 OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7a100tcsg324-1
 
@@ -75,6 +76,7 @@ set_property ip_output_repo c:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_f
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
+read_verilog C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/color_audio_table.vh
 read_mem {
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/ascii.mem
   C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/final_project_vga_files/image.mem

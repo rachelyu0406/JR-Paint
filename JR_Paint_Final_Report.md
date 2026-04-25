@@ -1,8 +1,7 @@
 # JR Paint Final Report
 
 **Course:** ECE 350  
-**Project Team:** Replace with final team names and NetIDs  
-**Submission Format:** Convert this document to PDF for Gradescope submission  
+**Project Team:** Rachel Yu and Jill Wang  
 
 ## 1. Project Overview and Specifications
 
