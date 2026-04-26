@@ -1,18 +1,17 @@
 # JR Paint Final Report
 
 **Course:** ECE 350  
-**Project Team:** Rachel Yu and Jill Wang  
+**Project Team:** Rachel Yu and Jill Wang 
+**NetIDs:** zy151, jaw185
 
 ## 1. Project Overview and Specifications
 
-JR Paint is an FPGA-based interactive paint application built for the Nexys A7 board. The project combines a custom five-stage pipelined processor, assembly-level application logic, VGA video output, PS/2 mouse input, color-dependent audio output, and board feedback peripherals into one integrated system. The system allows a user to draw on a VGA monitor using a real mouse, change colors and pen sizes with board switches, fill connected regions, undo strokes, clear the canvas, and hear a short sound effect associated with the active drawing color.
+JR Paint is an FPGA-based interactive paint application built for the Nexys A7 board. The project combines a custom five-stage pipelined processor, assembly-level application logic, VGA video output, PS/2 mouse input, color-dependent audio output, and board feedback peripherals into one integrated system. On a high level, the system allows a user to draw on a VGA monitor using a USB A 3.0 mouse, change colors and pen sizes with the on-board switches, fill connected regions, undo strokes, clear the canvas, and hear a short sound effect associated with the active drawing color. We also designed a 3D printed hardware case in OnShape to hold JR Paint and make ergonomics better.
 
 The central design decision was to split the system into two layers:
 
-1. A **hardware layer** in RTL/behavioral Verilog and VHDL that handles timing-critical and protocol-specific tasks such as VGA scan timing, PS/2 signaling, memory interfaces, cursor sprite rendering, and audio playback.
-2. A **software layer** in assembly that runs on the custom processor and acts as the application brain. The processor decides how the cursor moves, when drawing occurs, how fill bucket and undo work, which color is active, which pen size is active, and when to clear the screen.
-
-This split was intentional. A pure hardware implementation would have required much more control logic for fill, undo, and user interaction, while a pure software framebuffer implementation at full 640x480 resolution would have been too memory-heavy and inefficient for the processor. Instead, the design stores a compact logical canvas and lets hardware expand and display it efficiently.
+1. A **hardware layer** in behavioral Verilog that handles timing and interfacing tasks such as VGA timing, PS/2 interfacing, memory interfacing, cursor sprite rendering, and audio playback.
+2. A **software layer** in assembly that runs on the custom five-stage pipelined fully bypassed processor and acts as the CPU that decides how the cursor moves, when drawing occurs, how fill bucket and undo work, which color is active, which pen size is active, and when to clear the screen.
 
 ### Functional Specifications
 
@@ -21,15 +20,15 @@ This split was intentional. A pure hardware implementation would have required m
 - Ten selectable drawing colors: white, pink, red, orange, yellow, green, blue, purple, brown, and black.
 - Five selectable pen sizes corresponding to 0.2, 0.4, 0.6, 0.8, and 1.0.
 - PS/2 mouse input for cursor movement and button-based interaction.
-- Left click draws, right click undoes, middle click clears, and switch 15 enables fill-bucket mode.
-- Center board button (`BTNC`) also clears the canvas.
-- RGB LED indicates the currently selected color.
+- Left click draws when held down, right click undoes, middle click clears, and switch 15 enables fill-bucket mode.
+- Center board button (`BTNC`) also clears the canvas, although our 3D CAD does not allow regular user input to this button
+- RGB LED indicates the currently selected color, although orange, brown, and black cannot be shown in LED form. For these, orange looks more like yellow, brown looks like yellow, and black turns the RGB off.
 - Seven-segment display indicates the currently selected pen size.
-- Audio cue changes with the selected color and is played from pre-recorded `.wav` files converted into FPGA memory.
+- Audio cue changes with the selected color and is played from pre-recorded `.wav` files converted into .mem files.
 
 ## 2. Overall Design
 
-The final top-level design is implemented in `final_project_vga_files/FinalProjectJRPaint.v`. The system is organized around a custom processor connected to a memory-mapped I/O (MMIO) layer.
+The system is organized around a custom processor connected to a memory-mapped I/O (MMIO) layer.
 
 At a high level, the dataflow is:
 
@@ -56,8 +55,6 @@ Ps2Interface (VHDL) -> MousePacketDecoder -> MMIO registers
                          v
                      VGA monitor
 ```
-
-This block diagram was constructed directly from the module boundaries and signal flow in `FinalProjectJRPaint.v`, rather than from a hand-drawn gate-level schematic. That choice reflects the actual design methodology of the project: this system is best understood as a composition of higher-level hardware modules and software state machines rather than as a collection of isolated combinational circuits.
 
 ### 2.1 Clocking and Reset
 

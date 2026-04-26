@@ -1,23 +1,24 @@
 main:
-    addi $s0, $0, 40        # cursor x
-    addi $s1, $0, 30        # cursor y
-    addi $s2, $0, 2440      # cell index
+    # Startup state and fixed MMIO pointers.
+    addi $s0, $0, 40        # cursor x cell
+    addi $s1, $0, 30        # cursor y cell
+    addi $s2, $0, 2440      # linear cell index
     addi $s3, $0, 0         # last frame toggle
     addi $s4, $0, 8192      # canvas MMIO base
-    addi $s5, $0, 0         # mouse x remainder
-    addi $s6, $0, 0         # mouse y remainder
+    addi $s5, $0, 0         # pending mouse x delta
+    addi $s6, $0, 0         # pending mouse y delta
     addi $s7, $0, 0         # current mouse buttons
     addi $t0, $0, 4099      # mouse packet MMIO
     addi $t1, $0, 4100      # frame toggle MMIO
-    addi $t2, $0, 0         # current draw color
-    addi $t3, $0, 80        # row stride
-    addi $t8, $0, 4800      # total cells
+    addi $t2, $0, 0         # active draw color
+    addi $t3, $0, 80        # cells per row
+    addi $t8, $0, 4800      # total canvas cells
     addi $t9, $0, 0         # previous mouse buttons
     addi $a3, $0, 4101      # cursor x MMIO, y is 1($a3)
     addi $ra, $0, 4106      # pen size MMIO
     addi $k0, $0, 1         # current pen size
-    addi $gp, $0, 59        # y must stay < 59 to move down
-    addi $sp, $0, 79        # x must stay < 79 to move right
+    addi $gp, $0, 59        # largest valid y
+    addi $sp, $0, 79        # largest valid x
     addi $fp, $0, 1264      # undo stack top
 
     sw $s0, 0($a3)

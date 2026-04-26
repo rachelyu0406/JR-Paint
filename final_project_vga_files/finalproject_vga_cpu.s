@@ -1,25 +1,26 @@
 main:
-    addi $s0, $0, 40        # x position
-    addi $s1, $0, 30        # y position
-    addi $s2, $0, 2440      # cell index = 30*80 + 40
+    # Startup state and fixed MMIO pointers.
+    addi $s0, $0, 40        # cursor x cell
+    addi $s1, $0, 30        # cursor y cell
+    addi $s2, $0, 2440      # linear cell index
     addi $s3, $0, 0         # last frame toggle
     addi $s4, $0, 8192      # canvas MMIO base
-    addi $s5, $0, 0         # mouse x remainder
-    addi $s6, $0, 0         # mouse y remainder
+    addi $s5, $0, 0         # pending mouse x delta
+    addi $s6, $0, 0         # pending mouse y delta
     addi $s7, $0, 0         # current mouse buttons
-    addi $t0, $0, 4099      # mouse packet ready / ack MMIO
-    addi $t1, $0, 4100      # frame-toggle MMIO
+    addi $t0, $0, 4099      # mouse packet MMIO
+    addi $t1, $0, 4100      # frame toggle MMIO
     addi $a3, $0, 4101      # cursor x MMIO
     addi $t7, $0, 4103      # BTNC MMIO
     addi $a1, $0, 4104      # switch MMIO
     addi $a2, $0, 4105      # LED17 MMIO
     addi $ra, $0, 4106      # pen size MMIO
-    addi $t2, $0, 0         # current draw color = none
-    addi $k0, $0, 1         # current pen size = 0.2
-    addi $t3, $0, 80        # one canvas row
+    addi $t2, $0, 0         # active draw color
+    addi $k0, $0, 1         # current pen size
+    addi $t3, $0, 80        # cells per row
     addi $t8, $0, 4800      # total canvas cells
-    addi $gp, $0, 58        # y must stay < 58 to move down
-    addi $sp, $0, 78        # x must stay < 78 to move right
+    addi $gp, $0, 58        # largest valid y
+    addi $sp, $0, 78        # largest valid x
 
     sw $s0, 0($a3)
     sw $s1, 1($a3)
@@ -177,7 +178,7 @@ pen_ready:
     and $v1, $s7, $v0
     bne $v1, $0, do_clear
 
-    addi $t4, $0, 0         # cursor update needed
+    addi $t4, $0, 0         # cursor update pending
     addi $t5, $0, 0         # paint enabled
 
     addi $v0, $0, 1
@@ -366,16 +367,16 @@ clear_wait:
     bne $a0, $0, clear_wait
     j loop_wait
 
-# MMIO map used by the top file:
+# MMIO map for the matching top-level wrapper:
 # 4096: accumulated mouse dx
 # 4097: accumulated mouse dy
 # 4098: mouse buttons {middle,right,left}
-# 4099: packet ready, write any value to clear dx/dy + ready
-# 4100: frame toggle, flips once per screen refresh
+# 4099: packet ready; write any value to clear dx/dy and ready
+# 4100: frame toggle, flips once per refresh
 # 4101: live cursor x position in grid cells
 # 4102: live cursor y position in grid cells
-# 4103: BTNC, clears the canvas and recenters the cursor
-# 4104: SW[14:0], color + pen size select
+# 4103: BTNC clear input
+# 4104: SW[14:0], color and pen-size selects
 # 4105: LD17 RGB color code
-# 4106: current pen size code for DISP1
+# 4106: current pen-size code for DISP1
 # 8192 + n: canvas cell n, 0 <= n < 4800

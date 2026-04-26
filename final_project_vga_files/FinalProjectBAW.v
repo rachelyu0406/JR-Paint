@@ -1,8 +1,7 @@
 `timescale 1 ns / 100 ps
 
-// Build this top with Rachel's processor sources from rachel_processor/proc.
-// Do not include Jill's processor tree in the same source set, because both
-// implementations use the same Verilog module names.
+// Build this top with the sources in rachel_processor/proc only.
+// Jill's processor tree uses the same module names and will collide in Vivado.
 
 module FinalProjectBAW(
     input clk,
@@ -270,10 +269,11 @@ module FinalProjectBAW(
 
     assign sx = $signed({2'b00, x});
     assign sy = $signed({3'b000, y});
+    // Keep the cursor scale aligned with the selected brush size.
     assign cursorDrawSize =
-        (penSize == 3'd1) ? 7'd40 : //0.2
-        (penSize == 3'd2) ? 7'd66 : //0.4
-        (penSize == 3'd3) ? 7'd92 : //0.6
+        (penSize == 3'd1) ? 7'd40  :
+        (penSize == 3'd2) ? 7'd66  :
+        (penSize == 3'd3) ? 7'd92  :
         (penSize == 3'd4) ? 7'd116 : 7'd127;
     assign cursorLeft = $signed({2'b00, cursorX, 3'b000}) + 12'sd4 - ($signed({5'b0, cursorDrawSize}) >>> 1);
     assign cursorTop = $signed({3'b000, cursorY, 3'b000}) + 12'sd4 - ($signed({5'b0, cursorDrawSize}) >>> 1);
