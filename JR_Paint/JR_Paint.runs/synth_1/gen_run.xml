@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1776825575" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/FinalProjectJRPaint.dcp">
+<GenRun Id="synth_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1777515655" LaunchIncrCheckpoint="$PSRCDIR/utils_1/imports/synth_1/FinalProjectJRPaint.dcp">
+  <File Type="PA-TCL" Name="FinalProjectJRPaint.tcl"/>
   <File Type="REPORTS-TCL" Name="FinalProjectJRPaint_reports.tcl"/>
+  <File Type="RDS-RDS" Name="FinalProjectJRPaint.vds"/>
+  <File Type="RDS-PROPCONSTRS" Name="FinalProjectJRPaint_drc_synth.rpt"/>
   <File Type="RDS-UTIL" Name="FinalProjectJRPaint_utilization_synth.rpt"/>
   <File Type="RDS-UTIL-PB" Name="FinalProjectJRPaint_utilization_synth.pb"/>
-  <File Type="PA-TCL" Name="FinalProjectJRPaint.tcl"/>
-  <File Type="RDS-RDS" Name="FinalProjectJRPaint.vds"/>
   <File Type="RDS-DCP" Name="FinalProjectJRPaint.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="FinalProjectJRPaint_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="FinalProjectJRPaint_timing_summary_synth.pb"/>
   <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
     <Filter Type="Srcs"/>
     <File Path="$PPRDIR/../final_project_vga_files/ascii.mem">

@@ -3,8 +3,8 @@
 # SW Build 6299465 on Fri Nov 14 19:35:11 GMT 2025
 # IP Build 6300035 on Fri Nov 14 10:48:45 MST 2025
 # SharedData Build 6298862 on Thu Nov 13 04:50:51 MST 2025
-# Start of session at: Tue Apr 21 21:42:30 2026
-# Process ID         : 18592
+# Start of session at: Wed Apr 29 22:25:37 2026
+# Process ID         : 27272
 # Current directory  : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/JR_Paint/JR_Paint.runs/impl_1
 # Command line       : vivado.exe -log FinalProjectJRPaint.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source FinalProjectJRPaint.tcl -notrace
 # Log file           : C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/JR_Paint/JR_Paint.runs/impl_1/FinalProjectJRPaint.vdi
@@ -17,8 +17,8 @@
 # CPU Physical cores : 12
 # CPU Logical cores  : 14
 # Host memory        : 33782 MB
-# Swap memory        : 5373 MB
-# Total Virtual      : 39155 MB
-# Available Virtual  : 6158 MB
+# Swap memory        : 5905 MB
+# Total Virtual      : 39687 MB
+# Available Virtual  : 11522 MB
 #-----------------------------------------------------------
 source FinalProjectJRPaint.tcl -notrace

@@ -107,7 +107,6 @@ set rc [catch {
   create_msg_db write_bitstream.pb
   set_param general.usePosixSpawnForFork 1
   set_param chipscope.maxJobs 3
-  set_param xicom.use_bs_reader 1
   set_param runs.launchOptions { -jobs 7  }
   open_checkpoint FinalProjectJRPaint_routed.dcp
   set_property webtalk.parent_dir C:/Users/rache/OneDrive/Desktop/Duke/ECE350/ece350_final_proj/JR_Paint/JR_Paint.cache/wt [current_project]
